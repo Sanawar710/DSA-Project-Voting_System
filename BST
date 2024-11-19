@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+struct Node // Node for BST
+{
+    string data;
+    Node *right;
+    Node *left;
+};
+
+Node *createNode(string data)
+{
+    Node *newNode = new Node;
+    // Creates a new Node
+    newNode->data = data;
+    // Sets the Child Nodes to NULL
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return new Node;
+}
+
+// void Traversal(Node *rootNode)
+// {
+// }
