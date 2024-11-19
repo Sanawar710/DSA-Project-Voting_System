@@ -11,14 +11,67 @@ struct Node // Node for BST
 Node *createNode(string data)
 {
     Node *newNode = new Node;
-    // Creates a new Node
     newNode->data = data;
-    // Sets the Child Nodes to NULL
+
+    // Sets the children nodes to NULL
     newNode->left = NULL;
     newNode->right = NULL;
-    return new Node;
+
+    return newNode;
 }
 
-// void Traversal(Node *rootNode)
-// {
-// }
+void preOrder_Traversal(Node *rootNode)
+{
+    if (rootNode != NULL) // Traverses the BST if the root node is not NULL
+    {
+        cout << rootNode->data << " ";
+        preOrder_Traversal(rootNode->left);  // Traverses left subtrees
+        preOrder_Traversal(rootNode->right); // Traverses right subtrees
+    }
+}
+
+void postOrder_Travseral(Node *rootNode) // Left Subtree -> Right Subtree -> Root
+{
+    if (rootNode != NULL)
+    {
+        postOrder_Travseral(rootNode->left);
+        postOrder_Travseral(rootNode->right);
+        cout << rootNode->data;
+    }
+}
+
+void inOrder_Traversal(Node *rootNode) // Left Subtree -> Root -> Subtree
+{
+    if (rootNode != NULL)
+    {
+        postOrder_Travseral(rootNode->left);
+        cout << rootNode->data;
+        postOrder_Travseral(rootNode->right);
+    }
+}
+
+int main()
+{
+    // Testing
+
+    // Node *root = new Node;
+    // Node *second = new Node;
+    // Node *third = new Node;
+
+    // root = createNode("A");
+    // second = createNode("B");
+    // third = createNode("C");
+
+    // root->left = second;
+    // root->right = third;
+
+    // cout << "Pre-Order Traversal:" << endl;
+    // preOrder_Traversal(root);
+
+    // cout << "\nPost-Order Traversal" << endl;
+    // postOrder_Travseral(root);
+
+    // cout << "\nIn-Order Traversal" << endl;
+    // inOrder_Traversal(root);
+    return 0;
+}
