@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/abrar/DSA-Project-Voting_System-1",
-      "program": "c:/Users/abrar/DSA-Project-Voting_System-1/build/Debug/outDebug",
+      "cwd": "c:/Users/abrar/DSA-Project-Voting_System-1/output",
+      "program": "c:/Users/abrar/DSA-Project-Voting_System-1/output/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
