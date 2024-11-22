@@ -95,6 +95,49 @@ Node *iterative_Search(Node *rootNode, int Element)
     return NULL; // Returns NULL if the root node is NULL or if the desired element is not found
 }
 
+void insertion_in_BST(Node *rootNode, int Element)
+{
+    Node *prev = NULL; // Created for keeping the track of the Parent/Root Node
+
+    while (rootNode != NULL)
+    {
+        prev = rootNode;
+
+        if (rootNode->data == Element)
+        {
+            cout << "Duplicate values cannot be inserted." << endl;
+            break; // Breaks the loop a duplicate value is found.
+        }
+
+        if (rootNode->data > Element)
+        {
+            rootNode = rootNode->left;
+        }
+
+        else
+        {
+            rootNode = rootNode->right;
+        }
+    }
+
+    Node *newNode = createNode(Element); // Creates a new nodw with the value that we want to insert
+
+    if (prev == NULL)
+    {
+        rootNode = newNode; // The element becomes the parent node if the BST was previously empty
+    }
+
+    else if (prev->data > Element)
+    {
+        prev->left = newNode;
+    }
+
+    else
+    {
+        prev->right = newNode;
+    }
+}
+
 int main()
 {
     // Testing
@@ -119,19 +162,14 @@ int main()
     // cout << "\nIn-Order Traversal" << endl;
     // inOrder_Traversal(root);
 
-    // cout << endl;
+    // cout << "\n"
+    //      << endl;
 
-    // cout << "\nSearch Function Called." << endl;
+    // cout << "Insertion Function Called." << endl;
+    // insertion_in_BST(root, 101);
 
-    // Node *x = iterative_Search(root, 10);
-    // if (x != NULL)
-    // {
-    //     cout << "The element is found in the BST." << endl;
-    // }
-    // else
-    // {
-    //     cout << "Element was not found in BST." << endl;
-    // }
+    // cout << "\nIn-Order Traversal Function Called after Insertion: " << endl;
+    // inOrder_Traversal(root);
 
     return 0;
 }
