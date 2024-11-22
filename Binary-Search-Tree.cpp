@@ -138,8 +138,77 @@ void insertion_in_BST(Node *rootNode, int Element)
     }
 }
 
-int main()
+Node *inOrder_Predecessor(Node *rootNode); // Used in function to delete nodes in BST
+
+Node *deletion_in_BST(Node *rootNode, int Element)
 {
+    if (rootNode == NULL)
+    {
+        cout << "The tree is already empty. Cannot perform deletion." << endl;
+        return NULL;
+    }
+
+    // Searching for the node to be deleted
+    if (Element < rootNode->data)
+    {
+        rootNode->left = deletion_in_BST(rootNode->left, Element);
+    }
+
+    else if (Element > rootNode->data)
+    {
+        rootNode->right = deletion_in_BST(rootNode->right, Element);
+    }
+
+    else // This block implements the functionality to delete nodes
+    {
+        // Case 1: Node has no children i.e. it is a Leaf Node
+        if (rootNode->left == NULL && rootNode->right == NULL)
+        {
+            delete rootNode;
+            return NULL;
+        }
+
+        // Case 2: Node has only one child
+        else if (rootNode->left == NULL) // Only right child exists
+        {
+            Node *temp = rootNode->right;
+            delete rootNode;
+            return temp;
+        }
+
+        // Case 3: Only left child exists
+        else if (rootNode->right == NULL)
+        {
+            Node *temp = rootNode->left;
+            delete rootNode;
+            return temp;
+        }
+
+        // Case 3: Node has two children
+        else
+        {
+            Node *iPre = inOrder_Predecessor(rootNode);                   // Finding in-order predecessor
+            rootNode->data = iPre->data;                                  // Replacing data with predecessor's data
+            rootNode->left = deletion_in_BST(rootNode->left, iPre->data); // Delete predecessor
+        }
+    }
+    return rootNode;
+}
+
+Node *inOrder_Predecessor(Node *rootNode) // Used to return left subtree's right most child node
+{
+    rootNode = rootNode->left;
+
+    while (rootNode->right != NULL)
+    {
+        rootNode = rootNode->right;
+    }
+
+    return rootNode;
+}
+
+// int main()
+// {
     // Testing
 
     // Node *root = new Node;
@@ -153,23 +222,20 @@ int main()
     // root->right = second;
     // root->left = third;
 
-    // cout << "Pre-Order Traversal:" << endl;
-    // preOrder_Traversal(root);
+    // // cout << "Pre-Order Traversal:" << endl;
+    // // preOrder_Traversal(root);
 
-    // cout << "\nPost-Order Traversal" << endl;
-    // postOrder_Traversal(root);
+    // // cout << "\nPost-Order Traversal" << endl;
+    // // postOrder_Traversal(root);
+
+    // cout << "In-Order Traversal" << endl;
+    // inOrder_Traversal(root);
+
+    // cout << "\nDeletion Function Called " << endl;
+    // root = deletion_in_BST(root, 10);
 
     // cout << "\nIn-Order Traversal" << endl;
     // inOrder_Traversal(root);
 
-    // cout << "\n"
-    //      << endl;
-
-    // cout << "Insertion Function Called." << endl;
-    // insertion_in_BST(root, 101);
-
-    // cout << "\nIn-Order Traversal Function Called after Insertion: " << endl;
-    // inOrder_Traversal(root);
-
-    return 0;
-}
+//      return 0;
+// }
