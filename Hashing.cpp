@@ -1,5 +1,5 @@
 #include <iostream>
-#include <unordered_map> // Used to include unordered maps.
+#include <unordered_map> // Included to use unordered maps.
                          // Unordered map is similar to Python's dictionary
                          // It stores data in key-value pair. We can access a value against a key
 using namespace std;
@@ -14,13 +14,13 @@ struct Candidate
 
 unordered_map<int, Candidate> candidateTable;
 
-int registerCandidate(unordered_map<int, Candidate> &candidateTable, int id, string name, string party)
+bool registerCandidate(unordered_map<int, Candidate> &candidateTable, int id, string name, string party)
 {
     // Check if a candidate with the same ID already exists
     if (candidateTable.find(id) != candidateTable.end())
     {
         cout << "Candidate with ID " << id << " already exists!" << endl;
-        return 0;
+        return false;
     }
 
     // Insert data if it does not exist already
@@ -29,12 +29,13 @@ int registerCandidate(unordered_map<int, Candidate> &candidateTable, int id, str
 
     cout << "Candidate " << name << " registered successfully!" << endl;
 
-    return 1;
+    return true;
 }
 
 void displayCandidates(unordered_map<int, Candidate> &candidateTable)
 {
-    unordered_map<int, Candidate>::iterator iter;
+    unordered_map<int, Candidate>::iterator iter; // Initialized an iterator to traverse throught the map
+    
     for (iter = candidateTable.begin(); iter != candidateTable.end(); iter++)
     {
         cout << "Candidate's Name: " << iter->second.name
