@@ -31,7 +31,7 @@ bool registerCandidate(unordered_map<int, Candidate> &candidateTable, int id, st
 
     return true;
 }
-
+ 
 void displayCandidates(unordered_map<int, Candidate> &candidateTable)
 {
     unordered_map<int, Candidate>::iterator iter; // Initialized an iterator to traverse throught the map

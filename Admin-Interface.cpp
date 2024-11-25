@@ -30,7 +30,7 @@ class Admin
 {
 private:
     // Stored the username and password of admins for security purposes
-    vector<string> admins = {"admin1", "admin2", "admin3"}; // Stores the usernames of all the admins
+    vector<string> admins = {"admin1", "admin2", "admin3"};
     string password = "ABC";
 
 public:
@@ -52,15 +52,15 @@ public:
 
     void Menu()
     {
-        // Menu for the admin to manage the options
+        // Menu for the admin to choose from the options
         cout << "Voting System Admin Menu:"
-             << "\n1) Start Election"
+             << "\n1) Start Election"                  // Yet to be implemented
              << "\n2) Add Candidate to Elections"      // Done
              << "\n3) Delete Candidate from Elections" // Done
              << "\n4) Change Election's Deadline"      // Partly Done
-             << "\n5) View Election Results"
-             << "\n6) View Candidate's Information"
-             << "\n7) Exit" // Will be implemented in main when user enters the input
+             << "\n5) View Election Results"           // Yet to be implemented
+             << "\n6) View Candidate's Information"    // Done
+             << "\n7) Exit"                            // Will be implemented in main function when user enters the input
              << "\nSelect an option: ";
     }
 
