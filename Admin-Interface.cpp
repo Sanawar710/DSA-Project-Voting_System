@@ -11,6 +11,8 @@ struct Credentials // Used when we will use credentials from the user
     string password;
 };
 
+/// @brief This function is used to input the username and the password of the user
+/// @return Returns the username and password as structure to the 'authenticate' function in 'Admin' class
 Credentials loginTerminal()
 {
     Credentials cred;
@@ -32,6 +34,10 @@ private:
     string password = "ABC";
 
 public:
+    /// @brief This function is used to verify the username and password entered by the user
+    /// @param username Username entered by the user or the admin
+    /// @param Password Password entered by the user or the admin
+    /// @return Return true if username and password is verified. Otherwise, false
     bool Authenicate(string username, string Password)
     {
         for (const string &admin : admins) // Iterates through the vector to compare the usernames of the admin
@@ -99,12 +105,12 @@ public:
         long long int CNIC;
 
         cout << "Enter the name of the candidate: ";
-        cin >> name;
+        getline(cin, name); // Used to take input name (used incase if some one uses a space in their name)
 
-        cout << endl;
-
-        cout << "Enter the CNIC of the candidate (without dashes): ";
+        cout << "\nEnter the CNIC of the candidate (without dashes): ";
         cin >> CNIC;
+
+        cin.ignore(); // Clear input buffer
 
         Candidates.push_back(make_pair(name, CNIC)); // Inserting the pair of name and CNIC at the end of the list
     }
@@ -127,6 +133,20 @@ public:
 
         cout << "Candidate not found." << endl;
     }
+
+    void viewCandidate(list<pair<string, long long int>> &Candidates)
+    {
+        int count = 1; // Used to keep the record of numbers of candidates
+
+        for (auto it = Candidates.begin(); it != Candidates.end(); ++it) // Used an iterator to traverse through the list
+        {
+            cout << count << ")";
+            cout << " Name: " << it->first
+                 << "\n   CNIC: " << it->second << endl;
+
+            count++; // Increments with each iteration
+        }
+    }
 };
 
 int main()
@@ -134,10 +154,9 @@ int main()
     // Testing
 
     // Admin A;
-    // // A.deadLine();
+    // A.deadLine();
     // Credentials cred;
     // cred = loginTerminal();
-
     // if (A.Authenicate(cred.name, cred.password)) // Displays the menu if the login is successful
     // {
     //     A.Menu();
@@ -146,8 +165,12 @@ int main()
     // {
     //     cout << "Login Failed." << endl;
     // }
-    // list<pair<string,long long int>> Candidates;
+    // list<pair<string, long long int>> Candidates;
     // A.Menu();
     // A.addCandidates(Candidates);
+    // cout << endl;
+    // A.addCandidates(Candidates);
+    // cout << endl;
+    // A.viewCandidate(Candidates);
     return 0;
 }
