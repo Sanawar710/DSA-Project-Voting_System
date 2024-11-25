@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <string>
+#include <ctime>
 
 using namespace std;
 
@@ -49,17 +49,50 @@ public:
         // Menu for the admin to manage the options
         cout << "Voting System Admin Menu:"
              << "\n1) Start Election"
-             << "\n2) Add Candidate to Elections"
-             << "\n3) Delete Candidate from Elections"
-             << "\n4) Change Election's Deadline"
+             << "\n2) Add Candidate to Elections"      // Done
+             << "\n3) Delete Candidate from Elections" // Done
+             << "\n4) Change Election's Deadline"      // Partly Done
              << "\n5) View Election Results"
-             << "\n6) Exit"
+             << "\n6) View Candidate's Information"
+             << "\n7) Exit" // Will be implemented in main when user enters the input
              << "\nSelect an option: ";
+    }
+
+    /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
+    void deadLine()
+    {
+        float hours;
+
+        cout << "Enter the Deadline for Ending Elections (in hours): ";
+
+    negativeTime: // The control will be redirected to this label if the entered input of time is negative
+        cin >> hours;
+
+        // Validating the input
+        if (hours <= 0)
+        {
+            cout << "Time must be greater than 0. Please re-enter: ";
+            goto negativeTime; // Returns the control to the label 'negativeTime'
+        }
+
+        time_t currentTime = time(0);                       // Getting current system time
+        time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
+
+        // Enforcing the deadline
+        while (true)
+        {
+            currentTime = time(0); // Continuously checks the current time
+
+            if (currentTime >= deadlineTime)
+            {
+                cout << "Deadline reached! Elections are now closed." << endl;
+                break;
+            }
+        }
     }
 
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
-
     void addCandidates(list<pair<string, long long int>> &Candidates)
     {
         string name;
@@ -76,6 +109,10 @@ public:
         Candidates.push_back(make_pair(name, CNIC)); // Inserting the pair of name and CNIC at the end of the list
     }
 
+    /// @brief This function implements the functionality to delete the information of a certain candidates
+    /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
+    /// @param name It is name of the candidate whoose information we want to delete
+    /// @param CNIC It is CNIC/National ID of the candidate whoose information we want to delete
     void deleteCandidate(list<pair<string, long long int>> &Candidates, string name, long long int CNIC)
     {
         for (auto it = Candidates.begin(); it != Candidates.end(); ++it) // Used an iterator to traverse through the list
@@ -97,7 +134,7 @@ int main()
     // Testing
 
     // Admin A;
-
+    // // A.deadLine();
     // Credentials cred;
     // cred = loginTerminal();
 
