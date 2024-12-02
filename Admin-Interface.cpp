@@ -1,8 +1,6 @@
 #include <iostream>
-#include <vector>
-#include <list>
 #include <ctime>
-
+#include "singlelinklist.cpp"
 using namespace std;
 
 struct Credentials // Used when we will use credentials from the user
@@ -30,7 +28,7 @@ class Admin
 {
 private:
     // Stored the username and password of admins for security purposes
-    vector<string> admins = {"admin1", "admin2", "admin3"};
+    string admins[3] = {"admin1", "admin2", "admin3"};
     string password = "ABC";
 
 public:
@@ -40,14 +38,14 @@ public:
     /// @return Return true if username and password is verified. Otherwise, false
     bool Authenicate(string username, string Password)
     {
-        for (const string &admin : admins) // Iterates through the vector to compare the usernames of the admin
+        for (const string &admin : admins) // Iterates through the array to compare the usernames of the admin
         {
             if (username == admin && Password == password) // Validates the username and password
             {
                 return true;
             }
         }
-        return false; // Executes in the case if the username and password do not match
+        return false; // Executes in the case if the username and password do not match with the one in the array
     }
 
     void Menu()
@@ -59,7 +57,7 @@ public:
              << "\n3) Delete Candidate from Elections" // Done
              << "\n4) Change Election's Deadline"      // Partly Done
              << "\n5) View Election Results"           // Yet to be implemented
-             << "\n6) View Candidate's Information"    // Done
+             << "\n6) View Candidate's Information"    // Call the traversal function from singly linked list
              << "\n7) Exit"                            // Will be implemented in main function when user enters the input
              << "\nSelect an option: ";
     }
@@ -99,7 +97,7 @@ public:
 
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
-    void addCandidates(list<pair<string, long long int>> &Candidates)
+    void addCandidates(Singlelinklist *head)
     {
         string name;
         long long int CNIC;
@@ -112,40 +110,21 @@ public:
 
         cin.ignore(); // Clear input buffer
 
-        Candidates.push_back(make_pair(name, CNIC)); // Inserting the pair of name and CNIC at the end of the list
+        head->insertatStart(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
     }
 
     /// @brief This function implements the functionality to delete the information of a certain candidates
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     /// @param name It is name of the candidate whoose information we want to delete
     /// @param CNIC It is CNIC/National ID of the candidate whoose information we want to delete
-    void deleteCandidate(list<pair<string, long long int>> &Candidates, string name, long long int CNIC)
+    void deleteCandidate(Singlelinklist *head)
     {
-        for (auto it = Candidates.begin(); it != Candidates.end(); ++it) // Used an iterator to traverse through the list
-        {
-            if (it->first == name && it->second == CNIC) // Checks if the record in the list matches with the entered record
-            {
-                Candidates.erase(it); // Deletes the information of the candidate if the record is found
-                cout << "Candidate deleted successfully." << endl;
-                return;
-            }
-        }
+        long long int CNIC;
 
-        cout << "Candidate not found." << endl;
-    }
+        cout << "\nEnter the CNIC of the candidate (without dashes): ";
+        cin >> CNIC;
 
-    void viewCandidate(list<pair<string, long long int>> &Candidates)
-    {
-        int count = 1; // Used to keep the record of numbers of candidates
-
-        for (auto it = Candidates.begin(); it != Candidates.end(); ++it) // Used an iterator to traverse through the list
-        {
-            cout << count << ")";
-            cout << " Name: " << it->first
-                 << "\n   CNIC: " << it->second << endl;
-
-            count++; // Increments with each iteration
-        }
+        head->deletion(CNIC);
     }
 };
 
@@ -172,5 +151,5 @@ int main()
     // A.addCandidates(Candidates);
     // cout << endl;
     // A.viewCandidate(Candidates);
-    return 0;
+    // return 0;
 }

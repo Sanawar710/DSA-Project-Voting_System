@@ -22,18 +22,23 @@ public:
         tail = NULL;
     }
 
-    void insertatStart(string name, long long int CNIC, int votes) // Function to insert values
+    /// @brief This Function is used to insert the name, CNIC and number of votes in the singly linked list
+    /// @param name The name of the candidate
+    /// @param CNIC The CNIC / National ID of the candidate
+    void insertatStart(string name, long long int CNIC)
     {
         Node *newNode = new Node;
 
         newNode->CNIC = CNIC;
         newNode->next = head;
-        newNode->vote = votes;
 
         head = newNode;
     }
 
-    Node *deletion(long long int CNIC) // General function for deletion
+    /// @brief This is a general function for deletion. It performs deletion for all the cases
+    /// @param CNIC This is the CNIC / National ID of the person (for whom we want to delete information)
+    /// @return Returns NULL if the list is empty. Else, head
+    Node *deletion(long long int CNIC)
     {
         if (head == NULL)
         {
@@ -64,6 +69,7 @@ public:
         return head;
     }
 
+    /// @brief The function for traversal in list
     void traversal() // Function for traversal
     {
         Node *temp = new Node;

@@ -157,7 +157,8 @@ void printArray(int array[], int size)
     }
 }
 
-// Function Overloading
+/// @brief This function is a overloaded function used to implement bubble sort in the singly linked list
+/// @param head The first/head node of the linked list
 void bubbleSort(Node *head)
 {
     if (head == NULL)
@@ -180,7 +181,7 @@ void bubbleSort(Node *head)
             condition = false;
             current = head;
 
-            if (current->vote < current->next->vote)
+            if (current->CNIC < current->next->CNIC)
             {
                 // Swapping the elements if the condition become true
 
@@ -189,7 +190,6 @@ void bubbleSort(Node *head)
 
                 current->name = current->next->name;
                 current->CNIC = current->next->CNIC;
-                current->vote = current->next->vote;
 
                 current->next = temp;
 
