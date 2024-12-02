@@ -1,4 +1,5 @@
 #include <iostream>
+#include "singlelinklist.cpp" // File in which we have create the Node and Functions for Single Linked List
 
 using namespace std;
 
@@ -156,24 +157,47 @@ void printArray(int array[], int size)
     }
 }
 
-int main()
+// Function Overloading
+void bubbleSort(Node *head)
 {
-    int array[] = {12, 34, 11, 102, 19, 92};
-    int size = sizeof(array) / sizeof(array[0]);
+    if (head == NULL)
+    {
+        cout << "Empty List" << endl;
+    }
 
-    cout << "Original Array: ";
-    printArray(array, size);
+    bool condition;
 
-    cout << endl;
+    Node *current = new Node;
+    Node *prev = new Node; // Keeps the tracks of last sorted element in the list
 
-    bubbleSort(array, size);
-    cout << "Array after bubble sort: ";
-    printArray(array, size);
+    current = head;
+    prev = NULL;
 
-    cout << endl;
+    do
+    {
+        while (current->next != prev)
+        {
+            condition = false;
+            current = head;
 
-    selectionSort(array, size);
-    cout << "Array after selection sort: ";
-    printArray(array, size);
-    return 0;
+            if (current->vote < current->next->vote)
+            {
+                // Swapping the elements if the condition become true
+
+                Node *temp = new Node;
+                temp = current;
+
+                current->name = current->next->name;
+                current->CNIC = current->next->CNIC;
+                current->vote = current->next->vote;
+
+                current->next = temp;
+
+                condition = false;
+            }
+            current = current->next;
+        }
+
+        prev = current;
+    } while (condition); // The while loop will iterate unless the condition becomes false i.e the list is sorted
 }
