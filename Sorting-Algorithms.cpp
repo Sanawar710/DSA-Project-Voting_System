@@ -7,7 +7,7 @@ using namespace std;
 void merge(int array[], int left, int mid, int right); // Funtion Prototype. Later, used in merge sort algorithm
 int partition(int array[], int left, int right);       // Funtion Prototype. Later, used in quick sort algorithm
 
-void bubbleSort(int array[], int size)
+void bubbleSort(int array[],int votes, int size)
 {
     for (int i = 0; i < size - 1; i++)
     {
