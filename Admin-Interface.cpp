@@ -1,6 +1,8 @@
 #include <iostream>
+#include <unistd.h> // For sleep function
 #include <ctime>
 #include "Singly-Linked-List.cpp"
+
 using namespace std;
 
 struct Credentials // Used when we will use credentials from the user
@@ -55,7 +57,7 @@ public:
              << "\n1) Start Election"                  // Yet to be implemented
              << "\n2) Add Candidate to Elections"      // Done
              << "\n3) Delete Candidate from Elections" // Done
-             << "\n4) Change Election's Deadline"      // Partly Done
+             << "\n4) Set Election's Deadline"         // Done
              << "\n5) View Election Results"           // Yet to be implemented
              << "\n6) View Candidate's Information"    // Call the traversal function from singly linked list
              << "\n7) Exit"                            // Will be implemented in main function when user enters the input
@@ -63,7 +65,8 @@ public:
     }
 
     /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
-    void deadLine()
+    /// @return Retrieves the current time in hours, as read by the system clock.
+    time_t deadLine()
     {
         float hours;
 
@@ -82,17 +85,7 @@ public:
         time_t currentTime = time(0);                       // Getting current system time
         time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
 
-        // Enforcing the deadline
-        while (true)
-        {
-            currentTime = time(0); // Continuously checks the current time
-
-            if (currentTime >= deadlineTime)
-            {
-                cout << "Deadline reached! Elections are now closed." << endl;
-                break;
-            }
-        }
+        return deadlineTime;
     }
 
     /// @brief This function is used to add the information of the new candidates in the system
@@ -132,10 +125,16 @@ int main()
 {
     // Testing
 
-    // Admin A;
-    // A.deadLine();
+    time_t currentTime;
+    time_t deadlineTime;
+
+    Admin A;
+
+    deadlineTime = A.deadLine();
+
     // Credentials cred;
     // cred = loginTerminal();
+
     // if (A.Authenicate(cred.name, cred.password)) // Displays the menu if the login is successful
     // {
     //     A.Menu();
@@ -144,6 +143,26 @@ int main()
     // {
     //     cout << "Login Failed." << endl;
     // }
+
+    bool condition = true;
+
+    int i = 1;
+
+    // Enforcing the deadline
+    while (condition)
+    {
+        currentTime = time(0); // Continuously checks the current time
+
+        cout << i << endl;
+        i++;
+
+        if (currentTime >= deadlineTime)
+        {
+            cout << "Deadline reached! Elections are now closed." << endl;
+            condition = false;
+        }
+    }
+
     // list<pair<string, long long int>> Candidates;
     // A.Menu();
     // A.addCandidates(Candidates);
