@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ctime>
-#include "singlelinklist.cpp"
+#include "Singly-Linked-List.cpp"
 using namespace std;
 
 struct Credentials // Used when we will use credentials from the user
