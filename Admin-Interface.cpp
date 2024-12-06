@@ -110,7 +110,7 @@ public:
 
         cin.ignore(); // Clear input buffer
 
-        head->insertatStart(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
+        head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
     }
 
     /// @brief This function implements the functionality to delete the information of a certain candidates

@@ -59,6 +59,7 @@
   "files.associations": {
     "iostream": "cpp",
     "bst": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "thread": "cpp"
   }
 }

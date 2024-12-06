@@ -6,7 +6,7 @@ struct Node
 {
     string name;
     long long int CNIC;
-    int vote;
+    // int vote;
     Node *next;
 };
 
@@ -22,13 +22,14 @@ public:
         tail = NULL;
     }
 
-    /// @brief This Function is used to insert the name, CNIC and number of votes in the singly linked list
-    /// @param name The name of the candidate
-    /// @param CNIC The CNIC / National ID of the candidate
-    void insertatStart(string name, long long int CNIC)
+    /// @brief Inserts the values at the start of the list
+    /// @param name The name of the person
+    /// @param CNIC The CNIC/National ID of the person
+    void insert(string name, long long int CNIC)
     {
         Node *newNode = new Node;
 
+        newNode->name = name;
         newNode->CNIC = CNIC;
         newNode->next = head;
 
@@ -80,11 +81,11 @@ public:
         do
         {
 
-            cout << count << ")" << "Name: " << temp->name << "\nCNIC: " << temp->CNIC << "\nNumber of Votes: " << temp->vote << endl;
+            cout << count << ")" << "Name: " << temp->name << "\nCNIC: " << temp->CNIC << endl;
             cout << endl;
 
             temp = temp->next;
             count++;
-        } while (temp->next = NULL);
+        } while (temp->next == NULL);
     }
 };

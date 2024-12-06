@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+
 using namespace std;
 
 void bubbleSort(string names[], int votes[], int n)
