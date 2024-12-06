@@ -2,6 +2,7 @@
 #include <unistd.h> // For sleep function
 #include <ctime>
 #include "Singly-Linked-List.cpp"
+#include "Hashing.cpp"
 
 using namespace std;
 
@@ -101,7 +102,8 @@ public:
         cout << "\nEnter the CNIC of the candidate (without dashes): ";
         cin >> CNIC;
 
-        cin.ignore(); // Clear input buffer
+        registerCandidate(candidateTable, name, CNIC); // Registers the candidate in hash table in a sorted manner
+        cin.ignore();                                  // Clear input buffer
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
     }
@@ -119,30 +121,43 @@ public:
 
         head->deletion(CNIC);
     }
+
+    void viewCandidate(Singlelinklist *head, map<int, Candidate> Table)
+    {
+        int option;
+
+        cout << "Do you want to view information through Linked List or Hash Table? (0/1)" << endl;
+    invalidOption:
+        cin >> option;
+
+        if (option == 0)
+        {
+            head->traversal();
+        }
+        else if (option == 1)
+        {
+            displayCandidates(Table);
+        }
+        else
+        {
+            cout << "You have entered an invalid option." << "\nPlease re-enter the option." << endl;
+            goto invalidOption;
+        }
+    }
 };
 
 int main()
 {
     // Testing
 
-    time_t currentTime;
-    time_t deadlineTime;
+    time_t currentTime;  // Variable to store current time
+    time_t deadlineTime; // Variable to store the deadline time
 
     Admin A;
 
+    // Implementation of deadline
+    // Will call the function for casting votes in this block when the elections start
     deadlineTime = A.deadLine();
-
-    // Credentials cred;
-    // cred = loginTerminal();
-
-    // if (A.Authenicate(cred.name, cred.password)) // Displays the menu if the login is successful
-    // {
-    //     A.Menu();
-    // }
-    // else
-    // {
-    //     cout << "Login Failed." << endl;
-    // }
 
     bool condition = true;
 
@@ -162,13 +177,4 @@ int main()
             condition = false;
         }
     }
-
-    // list<pair<string, long long int>> Candidates;
-    // A.Menu();
-    // A.addCandidates(Candidates);
-    // cout << endl;
-    // A.addCandidates(Candidates);
-    // cout << endl;
-    // A.viewCandidate(Candidates);
-    // return 0;
 }
