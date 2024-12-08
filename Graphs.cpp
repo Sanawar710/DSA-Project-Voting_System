@@ -22,6 +22,7 @@ public:
         }
         VertexValues = new string[vertices];
     }
+
     ~graph()
     {
         for (int i = 0; i < vertices; i++)
@@ -31,6 +32,7 @@ public:
         delete[] AdjancencyMatrix;
         delete[] VertexValues;
     }
+
     void add_vertexValue(int vertex, string value)
     {
         if (vertex < 0 || vertex >= vertices)
@@ -40,6 +42,7 @@ public:
         }
         VertexValues[vertex] = value;
     }
+
     void addEdge(int v, int u, int weight)
     {
         if (v >= vertices || u >= vertices || v < 0 || u < 0)
@@ -50,6 +53,7 @@ public:
         AdjancencyMatrix[v][u] = weight; // bas yahan per jo bhi numerical value represent kerni hai wo yahan per typee kerni hai.....
         AdjancencyMatrix[u][v] = weight; // ager undirected graph hai
     }
+
     void display_Graph_2d_Matrix()
     {
         for (int i = 0; i < vertices; i++)
@@ -61,6 +65,7 @@ public:
             cout << endl;
         }
     }
+
     void search_edge(int v, int u)
     {
         if (v >= vertices || u >= vertices || v < 0 || u < 0)
@@ -78,6 +83,7 @@ public:
             cout << "There does not exist an edge between " << v << " and " << u << endl;
         }
     }
+
     void search_vertex_with_value(string value)
     {
         for (int i = 0; i < vertices; i++)
@@ -92,6 +98,7 @@ public:
         cout << "Vertex not found..." << endl;
         return;
     }
+
     void search_vertex_with_index_value(int vertex)
     {
         if (vertex >= vertices || vertex < 0)
@@ -109,6 +116,7 @@ public:
             cout << "Vertex found with value..." << VertexValues[vertex] << endl;
         }
     }
+
     void delete_vertex_by_value(string value)
     {
         int vertex_index_value = -1;
@@ -133,6 +141,7 @@ public:
         VertexValues[vertex_index_value] = "";
         cout << "Vertex deleted" << endl;
     }
+
     void delete_vertex_by_index(int index_value)
     {
         if (index_value >= vertices || index_value < 0)
@@ -148,6 +157,7 @@ public:
         VertexValues[index_value] = "";
         cout << "The vertex is deleted." << endl;
     }
+
     void delete_edge(int v, int u)
     {
         if (v >= vertices || u >= vertices || v < 0 || u < 0)
@@ -159,6 +169,7 @@ public:
         AdjancencyMatrix[u][v] = 0;
         cout << "The edge between the vertices has been deleted..." << endl;
     }
+
     void Breadth_first_search(int start)
     {
         if (start < 0 || start >= vertices)
@@ -178,7 +189,7 @@ public:
             cout << VertexValues[current] << " ";
             for (int i = 0; i < vertices; i++)
             {
-                if (AdjancencyMatrix[current][i] == 1 && !visited[i])
+                if (AdjancencyMatrix[current][i] != 0 && !visited[i])
                 {
                     visited[i] = true;
                     q.push(i);
@@ -188,18 +199,20 @@ public:
         cout << endl;
         delete[] visited;
     }
+
     void DFS_helper(int v, bool *visited)
     {
         visited[v] = true;
         cout << VertexValues[v] << " ";
         for (int i = 0; i < vertices; i++)
         {
-            if (AdjancencyMatrix[v][i] == 1 && !visited[i])
+            if (AdjancencyMatrix[v][i] != 0 && !visited[i])
             {
                 DFS_helper(i, visited);
             }
         }
     }
+
     void DFS(int start)
     {
         if (start < 0 || start >= vertices)
@@ -214,6 +227,7 @@ public:
         delete[] visited;
     }
 };
+
 int main()
 {
     int vertices = 7; // Example: Graph with 7 vertices
