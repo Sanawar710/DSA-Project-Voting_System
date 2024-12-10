@@ -1,10 +1,9 @@
 #include <iostream>
 #include <fstream>
-#include <string>
 
 using namespace std;
 
-void saveInfo(string filename, string name, long long int CNIC)
+void saveInfo(string filename, string name, long long int CNIC) // A general function to save information in files
 {
     ofstream file(filename, ios::app); // Opening the file in append mode
 
@@ -43,15 +42,40 @@ void saveInfo(string filename, string name, long long int CNIC)
     }
 }
 
+void viewInfo(string filename) // A general function to view information in files
+{
+    string line; // Helps us to read an entire line from the file
+
+    ifstream file(filename, ios::in); // Opening the file to read information
+    
+    cout<<" Name   |  CNIC\n";
+    while (!file.eof())
+    {
+        getline(file, line);
+        cout << line << endl;
+    }
+}
+
 int main()
 {
     char option;
+    cout << "\nDo you want to enter information(y/n):\n" << endl;
 
     cin >> option;
 
     if (option == 'y')
     {
         saveInfo("Candidates.txt", "Bob", 8189391);
+  }
+
+    char choice;
+
+    cout << "\nDo you want to view the entered information (y/n):\n" << endl;
+    cin >> choice;
+
+    if (choice == 'y')
+    {
+        viewInfo("Candidates.txt");
     }
 
     return 0;
