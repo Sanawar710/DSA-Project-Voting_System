@@ -60,6 +60,7 @@
     "iostream": "cpp",
     "bst": "cpp",
     "list": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "iosfwd": "cpp"
   }
 }

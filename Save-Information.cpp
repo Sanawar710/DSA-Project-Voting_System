@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream> // This header file allows us to include 'istringstream' function
 
 using namespace std;
 
@@ -42,13 +43,44 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
     }
 }
 
+void deleteInfo(string filename, string name, long long int CNIC)
+{
+    ifstream file(filename);                               // Opening the original file
+    ofstream tempFile("modifiedCandidates.txt", ios::app); // Temporary file to store the modified information
+
+    string line;
+
+    while (getline(file, line)) // Gets information from each line from the file
+    {
+        istringstream info(line); // 'istring' function allows us to read the file in a formatted way
+
+        string name, strCNIC;
+
+        getline(file, name, ','); // Reads name from the file
+        getline(file, strCNIC);   // Reads CNIC from the file
+
+        long long int cnic = stoll(strCNIC); // Converts the data type of 'strCNIC' from 'string' to 'long long int'
+
+        if (CNIC != cnic)
+        {
+            tempFile << line << endl;
+        }
+    }
+
+    file.close();
+    tempFile.close();
+
+    remove(filename.c_str());             // Deleting the original file
+    rename("temp.txt", filename.c_str()); // Renaming the temporary file to the name of the original file
+}
+
 void viewInfo(string filename) // A general function to view information in files
 {
     string line; // Helps us to read an entire line from the file
 
     ifstream file(filename, ios::in); // Opening the file to read information
-    
-    cout<<" Name   |  CNIC\n";
+
+    cout << " Name   |  CNIC\n";
     while (!file.eof())
     {
         getline(file, line);
@@ -59,18 +91,20 @@ void viewInfo(string filename) // A general function to view information in file
 int main()
 {
     char option;
-    cout << "\nDo you want to enter information(y/n):\n" << endl;
+    cout << "\nDo you want to enter information(y/n):\n"
+         << endl;
 
     cin >> option;
 
     if (option == 'y')
     {
         saveInfo("Candidates.txt", "Bob", 8189391);
-  }
+    }
 
     char choice;
 
-    cout << "\nDo you want to view the entered information (y/n):\n" << endl;
+    cout << "\nDo you want to view the entered information (y/n):\n"
+         << endl;
     cin >> choice;
 
     if (choice == 'y')
