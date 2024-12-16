@@ -35,15 +35,15 @@ void displayResult(string names[], int votes[], int size)
     }
 }
 
-int main()
-{
-    // Arrays to hold candidate names and votes
-    string names[] = {"Alice", "Bob", "Charlie"};
-    int votes[] = {120, 150, 90};
-    int n = 3; // Number of candidates
+// int main()
+// {
+//     // Arrays to hold candidate names and votes
+//     string names[] = {"Alice", "Bob", "Charlie"};
+//     int votes[] = {120, 150, 90};
+//     int n = 3; // Number of candidates
 
-    // Sort candidates using bubble sort
-    bubbleSort(names, votes, n);
-    displayResult(names, votes, n);
-    return 0;
-}
+//     // Sort candidates using bubble sort
+//     bubbleSort(names, votes, n);
+//     displayResult(names, votes, n);
+//     return 0;
+// }

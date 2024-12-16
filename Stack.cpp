@@ -131,37 +131,37 @@ public:
     }
 };
 
-int main()
-{
-    Stack candidates;
-    int n;
+// int main()
+// {
+//     Stack candidates;
+//     int n;
 
-    cout << "Enter the number of candidates: ";
-    cin >> n;
+//     cout << "Enter the number of candidates: ";
+//     cin >> n;
 
-    for (int i = 0; i < n; ++i)
-    {
-        Candidate c;
-        cout << "Enter name for candidate " << i + 1 << ": ";
-        cin >> c.name;
-        cout << "Enter the number of votes for candidate " << i + 1 << ": ";
-        cin >> c.votes;
-        candidates.push(c);
-    }
+//     for (int i = 0; i < n; ++i)
+//     {
+//         Candidate c;
+//         cout << "Enter name for candidate " << i + 1 << ": ";
+//         cin >> c.name;
+//         cout << "Enter the number of votes for candidate " << i + 1 << ": ";
+//         cin >> c.votes;
+//         candidates.push(c);
+//     }
 
-    cout << "\nOriginal Stack:\n";
-    candidates.printStack();
+//     cout << "\nOriginal Stack:\n";
+//     candidates.printStack();
 
-    // Sort the stack
-    candidates.sortStack();
+//     // Sort the stack
+//     candidates.sortStack();
 
-    cout << "\nSorted Stack:\n";
-    candidates.printStack();
+//     cout << "\nSorted Stack:\n";
+//     candidates.printStack();
 
-    // Find and display the candidate with the highest vote score
-    Candidate topCandidate = candidates.findTopCandidate();
-    cout << "\nCandidate with the highest vote score is: "
-         << topCandidate.name << " - " << topCandidate.votes << endl;
+//     // Find and display the candidate with the highest vote score
+//     Candidate topCandidate = candidates.findTopCandidate();
+//     cout << "\nCandidate with the highest vote score is: "
+//          << topCandidate.name << " - " << topCandidate.votes << endl;
 
-    return 0;
-}
+//     return 0;
+// }

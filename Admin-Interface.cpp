@@ -146,35 +146,35 @@ public:
     }
 };
 
-int main()
-{
-    // Testing
+// int main()
+// {
+//     // Testing
 
-    time_t currentTime;  // Variable to store current time
-    time_t deadlineTime; // Variable to store the deadline time
+//     time_t currentTime;  // Variable to store current time
+//     time_t deadlineTime; // Variable to store the deadline time
 
-    Admin A;
+//     Admin A;
 
-    // Implementation of deadline
-    // Will call the function for casting votes in this block when the elections start
-    deadlineTime = A.deadLine();
+//     // Implementation of deadline
+//     // Will call the function for casting votes in this block when the elections start
+//     deadlineTime = A.deadLine();
 
-    bool condition = true;
+//     bool condition = true;
 
-    int i = 1;
+//     int i = 1;
 
-    // Enforcing the deadline
-    while (condition)
-    {
-        currentTime = time(0); // Continuously checks the current time
+//     // Enforcing the deadline
+//     while (condition)
+//     {
+//         currentTime = time(0); // Continuously checks the current time
 
-        cout << i << endl;
-        i++;
+//         cout << i << endl;
+//         i++;
 
-        if (currentTime >= deadlineTime)
-        {
-            cout << "Deadline reached! Elections are now closed." << endl;
-            condition = false;
-        }
-    }
-}
+//         if (currentTime >= deadlineTime)
+//         {
+//             cout << "Deadline reached! Elections are now closed." << endl;
+//             condition = false;
+//         }
+//     }
+// }

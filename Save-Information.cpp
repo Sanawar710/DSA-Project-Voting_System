@@ -88,29 +88,29 @@ void viewInfo(string filename) // A general function to view information in file
     }
 }
 
-int main()
-{
-    char option;
-    cout << "\nDo you want to enter information(y/n):\n"
-         << endl;
+// int main()
+// {
+//     char option;
+//     cout << "\nDo you want to enter information(y/n):\n"
+//          << endl;
 
-    cin >> option;
+//     cin >> option;
 
-    if (option == 'y')
-    {
-        saveInfo("Candidates.txt", "Bob", 8189391);
-    }
+//     if (option == 'y')
+//     {
+//         saveInfo("Candidates.txt", "Bob", 8189391);
+//     }
 
-    char choice;
+//     char choice;
 
-    cout << "\nDo you want to view the entered information (y/n):\n"
-         << endl;
-    cin >> choice;
+//     cout << "\nDo you want to view the entered information (y/n):\n"
+//          << endl;
+//     cin >> choice;
 
-    if (choice == 'y')
-    {
-        viewInfo("Candidates.txt");
-    }
+//     if (choice == 'y')
+//     {
+//         viewInfo("Candidates.txt");
+//     }
 
-    return 0;
-}
+//     return 0;
+// }

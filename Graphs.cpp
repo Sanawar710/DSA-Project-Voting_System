@@ -237,45 +237,45 @@ public:
     }
 };
 
-int main()
-{
-    int vertices = 7; // Example: Graph with 7 vertices
-    graph g(vertices);
+// int main()
+// {
+//     int vertices = 7; // Example: Graph with 7 vertices
+//     graph g(vertices);
 
-    // Set values for the vertices
-    g.add_vertexValue(0, "A");
-    g.add_vertexValue(1, "B");
-    g.add_vertexValue(2, "C");
-    g.add_vertexValue(3, "D");
-    g.add_vertexValue(4, "E");
-    g.add_vertexValue(5, "F");
-    g.add_vertexValue(6, "G");
+//     // Set values for the vertices
+//     g.add_vertexValue(0, "A");
+//     g.add_vertexValue(1, "B");
+//     g.add_vertexValue(2, "C");
+//     g.add_vertexValue(3, "D");
+//     g.add_vertexValue(4, "E");
+//     g.add_vertexValue(5, "F");
+//     g.add_vertexValue(6, "G");
 
-    // The most important part.
-    g.addEdge(0, 1, 4);
-    g.addEdge(2, 3, 5);
-    g.addEdge(1, 3, 2);
-    g.addEdge(1, 4, 3);
-    g.addEdge(4, 5, 6);
-    g.addEdge(5, 6, 7);
-    g.addEdge(6, 2, 8);
+//     // The most important part.
+//     g.addEdge(0, 1, 4);
+//     g.addEdge(2, 3, 5);
+//     g.addEdge(1, 3, 2);
+//     g.addEdge(1, 4, 3);
+//     g.addEdge(4, 5, 6);
+//     g.addEdge(5, 6, 7);
+//     g.addEdge(6, 2, 8);
 
-    g.display_Graph_2d_Matrix();
-    cout << endl;
-    g.Breadth_first_search(3);
-    g.DFS(3);
+//     g.display_Graph_2d_Matrix();
+//     cout << endl;
+//     g.Breadth_first_search(3);
+//     g.DFS(3);
 
-    g.search_vertex_with_index_value(3);
-    g.search_edge(1, 2);
+//     g.search_vertex_with_index_value(3);
+//     g.search_edge(1, 2);
 
-    g.delete_edge(1, 2);
-    g.delete_vertex_by_index(4);
-    g.delete_vertex_by_value("A");
+//     g.delete_edge(1, 2);
+//     g.delete_vertex_by_index(4);
+//     g.delete_vertex_by_value("A");
 
-    g.display_Graph_2d_Matrix();
+//     g.display_Graph_2d_Matrix();
 
-    g.Breadth_first_search(3);
-    g.DFS(3);
+//     g.Breadth_first_search(3);
+//     g.DFS(3);
 
-    return 0;
-}
+//     return 0;
+// }
