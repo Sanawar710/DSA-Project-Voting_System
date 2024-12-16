@@ -1,15 +1,16 @@
 #include <iostream>
+#include <optional>
 
 using namespace std;
 
-class Node
+class Node_CQ
 {
 public:
     int data;
-    Node *next;
+    Node_CQ *next;
 
     // Constructor to initialize a node
-    Node(int value)
+    Node_CQ(int value)
     {
         data = value;
         next = nullptr;
@@ -19,8 +20,8 @@ public:
 class CircularQueue
 {
 private:
-    Node *front;
-    Node *rear;
+    Node_CQ *front;
+    Node_CQ *rear;
     int size;     // Current number of elements in the queue
     int capacity; // Maximum capacity of the queue
 
@@ -45,12 +46,12 @@ public:
 
     int Front()
     {
-        if (front == NULL)
+        if (isEmpty())
         {
             cout << "Queue is Empty" << endl;
-            return;
+            return false;
         }
-        return front->data;
+        return front->data; // Return the value at the front
     }
 
     void EnQueue(int value) // Function to add an element to the queue
@@ -61,7 +62,7 @@ public:
             return;
         }
 
-        Node *newNode = new Node(value);
+        Node_CQ *newNode = new Node_CQ(value);
 
         if (isEmpty())
         {
@@ -98,7 +99,7 @@ public:
         }
         else
         {
-            Node *temp = front;
+            Node_CQ *temp = front;
             value = temp->data;
             front = front->next;
             rear->next = front; // Maintain circular link

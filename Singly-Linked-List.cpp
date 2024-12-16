@@ -52,8 +52,8 @@ public:
         }
 
         // If the element is not stored by the head node and the list is not also empty
-        Node *current = new Node;
-        Node *prev = new Node;
+        Node_LinkedList *current = new Node_LinkedList;
+        Node_LinkedList *prev = new Node_LinkedList;
 
         current = head;
         prev = NULL;
