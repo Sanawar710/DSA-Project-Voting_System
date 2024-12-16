@@ -6,7 +6,6 @@ struct Node
 {
     string name;
     long long int CNIC;
-    // int vote;
     Node *next;
 };
 

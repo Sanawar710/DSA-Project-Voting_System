@@ -43,7 +43,7 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
     }
 }
 
-void deleteInfo(string filename, string name, long long int CNIC)
+void deleteInfo(string filename, long long int CNIC)
 {
     ifstream file(filename);                               // Opening the original file
     ofstream tempFile("modifiedCandidates.txt", ios::app); // Temporary file to store the modified information
