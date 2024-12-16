@@ -1,17 +1,17 @@
 #include <iostream>
 using namespace std;
 
-struct Candidate
+struct Candidate1
 {
     string name;
     int votes;
 
-    bool operator<(const Candidate &other) const
+    bool operator<(const Candidate1 &other) const
     {
         return votes < other.votes; // Compare by votes
     }
 
-    bool operator>(const Candidate &other) const
+    bool operator>(const Candidate1 &other) const
     {
         return votes > other.votes;
     }
@@ -20,9 +20,9 @@ struct Candidate
 // Node structure for the linked list
 struct Node
 {
-    Candidate data;
+    Candidate1 data;
     Node *next;
-    Node(Candidate c) : data(c), next(nullptr) {}
+    Node(Candidate1 c) : data(c), next(nullptr) {}
 };
 
 // Stack class using linked list
@@ -35,7 +35,7 @@ public:
     Stack() : topNode(nullptr) {}
 
     // Push an element to the stack
-    void push(const Candidate &c)
+    void push(const Candidate1 &c)
     {
         Node *newNode = new Node(c);
         newNode->next = topNode;
@@ -54,7 +54,7 @@ public:
     }
 
     // Get the top element of the stack
-    Candidate top() const
+    Candidate1 top() const
     {
         if (topNode != nullptr)
         {
@@ -70,15 +70,15 @@ public:
     }
 
     // Function to print the stack
-    void printStack() const
-    {
-        Node *temp = topNode;
-        while (temp != nullptr)
-        {
-            cout << temp->data.name << " - " << temp->data.votes << endl;
-            temp = temp->next;
-        }
-    }
+    // void printStack() const
+    // {
+    //     Node *temp = topNode;
+    //     while (temp != nullptr)
+    //     {
+    //         cout << temp->data.name << " - " << temp->data.votes << endl;
+    //         temp = temp->next;
+    //     }
+    // }
 
     // Sorting function
     void sortStack()
@@ -87,7 +87,7 @@ public:
 
         while (!empty())
         {
-            Candidate current = top();
+            Candidate1 current = top();
             pop();
 
             while (!tempStack.empty() && tempStack.top() > current)
@@ -108,7 +108,7 @@ public:
     }
 
     // Find and return the candidate with the highest votes
-    Candidate findTopCandidate() const
+    Candidate1 findTopCandidate() const
     {
         if (topNode == nullptr)
         {
@@ -116,7 +116,7 @@ public:
         }
 
         Node *temp = topNode;
-        Candidate topCandidate = temp->data;
+        Candidate1 topCandidate = temp->data;
 
         while (temp != nullptr)
         {

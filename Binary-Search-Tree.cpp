@@ -1,16 +1,16 @@
 #include <iostream>
 using namespace std;
 
-struct Node // Node for BST
+struct BST // Node for BST
 {
     int data;
-    Node *right;
-    Node *left;
+    BST *right;
+    BST *left;
 };
 
-Node *createNode(int data)
+BST *createNode(int data)
 {
-    Node *newNode = new Node;
+    BST *newNode = new BST;
     newNode->data = data;
 
     // Sets the children nodes to NULL
@@ -20,7 +20,7 @@ Node *createNode(int data)
     return newNode;
 }
 
-void preOrder_Traversal(Node *rootNode) // Root -> Left Subtree -> Right Subtree
+void preOrder_Traversal(BST *rootNode) // Root -> Left Subtree -> Right Subtree
 {
     if (rootNode != NULL) // Traverses the BST if the root node is not NULL
     {
@@ -30,7 +30,7 @@ void preOrder_Traversal(Node *rootNode) // Root -> Left Subtree -> Right Subtree
     }
 }
 
-void postOrder_Traversal(Node *rootNode) // Left Subtree -> Right Subtree -> Root
+void postOrder_Traversal(BST *rootNode) // Left Subtree -> Right Subtree -> Root
 {
     if (rootNode != NULL)
     {
@@ -40,7 +40,7 @@ void postOrder_Traversal(Node *rootNode) // Left Subtree -> Right Subtree -> Roo
     }
 }
 
-void inOrder_Traversal(Node *rootNode) // Left Subtree -> Root -> Subtree
+void inOrder_Traversal(BST *rootNode) // Left Subtree -> Root -> Subtree
 {
     if (rootNode != NULL)
     {
@@ -50,7 +50,7 @@ void inOrder_Traversal(Node *rootNode) // Left Subtree -> Root -> Subtree
     }
 }
 
-Node *recursive_Binary_Search(Node *rootNode, int Element)
+BST *recursive_Binary_Search(BST *rootNode, int Element)
 {
     if (rootNode == NULL)
     {
@@ -73,7 +73,7 @@ Node *recursive_Binary_Search(Node *rootNode, int Element)
     }
 }
 
-Node *iterative_Search(Node *rootNode, int Element)
+BST *iterative_Search(BST *rootNode, int Element)
 {
     while (rootNode != NULL) // Iterates through the BST until it reaches NULL
     {
@@ -95,9 +95,9 @@ Node *iterative_Search(Node *rootNode, int Element)
     return NULL; // Returns NULL if the root node is NULL or if the desired element is not found
 }
 
-void insertion_in_BST(Node *rootNode, int Element)
+void insertion_in_BST(BST *rootNode, int Element)
 {
-    Node *prev = NULL; // Created for keeping the track of the Parent/Root Node
+    BST *prev = NULL; // Created for keeping the track of the Parent/Root Node
 
     while (rootNode != NULL)
     {
@@ -120,7 +120,7 @@ void insertion_in_BST(Node *rootNode, int Element)
         }
     }
 
-    Node *newNode = createNode(Element); // Creates a new nodw with the value that we want to insert
+    BST *newNode = createNode(Element); // Creates a new nodw with the value that we want to insert
 
     if (prev == NULL)
     {
@@ -138,9 +138,9 @@ void insertion_in_BST(Node *rootNode, int Element)
     }
 }
 
-Node *inOrder_Predecessor(Node *rootNode); // Used in function to delete nodes in BST
+BST *inOrder_Predecessor(BST *rootNode); // Used in function to delete nodes in BST
 
-Node *deletion_in_BST(Node *rootNode, int Element)
+BST *deletion_in_BST(BST *rootNode, int Element)
 {
     if (rootNode == NULL)
     {
@@ -171,7 +171,7 @@ Node *deletion_in_BST(Node *rootNode, int Element)
         // Case 2: Node has only one child
         else if (rootNode->left == NULL) // Only right child exists
         {
-            Node *temp = rootNode->right;
+            BST *temp = rootNode->right;
             delete rootNode;
             return temp;
         }
@@ -179,7 +179,7 @@ Node *deletion_in_BST(Node *rootNode, int Element)
         // Case 3: Only left child exists
         else if (rootNode->right == NULL)
         {
-            Node *temp = rootNode->left;
+            BST *temp = rootNode->left;
             delete rootNode;
             return temp;
         }
@@ -187,7 +187,7 @@ Node *deletion_in_BST(Node *rootNode, int Element)
         // Case 3: Node has two children
         else
         {
-            Node *iPre = inOrder_Predecessor(rootNode);                   // Finding in-order predecessor
+            BST *iPre = inOrder_Predecessor(rootNode);                    // Finding in-order predecessor
             rootNode->data = iPre->data;                                  // Replacing data with predecessor's data
             rootNode->left = deletion_in_BST(rootNode->left, iPre->data); // Delete predecessor
         }
@@ -195,7 +195,7 @@ Node *deletion_in_BST(Node *rootNode, int Element)
     return rootNode;
 }
 
-Node *inOrder_Predecessor(Node *rootNode) // Used to return left subtree's right most child node
+BST *inOrder_Predecessor(BST *rootNode) // Used to return left subtree's right most child node
 {
     rootNode = rootNode->left;
 
@@ -209,33 +209,33 @@ Node *inOrder_Predecessor(Node *rootNode) // Used to return left subtree's right
 
 // int main()
 // {
-    // Testing
+// Testing
 
-    // Node *root = new Node;
-    // Node *second = new Node;
-    // Node *third = new Node;
+// Node *root = new Node;
+// Node *second = new Node;
+// Node *third = new Node;
 
-    // root = createNode(100);
-    // second = createNode(102);
-    // third = createNode(10);
+// root = createNode(100);
+// second = createNode(102);
+// third = createNode(10);
 
-    // root->right = second;
-    // root->left = third;
+// root->right = second;
+// root->left = third;
 
-    // // cout << "Pre-Order Traversal:" << endl;
-    // // preOrder_Traversal(root);
+// // cout << "Pre-Order Traversal:" << endl;
+// // preOrder_Traversal(root);
 
-    // // cout << "\nPost-Order Traversal" << endl;
-    // // postOrder_Traversal(root);
+// // cout << "\nPost-Order Traversal" << endl;
+// // postOrder_Traversal(root);
 
-    // cout << "In-Order Traversal" << endl;
-    // inOrder_Traversal(root);
+// cout << "In-Order Traversal" << endl;
+// inOrder_Traversal(root);
 
-    // cout << "\nDeletion Function Called " << endl;
-    // root = deletion_in_BST(root, 10);
+// cout << "\nDeletion Function Called " << endl;
+// root = deletion_in_BST(root, 10);
 
-    // cout << "\nIn-Order Traversal" << endl;
-    // inOrder_Traversal(root);
+// cout << "\nIn-Order Traversal" << endl;
+// inOrder_Traversal(root);
 
 //      return 0;
 // }
