@@ -2,18 +2,18 @@
 
 using namespace std;
 
-struct Node
+struct Node_LinkedList
 {
     string name;
     long long int CNIC;
-    Node *next;
+    Node_LinkedList *next;
 };
 
 class Singlelinklist
 {
 public:
-    Node *head;
-    Node *tail;
+    Node_LinkedList *head;
+    Node_LinkedList *tail;
 
     Singlelinklist() // Constructor
     {
@@ -26,7 +26,7 @@ public:
     /// @param CNIC The CNIC/National ID of the person
     void insert(string name, long long int CNIC)
     {
-        Node *newNode = new Node;
+        Node_LinkedList *newNode = new Node_LinkedList;
 
         newNode->name = name;
         newNode->CNIC = CNIC;
@@ -38,7 +38,7 @@ public:
     /// @brief This is a general function for deletion. It performs deletion for all the cases
     /// @param CNIC This is the CNIC / National ID of the person (for whom we want to delete information)
     /// @return Returns NULL if the list is empty. Else, head
-    Node *deletion(long long int CNIC)
+    Node_LinkedList *deletion(long long int CNIC)
     {
         if (head == NULL)
         {
@@ -72,7 +72,7 @@ public:
     /// @brief The function for traversal in list
     void traversal() // Function for traversal
     {
-        Node *temp = new Node;
+        Node_LinkedList *temp = new Node_LinkedList;
         temp = head;
 
         int count = 1;

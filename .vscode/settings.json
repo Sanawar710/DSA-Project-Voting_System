@@ -61,6 +61,7 @@
     "bst": "cpp",
     "list": "cpp",
     "thread": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "new": "cpp"
   }
 }
