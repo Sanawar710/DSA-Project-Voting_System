@@ -27,8 +27,8 @@ private:
 public:
     CircularQueue(int cap) // Constructor to initialize the circular queue
     {
-        front = nullptr;
-        rear = nullptr;
+        front = NULL;
+        rear = NULL;
         size = 0;
         capacity = cap;
     }
@@ -43,7 +43,17 @@ public:
         return size == capacity;
     }
 
-    void enqueue(int value) // Function to add an element to the queue
+    int Front()
+    {
+        if (front == NULL)
+        {
+            cout << "Queue is Empty" << endl;
+            return;
+        }
+        return front->data;
+    }
+
+    void EnQueue(int value) // Function to add an element to the queue
     {
         if (isFull())
         {
@@ -70,7 +80,7 @@ public:
         cout << value << " enqueued to the queue." << endl;
     }
 
-    int dequeue() // Function to remove an element from the queue
+    int DeQueue() // Function to remove an element from the queue
     {
         if (isEmpty())
         {

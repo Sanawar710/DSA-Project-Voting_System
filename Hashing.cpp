@@ -11,9 +11,15 @@ struct Candidate
     long long int CNIC;
 };
 
-map<int, Candidate> candidateTable;
+// Change the key type of the map to long long int to match CNIC's type
+map<long long int, Candidate> candidateTable;
 
-bool registerCandidate(map<int, Candidate> &candidateTable, string name , int id)
+/// @brief This function is used to insert values in a Hash-Table for Candidates
+/// @param candidateTable The table in which we want to insert table
+/// @param name The name of the table
+/// @param id The national id / CNIC of the candidate
+/// @return Returns false if candidate exists already, else true
+bool registerCandidate(map<long long int, Candidate> &candidateTable, string name, long long int id)
 {
     // Check if a candidate with the same ID already exists
     if (candidateTable.find(id) != candidateTable.end())
@@ -31,13 +37,13 @@ bool registerCandidate(map<int, Candidate> &candidateTable, string name , int id
     return true;
 }
 
-void displayCandidates(map<int, Candidate> &candidateTable)
+void displayCandidates(map<long long int, Candidate> &candidateTable)
 {
-    map<int, Candidate>::iterator iter; // Initialized an iterator to traverse throught the map
+    map<long long int, Candidate>::iterator iter; // Initialized an iterator to traverse through the map
 
     for (iter = candidateTable.begin(); iter != candidateTable.end(); iter++)
     {
         cout << "Candidate's Name: " << iter->second.name
-             << "\nCandidate's ID: " << iter->second.CNIC<<endl;
+             << "\nCandidate's CNIC: " << iter->second.CNIC << endl;
     }
 }

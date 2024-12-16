@@ -1,23 +1,27 @@
 #include <iostream>
-#include <queue>
-#include <string>
+#include "Queues.cpp"
+
 using namespace std;
+
+CircularQueue q;
+
 class graph
 {
-    int **AdjancencyMatrix;
+private:
+    int **AdjacencyMatrix;
     int vertices;
     string *VertexValues;
 
 public:
     graph(int value) : vertices(value)
     {
-        AdjancencyMatrix = new int *[vertices];
+        AdjacencyMatrix = new int *[vertices];
         for (int i = 0; i < vertices; i++)
         {
-            AdjancencyMatrix[i] = new int[vertices];
+            AdjacencyMatrix[i] = new int[vertices];
             for (int j = 0; j < vertices; j++)
             {
-                AdjancencyMatrix[i][j] = 0;
+                AdjacencyMatrix[i][j] = 0;
             }
         }
         VertexValues = new string[vertices];
@@ -27,9 +31,9 @@ public:
     {
         for (int i = 0; i < vertices; i++)
         {
-            delete[] AdjancencyMatrix[i];
+            delete[] AdjacencyMatrix[i];
         }
-        delete[] AdjancencyMatrix;
+        delete[] AdjacencyMatrix;
         delete[] VertexValues;
     }
 
@@ -50,8 +54,8 @@ public:
             cout << "Invalid vertices typed..." << endl;
             return;
         }
-        AdjancencyMatrix[v][u] = weight; // bas yahan per jo bhi numerical value represent kerni hai wo yahan per typee kerni hai.....
-        AdjancencyMatrix[u][v] = weight; // ager undirected graph hai
+        AdjacencyMatrix[v][u] = weight; // bas yahan per jo bhi numerical value represent kerni hai wo yahan per typee kerni hai.....
+        AdjacencyMatrix[u][v] = weight; // ager undirected graph hai
     }
 
     void display_Graph_2d_Matrix()
@@ -60,7 +64,7 @@ public:
         {
             for (int j = 0; j < vertices; j++)
             {
-                cout << AdjancencyMatrix[i][j] << " ";
+                cout << AdjacencyMatrix[i][j] << " ";
             }
             cout << endl;
         }
@@ -73,10 +77,10 @@ public:
             cout << "Invalid vertices typed..." << endl;
             return;
         }
-        if (AdjancencyMatrix[v][u] != 0)
+        if (AdjacencyMatrix[v][u] != 0)
         {
             cout << "There exists an edge between " << v << " and " << u << endl;
-            cout << "And the weight value is..." << AdjancencyMatrix[v][u];
+            cout << "And the weight value is..." << AdjacencyMatrix[v][u];
         }
         else
         {
@@ -135,8 +139,8 @@ public:
         }
         for (int j = 0; j < vertices; j++)
         {
-            AdjancencyMatrix[vertex_index_value][j] = 0; // Reseting all the egde connections
-            AdjancencyMatrix[j][vertex_index_value] = 0;
+            AdjacencyMatrix[vertex_index_value][j] = 0; // Reseting all the egde connections
+            AdjacencyMatrix[j][vertex_index_value] = 0;
         }
         VertexValues[vertex_index_value] = "";
         cout << "Vertex deleted" << endl;
@@ -151,8 +155,8 @@ public:
         }
         for (int i = 0; i < vertices; i++)
         {
-            AdjancencyMatrix[index_value][i] = 0;
-            AdjancencyMatrix[i][index_value] = 0;
+            AdjacencyMatrix[index_value][i] = 0;
+            AdjacencyMatrix[i][index_value] = 0;
         }
         VertexValues[index_value] = "";
         cout << "The vertex is deleted." << endl;
@@ -165,8 +169,8 @@ public:
             cout << "Invalid vertices typed..." << endl;
             return;
         }
-        AdjancencyMatrix[v][u] = 0;
-        AdjancencyMatrix[u][v] = 0;
+        AdjacencyMatrix[v][u] = 0;
+        AdjacencyMatrix[u][v] = 0;
         cout << "The edge between the vertices has been deleted..." << endl;
     }
 
@@ -178,21 +182,26 @@ public:
             return;
         }
         bool *visited = new bool[vertices]();
-        queue<int> q;
+
         cout << "BFS:" << endl;
         visited[start] = true;
-        q.push(start);
-        while (!q.empty())
+
+        q.EnQueue(start);
+
+        while (!q.isEmpty())
         {
-            int current = q.front();
-            q.pop();
+            int current = q.Front();
+
+            q.DeQueue();
+
             cout << VertexValues[current] << " ";
+
             for (int i = 0; i < vertices; i++)
             {
-                if (AdjancencyMatrix[current][i] != 0 && !visited[i])
+                if (AdjacencyMatrix[current][i] != 0 && !visited[i])
                 {
                     visited[i] = true;
-                    q.push(i);
+                    q.EnQueue(i);
                 }
             }
         }
@@ -206,7 +215,7 @@ public:
         cout << VertexValues[v] << " ";
         for (int i = 0; i < vertices; i++)
         {
-            if (AdjancencyMatrix[v][i] != 0 && !visited[i])
+            if (AdjacencyMatrix[v][i] != 0 && !visited[i])
             {
                 DFS_helper(i, visited);
             }
