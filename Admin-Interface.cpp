@@ -122,7 +122,7 @@ public:
         head->deletion(CNIC);
     }
 
-    void viewCandidate(Singlelinklist *head, map<int, Candidate> Table)
+    void viewCandidate(Singlelinklist *head, map<long long int, Candidate> candidateTable);
     {
         int option;
 
@@ -136,7 +136,7 @@ public:
         }
         else if (option == 1)
         {
-            displayCandidates(Table);
+            displayCandidates(candidateTable);
         }
         else
         {

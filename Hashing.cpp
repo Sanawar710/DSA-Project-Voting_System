@@ -4,7 +4,7 @@
                // It stores data in key-value pair. We can access a value against a key
 using namespace std;
 
-struct Candidate2
+struct Candidate3
 {
     string name;
     int votes;
@@ -12,14 +12,14 @@ struct Candidate2
 };
 
 // Change the key type of the map to long long int to match CNIC's type
-map<long long int, Candidate2> candidateTable;
+map<long long int, Candidate3> candidateTable;
 
 /// @brief This function is used to insert values in a Hash-Table for Candidates
 /// @param candidateTable The table in which we want to insert table
 /// @param name The name of the table
 /// @param id The national id / CNIC of the candidate
 /// @return Returns false if candidate exists already, else true
-bool registerCandidate(map<long long int, Candidate2> &candidateTable, string name, long long int id)
+bool registerCandidate(map<long long int, Candidate3> &candidateTable, string name, long long int id)
 {
     // Check if a candidate with the same ID already exists
     if (candidateTable.find(id) != candidateTable.end())
@@ -29,7 +29,7 @@ bool registerCandidate(map<long long int, Candidate2> &candidateTable, string na
     }
 
     // Insert data if it does not exist already
-    Candidate2 newCandidate = {name, 0, id};
+    Candidate3 newCandidate = {name, 0, id};
     candidateTable[id] = newCandidate;
 
     cout << "Candidate " << name << " registered successfully!" << endl;
@@ -37,9 +37,9 @@ bool registerCandidate(map<long long int, Candidate2> &candidateTable, string na
     return true;
 }
 
-void displayCandidates(map<long long int, Candidate2> &candidateTable)
+void displayCandidates(map<long long int, Candidate3> &candidateTable)
 {
-    map<long long int, Candidate2>::iterator iter; // Initialized an iterator to traverse through the map
+    map<long long int, Candidate3>::iterator iter; // Initialized an iterator to traverse through the map
 
     for (iter = candidateTable.begin(); iter != candidateTable.end(); iter++)
     {

@@ -5,31 +5,33 @@ using namespace std;
 
 CircularQueue q;
 
-class graph
+class Graph
 {
 private:
     int **AdjacencyMatrix;
-    int vertices;
+    int Vertices;
     string *VertexValues;
 
 public:
-    graph(int value) : vertices(value)
+    Graph(int value) : Vertices(value)
     {
-        AdjacencyMatrix = new int *[vertices];
-        for (int i = 0; i < vertices; i++)
+        AdjacencyMatrix = new int *[Vertices];
+
+        for (int i = 0; i < Vertices; i++)
         {
-            AdjacencyMatrix[i] = new int[vertices];
-            for (int j = 0; j < vertices; j++)
+            AdjacencyMatrix[i] = new int[Vertices];
+            for (int j = 0; j < Vertices; j++)
             {
                 AdjacencyMatrix[i][j] = 0;
             }
         }
-        VertexValues = new string[vertices];
+
+        VertexValues = new string[Vertices];
     }
 
-    ~graph()
+    ~Graph()
     {
-        for (int i = 0; i < vertices; i++)
+        for (int i = 0; i < Vertices; i++)
         {
             delete[] AdjacencyMatrix[i];
         }
@@ -37,19 +39,19 @@ public:
         delete[] VertexValues;
     }
 
-    void add_vertexValue(int vertex, string value)
+    void add_vertexValue(int Vertex, string value)
     {
-        if (vertex < 0 || vertex >= vertices)
+        if (Vertex < 0 || Vertex >= Vertices)
         {
             cout << "Invalid vertex entered..." << endl;
             return;
         }
-        VertexValues[vertex] = value;
+        VertexValues[Vertex] = value;
     }
 
     void addEdge(int v, int u, int weight)
     {
-        if (v >= vertices || u >= vertices || v < 0 || u < 0)
+        if (v >= Vertices || u >= Vertices || v < 0 || u < 0)
         {
             cout << "Invalid vertices typed..." << endl;
             return;
@@ -60,9 +62,9 @@ public:
 
     void display_Graph_2d_Matrix()
     {
-        for (int i = 0; i < vertices; i++)
+        for (int i = 0; i < Vertices; i++)
         {
-            for (int j = 0; j < vertices; j++)
+            for (int j = 0; j < Vertices; j++)
             {
                 cout << AdjacencyMatrix[i][j] << " ";
             }
@@ -72,7 +74,7 @@ public:
 
     void search_edge(int v, int u)
     {
-        if (v >= vertices || u >= vertices || v < 0 || u < 0)
+        if (v >= Vertices || u >= Vertices || v < 0 || u < 0)
         {
             cout << "Invalid vertices typed..." << endl;
             return;
@@ -90,7 +92,7 @@ public:
 
     void search_vertex_with_value(string value)
     {
-        for (int i = 0; i < vertices; i++)
+        for (int i = 0; i < Vertices; i++)
         {
             if (VertexValues[i] == value)
             {
@@ -103,28 +105,29 @@ public:
         return;
     }
 
-    void search_vertex_with_index_value(int vertex)
+    void search_vertex_with_index_value(int Vertex)
     {
-        if (vertex >= vertices || vertex < 0)
+        if (Vertex >= Vertices || Vertex < 0)
         {
             cout << "Invalid vertex typed..." << endl;
             return;
         }
-        if (VertexValues[vertex] == "")
+        if (VertexValues[Vertex] == "")
         {
             cout << "The vertex is deleted or empty..." << endl;
             return;
         }
         else
         {
-            cout << "Vertex found with value..." << VertexValues[vertex] << endl;
+            cout << "Vertex found with value..." << VertexValues[Vertex] << endl;
         }
     }
 
     void delete_vertex_by_value(string value)
     {
         int vertex_index_value = -1;
-        for (int i = 0; i < vertices; i++)
+
+        for (int i = 0; i < Vertices; i++)
         {
             if (VertexValues[i] == value)
             {
@@ -132,12 +135,14 @@ public:
                 vertex_index_value = i;
             }
         }
+
         if (vertex_index_value == -1)
         {
             cout << "No vertex found with value.. " << value << endl;
             return;
         }
-        for (int j = 0; j < vertices; j++)
+
+        for (int j = 0; j < Vertices; j++)
         {
             AdjacencyMatrix[vertex_index_value][j] = 0; // Reseting all the egde connections
             AdjacencyMatrix[j][vertex_index_value] = 0;
@@ -148,12 +153,12 @@ public:
 
     void delete_vertex_by_index(int index_value)
     {
-        if (index_value >= vertices || index_value < 0)
+        if (index_value >= Vertices || index_value < 0)
         {
             cout << "Invalid vertex typed..." << endl;
             return;
         }
-        for (int i = 0; i < vertices; i++)
+        for (int i = 0; i < Vertices; i++)
         {
             AdjacencyMatrix[index_value][i] = 0;
             AdjacencyMatrix[i][index_value] = 0;
@@ -164,7 +169,7 @@ public:
 
     void delete_edge(int v, int u)
     {
-        if (v >= vertices || u >= vertices || v < 0 || u < 0)
+        if (v >= Vertices || u >= Vertices || v < 0 || u < 0)
         {
             cout << "Invalid vertices typed..." << endl;
             return;
@@ -176,12 +181,12 @@ public:
 
     void Breadth_first_search(int start)
     {
-        if (start < 0 || start >= vertices)
+        if (start < 0 || start >= Vertices)
         {
             cout << "Invalid start vertex" << endl;
             return;
         }
-        bool *visited = new bool[vertices]();
+        bool *visited = new bool[Vertices]();
 
         cout << "BFS:" << endl;
         visited[start] = true;
@@ -196,7 +201,7 @@ public:
 
             cout << VertexValues[current] << " ";
 
-            for (int i = 0; i < vertices; i++)
+            for (int i = 0; i < Vertices; i++)
             {
                 if (AdjacencyMatrix[current][i] != 0 && !visited[i])
                 {
@@ -213,7 +218,7 @@ public:
     {
         visited[v] = true;
         cout << VertexValues[v] << " ";
-        for (int i = 0; i < vertices; i++)
+        for (int i = 0; i < Vertices; i++)
         {
             if (AdjacencyMatrix[v][i] != 0 && !visited[i])
             {
@@ -224,12 +229,12 @@ public:
 
     void DFS(int start)
     {
-        if (start < 0 || start >= vertices)
+        if (start < 0 || start >= Vertices)
         {
             cout << "Invalid start vertex" << endl;
             return;
         }
-        bool *visited = new bool[vertices]();
+        bool *visited = new bool[Vertices]();
         cout << "DFS:" << endl;
         DFS_helper(start, visited);
         cout << endl;
