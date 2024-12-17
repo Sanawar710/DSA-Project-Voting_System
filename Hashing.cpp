@@ -4,12 +4,12 @@
 
 using namespace std;
 
-struct Candidate
-{
-    string name;
-    int votes;
-    long long int CNIC;
-};
+// struct Candidate3
+// {
+//     string name;
+//     int votes;
+//     long long int CNIC;
+// };
 
 class HashMap
 {
@@ -63,7 +63,6 @@ public:
     {
         for (int i = 0; i < size; i++)
         {
-            cout << "Bucket " << i << ":\n";
             Node_LinkedList *current = table[i].head;
 
             int count = 1;

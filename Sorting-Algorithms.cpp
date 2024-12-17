@@ -1,12 +1,9 @@
 #include <iostream>
-#include "Singly-Linked-List.cpp" // File in which we have create the Node and Functions for Single Linked List
+#include "Singly-Linked-List.cpp" // Ensure this file contains your linked list implementation
 
 using namespace std;
 
-// For Arrays
-void merge(int array[], int left, int mid, int right); // Funtion Prototype. Later, used in merge sort algorithm
-int partition(int array[], int left, int right);       // Funtion Prototype. Later, used in quick sort algorithm
-
+// Bubble Sort for Array
 void bubbleSort(int array[], int size)
 {
     for (int i = 0; i < size - 1; i++)
@@ -19,31 +16,28 @@ void bubbleSort(int array[], int size)
     }
 }
 
+// Selection Sort for Array
 void selectionSort(int array[], int size)
 {
     for (int i = 0; i < size - 1; i++)
     {
         int minIndex = i;
-
-        for (int j = i + 1; j < size - 1; j++) // j is equal to i + 1 because the previous elements of the array are already sorted
+        for (int j = i + 1; j < size; j++)
         {
-            if (array[j] < minIndex)
-            {
-                minIndex = j; // Update minimum index if a element less than the previous one is found in the unsorted part of array
-            }
+            if (array[j] < array[minIndex])
+                minIndex = j;
         }
-        swap(array[i], array[minIndex]); // Swap elements if element smaller than minimum index is found
+        swap(array[i], array[minIndex]);
     }
 }
 
+// Insertion Sort for Array
 void insertionSort(int array[], int size)
 {
-    int key, j;
-
     for (int i = 1; i < size; i++)
     {
-        key = array[i];
-        j = i - 1;
+        int key = array[i];
+        int j = i - 1;
         while (j >= 0 && array[j] > key)
         {
             array[j + 1] = array[j];
@@ -53,151 +47,98 @@ void insertionSort(int array[], int size)
     }
 }
 
+// Merge Sort Helper Function (Merge Step)
+void merge(int array[], int left, int mid, int right)
+{
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int L[n1], R[n2];
+
+    for (int i = 0; i < n1; i++)
+        L[i] = array[left + i];
+    for (int i = 0; i < n2; i++)
+        R[i] = array[mid + 1 + i];
+
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+            array[k++] = L[i++];
+        else
+            array[k++] = R[j++];
+    }
+
+    while (i < n1)
+        array[k++] = L[i++];
+    while (j < n2)
+        array[k++] = R[j++];
+}
+
+// Merge Sort for Array
 void mergeSort(int array[], int left, int right)
 {
     if (left < right)
     {
-        int mid = left + (right - left) / 2; // Calculates mid point of the array
-
-        // Recursive Call
+        int mid = left + (right - left) / 2;
         mergeSort(array, left, mid);
         mergeSort(array, mid + 1, right);
-
         merge(array, left, mid, right);
     }
 }
 
-void quickSort(int array[], int left, int right)
-{
-    int partitionIndex;
-    if (left < right)
-    {
-        partitionIndex = partition(array, left, right);
-        // Recursive Call
-        quickSort(array, left, partitionIndex - 1);  // Sorts left half
-        quickSort(array, partitionIndex + 1, right); // Sorts right half
-    }
-}
-
+// Quick Sort Helper Function (Partition Step)
 int partition(int array[], int left, int right)
 {
-    int pivot = array[left];
-    int i = left + 1;
-    int j = right;
-
-    while (i <= j)
+    int pivot = array[right];
+    int i = left - 1;
+    for (int j = left; j < right; j++)
     {
-        while (i <= right && array[i] <= pivot)
-        {
-            i++;
-        }
-
-        while (j >= left && array[j] > pivot)
-        {
-            j--;
-        }
-
-        if (i < j)
-        {
-            swap(array[i], array[j]);
-        }
+        if (array[j] < pivot)
+            swap(array[++i], array[j]);
     }
-
-    swap(array[left], array[j]);
-    return j;
+    swap(array[i + 1], array[right]);
+    return i + 1;
 }
 
-void merge(int array[], int left, int mid, int right)
+// Quick Sort for Array
+void quickSort(int array[], int left, int right)
 {
-    int i, j, k;
-    i = left;
-    k = 0;
-    j = mid + 1;
-    int size = right - left + 1;
-    int tempArray[size];
-
-    while (i <= mid && j <= right)
+    if (left < right)
     {
-        if (array[i] < array[j])
-        {
-            tempArray[k] = array[i];
-            i++, k++;
-        }
-        else
-        {
-            tempArray[k] = array[j];
-            j++, k++;
-        }
-    }
-
-    // Copy the remaining elements into the array
-    while (i <= mid)
-    {
-        tempArray[k] = array[i];
-        i++, k++;
-    }
-
-    while (j <= right)
-    {
-        tempArray[k] = array[j];
-        j++, k++;
-    }
-
-    for (int i = left, k = 0; i <= right; i++, k++)
-    {
-        array[i] = tempArray[k];
+        int pivotIndex = partition(array, left, right);
+        quickSort(array, left, pivotIndex - 1);
+        quickSort(array, pivotIndex + 1, right);
     }
 }
 
-void printArray(int array[], int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        cout << array[i] << " ";
-    }
-}
-
-/// @brief This function is a overloaded function used to implement bubble sort in the singly linked list
-/// @param head The first/head node of the linked list
-void bubbleSort(Node *head)
+// Bubble Sort for Singly Linked List
+void bubbleSort(Node_LinkedList *head)
 {
     if (head == NULL)
     {
         cout << "Empty List" << endl;
+        return;
     }
 
-    bool condition;
-
-    Node *current = new Node;
-    Node *prev = new Node; // Keeps the tracks of last sorted element in the list
-
-    current = head;
-    prev = NULL;
+    bool swapped;
+    Node_LinkedList *current;
+    Node_LinkedList *lastSorted = NULL;
 
     do
     {
-        while (current->next != prev)
+        swapped = false;
+        current = head;
+
+        while (current->next != lastSorted)
         {
-            condition = false;
-            current = head;
-
-            if (current->CNIC < current->next->CNIC)
+            if (current->CNIC > current->next->CNIC)
             {
-                // Swapping the elements if the condition become true
-
-                Node *temp = new Node;
-                temp = current;
-
-                current->name = current->next->name;
-                current->CNIC = current->next->CNIC;
-
-                current->next = temp;
-
-                condition = false;
+                swap(current->name, current->next->name);
+                swap(current->CNIC, current->next->CNIC);
+                swapped = true;
             }
             current = current->next;
         }
-
-        prev = current;
-    } while (condition); // The while loop will iterate till the condition becomes false i.e the list is sorted
+        lastSorted = current;
+    } while (swapped);
 }
