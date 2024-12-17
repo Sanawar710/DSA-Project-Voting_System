@@ -1,49 +1,97 @@
 #include <iostream>
-#include <map> // Included to use unordered maps.
-               // Unordered map is similar to Python's dictionary
-               // It stores data in key-value pair. We can access a value against a key
+#include <vector>
+#include "Singly-Linked-List.cpp"
+
 using namespace std;
 
-struct Candidate3
+struct Candidate
 {
     string name;
     int votes;
     long long int CNIC;
 };
 
-// Change the key type of the map to long long int to match CNIC's type
-map<long long int, Candidate3> candidateTable;
-
-/// @brief This function is used to insert values in a Hash-Table for Candidates
-/// @param candidateTable The table in which we want to insert table
-/// @param name The name of the table
-/// @param id The national id / CNIC of the candidate
-/// @return Returns false if candidate exists already, else true
-bool registerCandidate(map<long long int, Candidate3> &candidateTable, string name, long long int id)
+class HashMap
 {
-    // Check if a candidate with the same ID already exists
-    if (candidateTable.find(id) != candidateTable.end())
+private:
+    vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
+    int size;                     // Size of the hash table
+
+    /// @brief Hash function to calculate the index
+    /// @param CNIC The CNIC of the candidate
+    /// @return Returns the hash index
+    int hashFunction(long long int CNIC)
     {
-        cout << "Candidate with ID " << id << " already exists!" << endl;
-        return false;
+        return CNIC % size; // Simple modulus-based hash function
     }
 
-    // Insert data if it does not exist already
-    Candidate3 newCandidate = {name, 0, id};
-    candidateTable[id] = newCandidate;
-
-    cout << "Candidate " << name << " registered successfully!" << endl;
-
-    return true;
-}
-
-void displayCandidates(map<long long int, Candidate3> &candidateTable)
-{
-    map<long long int, Candidate3>::iterator iter; // Initialized an iterator to traverse through the map
-
-    for (iter = candidateTable.begin(); iter != candidateTable.end(); iter++)
+public:
+    // Constructor to initialize the hash table with a fixed size
+    HashMap(int tableSize) : size(tableSize)
     {
-        cout << "Candidate's Name: " << iter->second.name
-             << "\nCandidate's CNIC: " << iter->second.CNIC << endl;
+        table.resize(size); // Initialize the table with empty lists
     }
-}
+
+    /// @brief Registers a candidate in the hash table
+    /// @param name The name of the candidate
+    /// @param CNIC The CNIC of the candidate
+    /// @return Returns false if the candidate already exists, otherwise true
+    bool registerCandidate(string name, long long int CNIC)
+    {
+        int index = hashFunction(CNIC);
+
+        // Check if the candidate already exists in the chain
+        Node_LinkedList *current = table[index].head;
+        while (current != NULL)
+        {
+            if (current->CNIC == CNIC)
+            {
+                cout << "Candidate with CNIC " << CNIC << " already exists!" << endl;
+                return false;
+            }
+            current = current->next;
+        }
+
+        // Add the new candidate to the chain
+        table[index].insert(name, CNIC);
+        cout << "Candidate " << name << " registered successfully!" << endl;
+        return true;
+    }
+
+    /// @brief Displays all candidates in the hash table
+    void displayCandidates() const
+    {
+        for (int i = 0; i < size; i++)
+        {
+            cout << "Bucket " << i << ":\n";
+            Node_LinkedList *current = table[i].head;
+
+            int count = 1;
+
+            while (current != NULL)
+            {
+                cout << count << ")Candidate's Name: " << current->name
+                     << "\n  Candidate's CNIC: " << current->CNIC << endl;
+                current = current->next;
+
+                count++;
+            }
+        }
+    }
+
+    /// @brief Deletes a candidate from the hash table
+    /// @param CNIC The CNIC of the candidate to delete
+    void deleteCandidate(long long int CNIC)
+    {
+        int index = hashFunction(CNIC);
+
+        if (table[index].deletion(CNIC) != NULL)
+        {
+            cout << "Candidate with CNIC " << CNIC << " deleted successfully!" << endl;
+        }
+        else
+        {
+            cout << "Candidate with CNIC " << CNIC << " not found!" << endl;
+        }
+    }
+};
