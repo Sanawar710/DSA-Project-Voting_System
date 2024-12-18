@@ -1,9 +1,10 @@
-#include <iostream>
+#ifndef CIRCULAR_QUEUE_H // Checks if circular queue is defined or not
+#define CIRCULAR_QUEUE_H // If it is not defined, this statement will define it
 
+#include <iostream>
 using namespace std;
 
-class Node_CQ
-{
+class Node_CQ {
 public:
     int data;
     Node_CQ *next;
@@ -16,12 +17,11 @@ public:
     }
 };
 
-class CircularQueue
-{
+class CircularQueue {
 private:
     Node_CQ *front;
     Node_CQ *rear;
-    int size;     // Current number of elements in the queue
+    int size; // Current number of elements in the queue
     int capacity; // Maximum capacity of the queue
 
 public:
@@ -109,3 +109,5 @@ public:
         return value;
     }
 };
+
+#endif 

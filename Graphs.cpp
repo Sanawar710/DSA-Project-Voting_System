@@ -3,8 +3,6 @@
 
 using namespace std;
 
-CircularQueue q;
-
 class Graph
 {
 private:
@@ -191,6 +189,7 @@ public:
         cout << "BFS:" << endl;
         visited[start] = true;
 
+        CircularQueue q(start);
         q.EnQueue(start);
 
         while (!q.isEmpty())
