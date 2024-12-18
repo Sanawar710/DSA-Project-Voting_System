@@ -1,3 +1,6 @@
+#ifndef SINGLELINKLIST_H
+#define SINGLELINKLIST_H
+
 #include <iostream>
 
 using namespace std;
@@ -13,12 +16,10 @@ class Singlelinklist
 {
 public:
     Node_LinkedList *head;
-    Node_LinkedList *tail;
 
     Singlelinklist() // Constructor
     {
         head = NULL;
-        tail = NULL;
     }
 
     /// @brief Inserts the values at the start of the list
@@ -45,18 +46,17 @@ public:
             return NULL; // Returns NULL if the list is empty
         }
 
-        else if (head->CNIC == CNIC)
+        if (head->CNIC == CNIC)
         {
+            Node_LinkedList *temp = head;
             head = head->next; // Head becomes the second node if the 'CNIC to be deleted' is at the head
+            delete temp; // Free the memory of the removed node
             return head;
         }
 
-        // If the element is not stored by the head node and the list is not also empty
-        Node_LinkedList *current = new Node_LinkedList;
-        Node_LinkedList *prev = new Node_LinkedList;
-
-        current = head;
-        prev = NULL;
+        // If the element is not stored by the head node and the list is not empty
+        Node_LinkedList *current = head;
+        Node_LinkedList *prev = NULL;
 
         while (current != NULL && current->CNIC != CNIC)
         {
@@ -64,27 +64,41 @@ public:
             current = current->next;
         }
 
-        // Freeing the connection
+        if (current == NULL)
+        {
+            // CNIC not found
+            cout << "CNIC not found in the list." << endl;
+            return head;
+        }
+
+        // Freeing the connection and deleting the node
         prev->next = current->next;
+        delete current;
         return head;
     }
 
     /// @brief The function for traversal in list
-    void traversal() // Function for traversal
+    void traversal()
     {
-        Node_LinkedList *temp = new Node_LinkedList;
-        temp = head;
+        Node_LinkedList *temp = head;
+
+        if (temp == NULL)
+        {
+            cout << "The list is empty." << endl;
+            return;
+        }
 
         int count = 1;
 
-        do
+        while (temp != NULL)
         {
-
-            cout << count << ")" << "Name: " << temp->name << "\nCNIC: " << temp->CNIC << endl;
+            cout << count << ") Name: " << temp->name << "\nCNIC: " << temp->CNIC << endl;
             cout << endl;
 
             temp = temp->next;
             count++;
-        } while (temp->next == NULL);
+        }
     }
 };
+
+#endif 

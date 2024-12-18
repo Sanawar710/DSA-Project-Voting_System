@@ -1,3 +1,4 @@
+// Included the cpp file which include functions for our voting system
 #include "Hashing.cpp"
 #include "Admin-Interface.cpp"
 #include "Graphs.cpp"

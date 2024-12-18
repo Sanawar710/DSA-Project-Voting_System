@@ -47,7 +47,6 @@ void insertionSort(int array[], int size)
     }
 }
 
-// Merge Sort Helper Function (Merge Step)
 void merge(int array[], int left, int mid, int right)
 {
     int n1 = mid - left + 1;
@@ -68,6 +67,7 @@ void merge(int array[], int left, int mid, int right)
             array[k++] = R[j++];
     }
 
+    // Copying the remaining elements in the array
     while (i < n1)
         array[k++] = L[i++];
     while (j < n2)
@@ -86,7 +86,6 @@ void mergeSort(int array[], int left, int right)
     }
 }
 
-// Quick Sort Helper Function (Partition Step)
 int partition(int array[], int left, int right)
 {
     int pivot = array[right];
