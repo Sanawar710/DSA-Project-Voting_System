@@ -2,6 +2,7 @@
 #define HASHMAP_H
 #include <iostream>
 #include <vector>
+#include "Save-Information.cpp"
 #include "Singly-Linked-List.cpp"
 
 using namespace std;
@@ -56,6 +57,7 @@ public:
 
         // Add the new candidate to the chain
         table[index].insert(name, CNIC);
+        saveInfo("Candidates", name, CNIC);
         cout << "Candidate " << name << " registered successfully!" << endl;
         return true;
     }
