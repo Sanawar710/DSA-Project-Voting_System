@@ -6,6 +6,9 @@
 
 using namespace std;
 
+const int tableSize = 10; // Max size of information that we can store in the hash table
+HashMap M(tableSize);
+
 struct Credentials // Used when we will use credentials from the user
 {
     string name;
@@ -102,8 +105,8 @@ public:
         cout << "\nEnter the CNIC of the candidate (without dashes): ";
         cin >> CNIC;
 
-        registerCandidate(candidateTable, name, CNIC); // Registers the candidate in hash table in a sorted manner
-        cin.ignore();                                  // Clear input buffer
+        M.registerCandidate(name, CNIC); // Registers the candidate in hash table in a sorted manner
+        cin.ignore();                      // Clear input buffer
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
     }
@@ -122,7 +125,7 @@ public:
         head->deletion(CNIC);
     }
 
-    void viewCandidate(Singlelinklist *head, map<long long int, Candidate> candidateTable);
+    void viewCandidate(Singlelinklist *head, HashMap M)
     {
         int option;
 
@@ -136,7 +139,7 @@ public:
         }
         else if (option == 1)
         {
-            displayCandidates(candidateTable);
+            M.displayCandidates();
         }
         else
         {
