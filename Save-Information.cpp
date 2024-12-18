@@ -46,35 +46,69 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
     }
 }
 
-void deleteInfo(string filename, long long int CNIC)
+bool deleteInfo(string filename, long long int CNIC)
 {
-    ifstream file(filename);                               // Opening the original file
-    ofstream tempFile("modifiedCandidates.txt", ios::app); // Temporary file to store the modified information
+    ifstream file(filename); // Opening the original file
+    if (!file.is_open())
+    {
+        cerr << "Error: Unable to open file " << filename << endl;
+        return false; // Return false if the file cannot be opened
+    }
+
+    ofstream tempFile("modifiedCandidates.txt"); // Temporary file to store the modified information
+
+    if (!tempFile.is_open())
+    {
+        cerr << "Error: Unable to create temporary file." << endl;
+        file.close();
+        return false; // Return false if the temporary file cannot be created
+    }
 
     string line;
+    bool found = false; // Flag to check if the CNIC is found
 
-    while (getline(file, line)) // Gets information from each line from the file
+    while (getline(file, line)) // Read each line from the file
     {
-        istringstream info(line); // 'istring' function allows us to read the file in a formatted way
-
+        istringstream info(line); // 'istringstream' to parse the line
         string name, strCNIC;
 
-        getline(file, name, ','); // Reads name from the file
-        getline(file, strCNIC);   // Reads CNIC from the file
+        getline(info, name, ','); // Extract name
+        getline(info, strCNIC);   // Extract CNIC
 
-        long long int cnic = stoll(strCNIC); // Converts the data type of 'strCNIC' from 'string' to 'long long int'
+        long long int cnic = stoll(strCNIC); // Convert CNIC from string to long long int
 
-        if (CNIC != cnic)
+        if (CNIC == cnic)
         {
-            tempFile << line << endl;
+            found = true; // Mark as found if the CNIC matches
+        }
+        else
+        {
+            tempFile << line << endl; // Write the line to the temporary file if CNIC doesn't match
         }
     }
 
     file.close();
     tempFile.close();
 
-    remove(filename.c_str());             // Deleting the original file
-    rename("temp.txt", filename.c_str()); // Renaming the temporary file to the name of the original file
+    if (found)
+    {
+        if (remove(filename.c_str()) != 0) // Delete the original file
+        {
+            return false;
+        }
+
+        if (rename("modifiedCandidates.txt", filename.c_str()) != 0) // Rename the temporary file
+        {
+            return false;
+        }
+
+        return true; // Return true if deletion and renaming are successful
+    }
+    else
+    {
+        remove("modifiedCandidates.txt"); // Clean up temporary file if CNIC not found
+        return false;                     // Return false if CNIC not found
+    }
 }
 
 void viewInfo(string filename) // A general function to view information in files

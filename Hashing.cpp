@@ -1,5 +1,6 @@
 #ifndef HASHMAP_H
 #define HASHMAP_H
+
 #include <iostream>
 #include <vector>
 #include "Save-Information.cpp"
@@ -29,11 +30,13 @@ private:
     }
 
 public:
-    // Constructor to initialize the hash table with a fixed size
+    /// @brief Constructor to initialize the hash table with a fixed size
+    /// @param tableSize The size of the table
     HashMap(int tableSize) : size(tableSize)
     {
         table.resize(size); // Initialize the table with empty lists
     }
+
     /// @brief Registers a candidate in the hash table and verifies against file data
     /// @param name The name of the candidate
     /// @param CNIC The CNIC of the candidate
@@ -81,27 +84,7 @@ public:
         return true;
     }
 
-    /// @brief Displays all candidates in the hash table
-    void displayCandidates() const
-    {
-        for (int i = 0; i < size; i++)
-        {
-            Node_LinkedList *current = table[i].head;
-
-            int count = 1;
-
-            while (current != NULL)
-            {
-                cout << count << ")Candidate's Name: " << current->name
-                     << "\n  Candidate's CNIC: " << current->CNIC << endl;
-                current = current->next;
-
-                count++;
-            }
-        }
-    }
-
-    /// @brief Deletes a candidate from the hash table
+    /// @brief Deletes a candidate from the hash table and the file
     /// @param CNIC The CNIC of the candidate to delete
     void deleteCandidate(long long int CNIC)
     {
@@ -109,11 +92,21 @@ public:
 
         if (table[index].deletion(CNIC) != NULL)
         {
-            cout << "Candidate with CNIC " << CNIC << " deleted successfully!" << endl;
+            cout << "Candidate with CNIC " << CNIC << " deleted successfully from the hash table!" << endl;
+
+            // Assuming deleteInfo returns true if deletion from the file is successful
+            if (deleteInfo("candidates.txt", CNIC))
+            {
+                cout << "Candidate with CNIC " << CNIC << " deleted successfully from the file!" << endl;
+            }
+            else
+            {
+                cout << "Failed to delete candidate with CNIC " << CNIC << " from the file!" << endl;
+            }
         }
         else
         {
-            cout << "Candidate with CNIC " << CNIC << " not found!" << endl;
+            cout << "Candidate with CNIC " << CNIC << " not found in the hash table!" << endl;
         }
     }
 };
