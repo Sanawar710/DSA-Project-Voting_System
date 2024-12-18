@@ -34,30 +34,49 @@ public:
     {
         table.resize(size); // Initialize the table with empty lists
     }
-
-    /// @brief Registers a candidate in the hash table
+    /// @brief Registers a candidate in the hash table and verifies against file data
     /// @param name The name of the candidate
     /// @param CNIC The CNIC of the candidate
     /// @return Returns false if the candidate already exists, otherwise true
     bool registerCandidate(string name, long long int CNIC)
     {
-        int index = hashFunction(CNIC);
+        // Check if the candidate exists in the file
+        ifstream file("Candidates.txt");
+        string line;
 
-        // Check if the candidate already exists in the chain
+        while (getline(file, line))
+        {
+            istringstream info(line);
+            string fileName, fileCNIC;
+
+            getline(info, fileName, ',');
+            getline(info, fileCNIC);
+
+            if (stoll(fileCNIC) == CNIC) // Convert file CNIC from string to long long and compare
+            {
+                cout << "Candidate with CNIC " << CNIC << " already exists in the file!" << endl;
+                file.close();
+                return false;
+            }
+        }
+        file.close();
+
+        // Checking if the candidate exists in the hash table
+        int index = hashFunction(CNIC);
         Node_LinkedList *current = table[index].head;
+
         while (current != NULL)
         {
             if (current->CNIC == CNIC)
             {
-                cout << "Candidate with CNIC " << CNIC << " already exists!" << endl;
+                cout << "Candidate with CNIC " << CNIC << " already exists in the hash table!" << endl;
                 return false;
             }
             current = current->next;
         }
 
-        // Add the new candidate to the chain
         table[index].insert(name, CNIC);
-        saveInfo("Candidates", name, CNIC);
+        saveInfo("Candidates.txt", name, CNIC);
         cout << "Candidate " << name << " registered successfully!" << endl;
         return true;
     }
