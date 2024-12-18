@@ -1,3 +1,5 @@
+#ifndef HASHMAP_H
+#define HASHMAP_H
 #include <iostream>
 #include <vector>
 #include "Singly-Linked-List.cpp"
@@ -94,3 +96,5 @@ public:
         }
     }
 };
+
+#endif
