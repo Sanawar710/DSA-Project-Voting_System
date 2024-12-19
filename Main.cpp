@@ -14,9 +14,5 @@
 
 int main()
 {
-    // cout << "Hello World";
-    M.registerCandidate("Robert", 34602819381983);
-    cout << "Hello" << endl;
-    M.registerCandidate("Robert", 34602819381983);
     return 0;
 }

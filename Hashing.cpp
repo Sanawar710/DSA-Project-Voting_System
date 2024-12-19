@@ -84,30 +84,68 @@ public:
         return true;
     }
 
-    /// @brief Deletes a candidate from the hash table and the file
-    /// @param CNIC The CNIC of the candidate to delete
-    void deleteCandidate(long long int CNIC)
+    /// @brief This function is used to delete information of the candidate from the hash table and the file
+    /// @param filename The name of the file in which we store the information
+    /// @param CNIC The national id / CNIC of the candidate
+    /// @return Returns true if deletion is successful, else false
+    bool deleteInfo(string filename, long long int CNIC)
     {
-        int index = hashFunction(CNIC);
-
-        if (table[index].deletion(CNIC) != NULL)
+        ifstream file(filename); // Opening the original file
+        if (!file.is_open())
         {
-            cout << "Candidate with CNIC " << CNIC << " deleted successfully from the hash table!" << endl;
+            cerr << "Error: Unable to open file " << filename << endl;
+            return false; // Returning false if the file cannot be opened
+        }
 
-            // Assuming deleteInfo returns true if deletion from the file is successful
-            if (deleteInfo("candidates.txt", CNIC))
+        ofstream tempFile("modifiedCandidates.txt"); // Temporary file to store the modified information
+        if (!tempFile.is_open())
+        {
+            file.close();
+            return false; // Returning false if the temporary file cannot be created
+        }
+
+        string line;
+        bool found = false; // Flaging to check if the CNIC is found
+
+        while (getline(file, line)) // Reading each line from the file
+        {
+            istringstream info(line); // 'istringstream' to parse the line
+            string name, strCNIC;
+
+            getline(info, name, ','); // Extracting name
+            getline(info, strCNIC);   // Extracting CNIC
+
+            long long int cnic = stoll(strCNIC); // Converting CNIC from string to long long int
+
+            if (CNIC == cnic)
             {
-                cout << "Candidate with CNIC " << CNIC << " deleted successfully from the file!" << endl;
+                found = true; // Marking as found if the CNIC matches
             }
             else
             {
-                cout << "Failed to delete candidate with CNIC " << CNIC << " from the file!" << endl;
+                tempFile << line << endl; // Writing the line to the temporary file if CNIC doesn't match
             }
         }
-        else
+
+        file.close();
+        tempFile.close();
+
+        if (found)
         {
-            cout << "Candidate with CNIC " << CNIC << " not found in the hash table!" << endl;
+            if (remove(filename.c_str()) != 0) // Deleting the original file
+            {
+                return false;
+            }
+
+            if (rename("modifiedCandidates.txt", filename.c_str()) != 0) // Renaming the temporary file
+            {
+                return false;
+            }
+
+            return true; // Returning true if deletion and renaming are successful
         }
+        remove("modifiedCandidates.txt"); // Cleaning up temporary file if CNIC not found
+        return false;                     // Return false if CNIC not found
     }
 };
 
