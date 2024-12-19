@@ -106,7 +106,7 @@ public:
         cin >> CNIC;
 
         M.registerCandidate(name, CNIC); // Registers the candidate in hash table in a sorted manner
-        cin.ignore();                      // Clear input buffer
+        cin.ignore();                    // Clear input buffer
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
     }
@@ -125,7 +125,7 @@ public:
         head->deletion(CNIC);
     }
 
-    void viewCandidate(Singlelinklist *head, HashMap M)
+    void viewCandidate(Singlelinklist *head) //, HashMap M
     {
         int option;
 
@@ -139,7 +139,7 @@ public:
         }
         else if (option == 1)
         {
-            M.displayCandidates();
+            viewInfo("Candidates.txt");
         }
         else
         {
