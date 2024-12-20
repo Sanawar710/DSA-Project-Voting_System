@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Save-Information.cpp"
-
+#include "Stack.cpp"
 using namespace std;
 
 // Helper function to validate if a voter ID exists in the voter list
@@ -51,25 +51,21 @@ void processVote(long long int voterIDs[], int voterCount, bool voted[],
 
     // Display the list of candidates
     cout << "Candidates:\n";
-    for (int i = 0; i < candidateCount; ++i)
-    {
-        cout << "Candidate ID: " << candidateIDs[i] << "\n";
-    }
+    viewInfo("Candidates.txt");
 
     // Input candidate ID
     cout << "Enter the ID of the candidate you want to vote for: ";
     cin >> candidateID;
 
     // Validate candidate ID and record the vote
-    bool validCandidate = false;
-    for (int i = 0; i < candidateCount; ++i)
+    bool validCandidate = searchbyID("Candidates.txt", candidateID);
+
+    if (validCandidate)
     {
-        if (candidateIDs[i] == candidateID)
-        {
-            candidateVotes[i]++; // Increment the vote count for the candidate
-            validCandidate = true;
-            break;
-        }
+        // Candidate C;
+        // candidateVotes[i]++; // Increment the vote count for the candidate
+        // validCandidate = true;
+        // break;
     }
 
     if (validCandidate)

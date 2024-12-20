@@ -1,17 +1,17 @@
 #include <iostream>
 using namespace std;
 
-struct Candidate1
+struct Candidate
 {
     string name;
     int votes;
 
-    bool operator<(const Candidate1 &other) const
+    bool operator<(const Candidate &other) const
     {
         return votes < other.votes; // Compare by votes
     }
 
-    bool operator>(const Candidate1 &other) const
+    bool operator>(const Candidate &other) const
     {
         return votes > other.votes;
     }
@@ -20,9 +20,9 @@ struct Candidate1
 // Node structure for the linked list
 struct Node
 {
-    Candidate1 data;
+    Candidate data;
     Node *next;
-    Node(Candidate1 c) : data(c), next(nullptr) {}
+    Node(Candidate c) : data(c), next(nullptr) {}
 };
 
 // Stack class using linked list
@@ -35,7 +35,7 @@ public:
     Stack() : topNode(nullptr) {}
 
     // Push an element to the stack
-    void push(const Candidate1 &c)
+    void push(const Candidate &c)
     {
         Node *newNode = new Node(c);
         newNode->next = topNode;
@@ -54,7 +54,7 @@ public:
     }
 
     // Get the top element of the stack
-    Candidate1 top() const
+    Candidate top() const
     {
         if (topNode != nullptr)
         {
@@ -87,7 +87,7 @@ public:
 
         while (!empty())
         {
-            Candidate1 current = top();
+            Candidate current = top();
             pop();
 
             while (!tempStack.empty() && tempStack.top() > current)
@@ -108,7 +108,7 @@ public:
     }
 
     // Find and return the candidate with the highest votes
-    Candidate1 findTopCandidate() const
+    Candidate findTopCandidate() const
     {
         if (topNode == nullptr)
         {
@@ -116,7 +116,7 @@ public:
         }
 
         Node *temp = topNode;
-        Candidate1 topCandidate = temp->data;
+        Candidate topCandidate = temp->data;
 
         while (temp != nullptr)
         {
