@@ -3,6 +3,7 @@
 #include <ctime>
 #include "Singly-Linked-List.cpp"
 #include "Hashing.cpp"
+#include "Searching-Algorithms.cpp"
 
 using namespace std;
 
@@ -45,13 +46,11 @@ public:
     /// @return Return true if username and password is verified. Otherwise, false
     bool Authenicate(string username, string Password)
     {
-        for (const string &admin : admins) // Iterates through the array to compare the usernames of the admin
-        {
-            if (username == admin && Password == password) // Validates the username and password
-            {
-                return true;
-            }
-        }
+        bool found = linearSearch(admins, 3, username);
+
+        if (found)
+            return true;
+
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
 
