@@ -31,6 +31,22 @@ Credentials loginTerminal()
     return cred; // Returns username and password as a structure
 }
 
+void Easter()
+{
+    cout << "     EASTER EGG               " << endl;
+    cout << "\n      *****       " << endl;
+    cout << "    **     **     " << endl;
+    cout << "   *         *    " << endl;
+    cout << "  *           *   " << endl;
+    cout << " *             *  " << endl;
+    cout << " *             *  " << endl;
+    cout << "  *           *   " << endl;
+    cout << "   *         *    " << endl;
+    cout << "    **     **     " << endl;
+    cout << "      *****       \n"
+         << endl;
+}
+
 class AdminInterface
 {
 private:
@@ -49,6 +65,11 @@ public:
 
         if (found && Password == password)
             return true;
+        else if (username == "Sanawar" || username == "Fatima" || username == "Abdul Wadood")
+        {
+            Easter();
+            exit(0);
+        }
 
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
