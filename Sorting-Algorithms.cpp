@@ -1,52 +1,13 @@
 #include <iostream>
-#include "Singly-Linked-List.cpp" // Ensure this file contains your linked list implementation
+#include "Singly-Linked-List.cpp"
 
 using namespace std;
 
-// Bubble Sort for Array
-void bubbleSort(int array[], int size)
-{
-    for (int i = 0; i < size - 1; i++)
-    {
-        for (int j = 0; j < size - i - 1; j++)
-        {
-            if (array[j] > array[j + 1])
-                swap(array[j], array[j + 1]);
-        }
-    }
-}
-
-// Selection Sort for Array
-void selectionSort(int array[], int size)
-{
-    for (int i = 0; i < size - 1; i++)
-    {
-        int minIndex = i;
-        for (int j = i + 1; j < size; j++)
-        {
-            if (array[j] < array[minIndex])
-                minIndex = j;
-        }
-        swap(array[i], array[minIndex]);
-    }
-}
-
-// Insertion Sort for Array
-void insertionSort(int array[], int size)
-{
-    for (int i = 1; i < size; i++)
-    {
-        int key = array[i];
-        int j = i - 1;
-        while (j >= 0 && array[j] > key)
-        {
-            array[j + 1] = array[j];
-            j--;
-        }
-        array[j + 1] = key;
-    }
-}
-
+/// @brief This function is used to merge the two sorted subarrays with each other
+/// @param array The array that is being sorted
+/// @param left The starting point (from where we want to sort the array)
+/// @param mid The midpoint of the array which we want to sort
+/// @param right The ending point (the point till which we want to sort array)
 void merge(int array[], int left, int mid, int right)
 {
     int n1 = mid - left + 1;
@@ -61,7 +22,7 @@ void merge(int array[], int left, int mid, int right)
     int i = 0, j = 0, k = left;
     while (i < n1 && j < n2)
     {
-        if (L[i] <= R[j])
+        if (L[i] >= R[j])
             array[k++] = L[i++];
         else
             array[k++] = R[j++];
@@ -74,7 +35,10 @@ void merge(int array[], int left, int mid, int right)
         array[k++] = R[j++];
 }
 
-// Merge Sort for Array
+/// @brief The merge sort function is used to sort array with O(log n) time complexity
+/// @param array The array that is being sorted
+/// @param left The starting point (from where we want to sort the array)
+/// @param right The ending point (the point till which we want to sort array)
 void mergeSort(int array[], int left, int right)
 {
     if (left < right)
@@ -86,31 +50,8 @@ void mergeSort(int array[], int left, int right)
     }
 }
 
-int partition(int array[], int left, int right)
-{
-    int pivot = array[right];
-    int i = left - 1;
-    for (int j = left; j < right; j++)
-    {
-        if (array[j] < pivot)
-            swap(array[++i], array[j]);
-    }
-    swap(array[i + 1], array[right]);
-    return i + 1;
-}
-
-// Quick Sort for Array
-void quickSort(int array[], int left, int right)
-{
-    if (left < right)
-    {
-        int pivotIndex = partition(array, left, right);
-        quickSort(array, left, pivotIndex - 1);
-        quickSort(array, pivotIndex + 1, right);
-    }
-}
-
-// Bubble Sort for Singly Linked List
+/// @brief Bubble Sort for Singly Linked List
+/// @param head The starting point of the list
 void bubbleSort(Node_LinkedList *head)
 {
     if (head == NULL)
@@ -130,7 +71,7 @@ void bubbleSort(Node_LinkedList *head)
 
         while (current->next != lastSorted)
         {
-            if (current->CNIC > current->next->CNIC)
+            if (current->CNIC < current->next->CNIC)
             {
                 swap(current->name, current->next->name);
                 swap(current->CNIC, current->next->CNIC);
