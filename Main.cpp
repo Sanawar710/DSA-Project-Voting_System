@@ -12,6 +12,7 @@
 #include "Binary-Search-Tree.cpp"
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
+#include <limits>
 
 time_t deadline; // Global Variable for Deadline
 
@@ -23,7 +24,6 @@ int main()
     Singlelinklist *Candidates, *Voters;
 
     cout << "Welcome to the Voting System !" << endl;
-    // V.castVote(3460330147935);
 
     int choice;
 
@@ -105,6 +105,7 @@ int main()
 
                 cout << "Election's Result: \n";
                 A.viewResult();
+
                 break;
 
             case 7:
@@ -112,6 +113,7 @@ int main()
 
                 cout << "Voter's Information: " << endl;
                 A.viewVoters(Voters);
+
                 break;
 
             case 8:
@@ -162,6 +164,8 @@ int main()
 
             cout << "Enter your CNIC: " << endl;
             cin >> CNIC;
+            cin.ignore();
+
             saveInfo("Voters.txt", creds.name, CNIC);
 
             break;
@@ -173,6 +177,7 @@ int main()
 
             cout << "Enter your CNIC: " << endl;
             cin >> CNIC;
+            cin.ignore();
 
             V.castVote(CNIC);
 
@@ -183,6 +188,10 @@ int main()
         {
             string name;
             long long int CNIC;
+
+            cout << "\nEnter your name: \n";
+            cin.ignore();
+            getline(cin, name);
 
             sleep(3);
 

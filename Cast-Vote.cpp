@@ -10,35 +10,39 @@ using namespace std;
 // Helper function to validate if a voter ID exists in the voter list
 bool isValidVoter(long long int voterID)
 {
-    bool found = searchbyID("Voters.txt", voterID);
-
-    if (found == true)
-        return true;
-
-    return false;
+    return searchbyID("Voters.txt", voterID);
 }
 
+// Function to process a vote
 void processVote(string candidateFile, string voteLogFile)
 {
-    string voterID, candidateID;
+    string voterIDStr, candidateIDStr;
 
     // Input voter ID (CNIC)
     cout << "Enter your CNIC (Voter ID): ";
-    cin >> voterID;
+    cin >> voterIDStr;
 
-    bool isValidVoter = searchbyID("Voters.txt", stoll(voterID));
+    // Validate voter ID input and existence
+    long long int voterID;
+    try
+    {
+        voterID = stoll(voterIDStr);
+    }
+    catch (exception &e)
+    {
+        cout << "\nInvalid CNIC format. Please enter a valid number.\n";
+        return;
+    }
 
-    // Validate voter ID
-    if (!isValidVoter)
+    if (!isValidVoter(voterID))
     {
         sleep(3);
-
         cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         return;
     }
 
     // Check if the voter has already voted
-    if (searchbyID(voteLogFile, stoll(voterID)))
+    if (searchbyID(voteLogFile, voterID))
     {
         sleep(3);
         cout << "You have already voted.\n";
@@ -53,11 +57,21 @@ void processVote(string candidateFile, string voteLogFile)
     sleep(3);
     // Input candidate ID (CNIC)
     cout << "Enter the CNIC of the candidate you want to vote for: ";
-    cin >> candidateID;
+    cin >> candidateIDStr;
 
-    bool isValidCandidate = searchbyID("Candidates.txt", stoll(candidateID));
-    // Validate candidate ID
-    if (!isValidCandidate)
+    // Validate candidate ID input and existence
+    long long int candidateID;
+    try
+    {
+        candidateID = stoll(candidateIDStr);
+    }
+    catch (exception &e)
+    {
+        cout << "\nInvalid candidate CNIC format. Please enter a valid number.\n";
+        return;
+    }
+
+    if (!searchbyID(candidateFile, candidateID))
     {
         sleep(3);
         cout << "Invalid candidate CNIC.\n";
@@ -65,7 +79,7 @@ void processVote(string candidateFile, string voteLogFile)
     }
 
     // Log the vote
-    if (saveInfo(voteLogFile, "Voters.txt", stoll(voterID))) // Add a placeholder for voter logging
+    if (saveInfo(voteLogFile, voterIDStr, stoll(candidateIDStr)))
     {
         sleep(3);
         cout << "Your vote has been cast successfully!\n";
