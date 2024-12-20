@@ -122,7 +122,7 @@ public:
     {
         int option;
 
-        cout << "Do you want to view information through Linked List or Hash Table? (0/1)" << endl;
+        cout << "Do you want to view information through Linked List or File? (0/1)" << endl;
     invalidOption:
         cin >> option;
 
@@ -140,6 +140,7 @@ public:
             goto invalidOption;
         }
     }
+
     /// @brief This function is used to add the voter's information in the linked list, hash table and the text file
     /// @param head The starting node of the linked list
     /// @param name The name of the file
@@ -166,6 +167,30 @@ public:
 
         head->deletion(CNIC);
         deleteInfo("Voter.txt", CNIC);
+    }
+
+    
+    void viewVoters(Singlelinklist *head)
+    {
+        int option;
+
+        cout << "Do you want to view information through Linked List or File? (0/1)" << endl;
+    invalidOption:
+        cin >> option;
+
+        if (option == 0)
+        {
+            head->traversal();
+        }
+        else if (option == 1)
+        {
+            viewInfo("Voters.txt");
+        }
+        else
+        {
+            cout << "You have entered an invalid option." << "\nPlease re-enter the option." << endl;
+            goto invalidOption;
+        }
     }
 };
 
