@@ -1,14 +1,16 @@
 #include <iostream>
+#include "Save-Information.cpp"
+
 using namespace std;
 
 // Helper function to validate if a voter ID exists in the voter list
-bool isValidVoter(long long int voterIDs[], int voterCount, long long int voterID)
+bool isValidVoter(long long int voterID)
 {
-    for (int i = 0; i < voterCount; ++i)
-    {
-        if (voterIDs[i] == voterID)
-            return true;
-    }
+    bool found = searchbyID("Voters.txt", voterID);
+
+    if (found == true)
+        return true;
+
     return false;
 }
 
@@ -23,9 +25,9 @@ void processVote(long long int voterIDs[], int voterCount, bool voted[],
     cin >> voterID;
 
     // Validate voter ID
-    if (!isValidVoter(voterIDs, voterCount, voterID))
+    if (!isValidVoter(voterID))
     {
-        cout << "You are not registered to vote.\n";
+        cout << "\nYou are not registered to vote.\n";
         return;
     }
 
