@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void saveInfo(string filename, string name, long long int CNIC) // A general function to save information in files
+bool saveInfo(string filename, string name, long long int CNIC) // A general function to save information in files
 {
     ofstream file(filename, ios::app); // Opening the file in append mode
 
@@ -15,7 +15,10 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
     {
         file << name << "," << CNIC << endl; // Storing the values in a comma separated format
         file.close();
+        
         cout << "\nCandidate information saved to file successfully.\n";
+        
+        return true;
     }
     else
     {
@@ -36,14 +39,19 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
             {
                 new_file << name << "," << CNIC << endl;
                 new_file.close();
+
                 cout << "\nNew file created and information saved successfully.\n";
+                
+                return true;
             }
             else
             {
                 cerr << "\n Unable to create new file.\n";
+                return false;
             }
         }
     }
+    return false;
 }
 
 bool deleteInfo(string filename, long long int CNIC)

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Save-Information.cpp"
-#include "Stack.cpp"
+
 using namespace std;
 
 // Helper function to validate if a voter ID exists in the voter list
@@ -14,36 +14,26 @@ bool isValidVoter(long long int voterID)
     return false;
 }
 
-// Function to process a vote from a voter
-void processVote(long long int voterIDs[], int voterCount, bool voted[],
-                 int candidateIDs[], int candidateVotes[], int candidateCount)
+void processVote(string voterFile, string candidateFile, string voteLogFile)
 {
-    long long int voterID, candidateID;
+    string voterID, candidateID;
+    int voterIndex = -1, candidateIndex = -1;
 
-    // Input voter ID
-    cout << "Enter your voter ID: ";
+    // Input voter ID (CNIC)
+    cout << "Enter your CNIC (Voter ID): ";
     cin >> voterID;
+    
+    bool isValidVoter = searchbyID("Voters.txt", stoll(voterID));
 
     // Validate voter ID
-    if (!isValidVoter(voterID))
+    if (!isValidVoter)
     {
-        cout << "\nYou are not registered to vote.\n";
+        cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         return;
     }
 
-    // Find the index of the voter
-    int voterIndex = -1;
-    for (int i = 0; i < voterCount; ++i)
-    {
-        if (voterIDs[i] == voterID)
-        {
-            voterIndex = i;
-            break;
-        }
-    }
-
     // Check if the voter has already voted
-    if (voted[voterIndex])
+    if (searchbyID(voteLogFile, stoll(voterID)))
     {
         cout << "You have already voted.\n";
         return;
@@ -51,30 +41,27 @@ void processVote(long long int voterIDs[], int voterCount, bool voted[],
 
     // Display the list of candidates
     cout << "Candidates:\n";
-    viewInfo("Candidates.txt");
+    viewInfo(candidateFile); // Display candidate list using the viewInfo function
 
-    // Input candidate ID
-    cout << "Enter the ID of the candidate you want to vote for: ";
+    // Input candidate ID (CNIC)
+    cout << "Enter the CNIC of the candidate you want to vote for: ";
     cin >> candidateID;
 
-    // Validate candidate ID and record the vote
-    bool validCandidate = searchbyID("Candidates.txt", candidateID);
-
-    if (validCandidate)
+    bool isValidCandidate = searchbyID("Candidates.txt", stoll(candidateID));
+    // Validate candidate ID
+    if (!isValidCandidate)
     {
-        // Candidate C;
-        // candidateVotes[i]++; // Increment the vote count for the candidate
-        // validCandidate = true;
-        // break;
+        cout << "Invalid candidate CNIC.\n";
+        return;
     }
 
-    if (validCandidate)
+    // Log the vote
+    if (saveInfo(voteLogFile, "Voter", stoll(voterID))) // Add a placeholder for voter logging
     {
-        voted[voterIndex] = true; // Mark the voter as having voted
         cout << "Your vote has been cast successfully!\n";
     }
     else
     {
-        cout << "Invalid candidate ID.\n";
+        cout << "Error: Unable to record your vote.\n";
     }
 }
