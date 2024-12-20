@@ -10,7 +10,7 @@ using namespace std;
 const int TableSize = 10; // Max size of information that we can store in the hash table
 // Global Objects
 HashMap Voter_Table(TableSize);
-BST *CNIC_Records;
+BST *Voter_Records;
 
 class VoterInterface
 {
@@ -35,6 +35,7 @@ public:
         Voter_Table.registeration("Voters.txt", name, CNIC);
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
         saveInfo("Voters.txt", name, CNIC);
+        Voter_Records->insertRecord(Voter_Records, CNIC);
 
         cout << name << " with CNIC " << CNIC << " has been registered successfully." << endl;
     }
@@ -48,6 +49,7 @@ public:
         head->deletion(CNIC);
         deleteInfo("Voters.txt", CNIC);
         Voter_Table.delete_by_CNIC(CNIC);
+        Voter_Records->deleteRecord(Voter_Records,CNIC);
     }
 
     /// @brief This function is used to cast vote to the candidates
