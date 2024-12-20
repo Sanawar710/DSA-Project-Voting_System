@@ -7,7 +7,8 @@
 using namespace std;
 
 const int tableSize = 10; // Max size of information that we can store in the hash table
-HashMap M(tableSize);
+HashMap Candidate_Table(tableSize);
+HashMap Voter_Table(tableSize);
 
 struct Credentials // Used when we will use credentials from the user
 {
@@ -30,7 +31,7 @@ Credentials loginTerminal()
     return cred; // Returns username and password as a structure
 }
 
-class Admin
+class AdminInterface
 {
 private:
     // Stored the username and password of admins for security purposes
@@ -96,7 +97,7 @@ public:
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     void addCandidates(Singlelinklist *&head, string name, long long int CNIC)
     {
-        M.registerCandidate(name, CNIC); // Registers the candidate in hash table in a sorted manner
+        Candidate_Table.registeration("Candidates.txt", name, CNIC); // Registers the candidate in hash table in a sorted manner
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
 
@@ -107,7 +108,7 @@ public:
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     /// @param name It is name of the candidate whoose information we want to delete
     /// @param CNIC It is CNIC/National ID of the candidate whoose information we want to delete
-    void deleteCandidate(Singlelinklist *head)
+    void deleteCandidates(Singlelinklist *head)
     {
         long long int CNIC;
 
@@ -117,7 +118,7 @@ public:
         head->deletion(CNIC);
     }
 
-    void viewCandidate(Singlelinklist *head) //, HashMap M
+    void viewCandidates(Singlelinklist *head) //, HashMap M
     {
         int option;
 
@@ -138,6 +139,33 @@ public:
             cout << "You have entered an invalid option." << "\nPlease re-enter the option." << endl;
             goto invalidOption;
         }
+    }
+    /// @brief This function is used to add the voter's information in the linked list, hash table and the text file
+    /// @param head The starting node of the linked list
+    /// @param name The name of the file
+    /// @param CNIC The CNIC / National ID of the user
+    void addVoter(Singlelinklist *&head, string name, long long int CNIC)
+    {
+        Voter_Table.registeration("Voters.txt", name, CNIC);
+        head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
+        saveInfo("Voters.txt", name, CNIC);
+
+        cout << name << " with CNIC " << CNIC << " has been registered successfully." << endl;
+    }
+
+    /// @brief This function is used to delete the voter's information from the linked list, hash table and the text file
+    /// @param head The starting node of the linked list
+    /// @param name The name of the file
+    /// @param CNIC The CNIC / National ID of the user
+    void deleteVoter(Singlelinklist *&head, string name, long long int CNIC)
+    {
+        long long int CNIC;
+
+        cout << "\nEnter the CNIC of the candidate (without dashes): ";
+        cin >> CNIC;
+
+        head->deletion(CNIC);
+        deleteInfo("Voter.txt", CNIC);
     }
 };
 

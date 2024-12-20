@@ -14,7 +14,8 @@
 
 int main()
 {
-    Admin A;
+    // Creating Objects
+    AdminInterface A;
     Singlelinklist *Candidates;
 
     cout << "Welcome to the Voting System !" << endl;

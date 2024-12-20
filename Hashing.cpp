@@ -37,14 +37,14 @@ public:
         table.resize(size); // Initialize the table with empty lists
     }
 
-    /// @brief Registers a candidate in the hash table and verifies against file data
+    /// @brief Registers a person in the hash table and verifies against file data
     /// @param name The name of the candidate
     /// @param CNIC The CNIC of the candidate
     /// @return Returns false if the candidate already exists, otherwise true
-    bool registerCandidate(string name, long long int CNIC)
+    bool registeration(string filename,string name, long long int CNIC)
     {
         // Check if the candidate exists in the file
-        ifstream file("Candidates.txt");
+        ifstream file(filename);
         string line;
 
         while (getline(file, line))
