@@ -84,23 +84,16 @@ int main()
                 break;
 
             case 6:
-                // A.addVoter(Voters); // Need to consult
-                break;
-
-            case 7:
-                // A.deleteVoter(Voters)
-                break;
-
-            case 8:
-                // A.viewVoters(Voters);
-                break;
-
-            case 9:
                 cout << "Election's Result: \n";
                 A.viewResult();
                 break;
 
-            case 10:
+            case 7:
+                cout << "Voter's Information: " << endl;
+                A.viewVoters(Voters);
+                break;
+
+            case 8:
                 cout << "Exiting the system. Thank you for managing the voting process." << endl;
                 break;
 
