@@ -14,15 +14,16 @@ bool isValidVoter(long long int voterID)
     return false;
 }
 
-void processVote(string voterFile, string candidateFile, string voteLogFile)
+// string voterFile,
+void processVote(string candidateFile, string voteLogFile)
 {
     string voterID, candidateID;
-    int voterIndex = -1, candidateIndex = -1;
+    // int voterIndex = -1, candidateIndex = -1;
 
     // Input voter ID (CNIC)
     cout << "Enter your CNIC (Voter ID): ";
     cin >> voterID;
-    
+
     bool isValidVoter = searchbyID("Voters.txt", stoll(voterID));
 
     // Validate voter ID

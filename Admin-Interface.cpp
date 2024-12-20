@@ -94,21 +94,13 @@ public:
 
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
-    void addCandidates(Singlelinklist *head)
+    void addCandidates(Singlelinklist *&head, string name, long long int CNIC)
     {
-        string name;
-        long long int CNIC;
-
-        cout << "Enter the name of the candidate: ";
-        getline(cin, name); // Used to take input name (used incase if some one uses a space in their name)
-
-        cout << "\nEnter the CNIC of the candidate (without dashes): ";
-        cin >> CNIC;
-
         M.registerCandidate(name, CNIC); // Registers the candidate in hash table in a sorted manner
-        cin.ignore();                    // Clear input buffer
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
+
+        cout << name << " with CNIC " << CNIC << " has been registered successfully." << endl;
     }
 
     /// @brief This function implements the functionality to delete the information of a certain candidates
