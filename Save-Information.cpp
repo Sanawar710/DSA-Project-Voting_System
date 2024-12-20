@@ -15,9 +15,9 @@ bool saveInfo(string filename, string name, long long int CNIC) // A general fun
     {
         file << name << "," << CNIC << endl; // Storing the values in a comma separated format
         file.close();
-        
+
         cout << "\nCandidate information saved to file successfully.\n";
-        
+
         return true;
     }
     else
@@ -41,7 +41,7 @@ bool saveInfo(string filename, string name, long long int CNIC) // A general fun
                 new_file.close();
 
                 cout << "\nNew file created and information saved successfully.\n";
-                
+
                 return true;
             }
             else
@@ -64,7 +64,7 @@ bool deleteInfo(string filename, long long int CNIC)
         return false; // Return false if the file cannot be opened
     }
 
-    ofstream tempFile("modifiedCandidates.txt"); // Temporary file to store the modified information
+    ofstream tempFile("modifiedFile.txt"); // Temporary file to store the modified information
 
     if (!tempFile.is_open())
     {
@@ -106,18 +106,16 @@ bool deleteInfo(string filename, long long int CNIC)
             return false;
         }
 
-        if (rename("modifiedCandidates.txt", filename.c_str()) != 0) // Rename the temporary file
+        if (rename("modifiedFile.txt", filename.c_str()) != 0) // Rename the temporary file
         {
             return false;
         }
 
         return true; // Return true if deletion and renaming are successful
     }
-    else
-    {
-        remove("modifiedCandidates.txt"); // Clean up temporary file if CNIC not found
-        return false;                     // Return false if CNIC not found
-    }
+
+    remove("modifiedFile.txt"); // Clean up temporary file if CNIC not found
+    return false;               // Return false if CNIC not found
 }
 
 bool searchbyID(string filename, long long int CNIC)
@@ -129,7 +127,7 @@ bool searchbyID(string filename, long long int CNIC)
         cerr << "Error: Unable to open file " << filename << endl;
         return false; // Return false if the file cannot be opened
     }
-    
+
     string line;
 
     while (getline(file, line)) // Read each line from the file
@@ -147,7 +145,7 @@ bool searchbyID(string filename, long long int CNIC)
             return true;
         }
     }
-    
+
     file.close();
     return false;
 }

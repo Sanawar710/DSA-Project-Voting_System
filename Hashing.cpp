@@ -41,7 +41,7 @@ public:
     /// @param name The name of the candidate
     /// @param CNIC The CNIC of the candidate
     /// @return Returns false if the candidate already exists, otherwise true
-    bool registeration(string filename,string name, long long int CNIC)
+    bool registeration(string filename, string name, long long int CNIC)
     {
         // Check if the candidate exists in the file
         ifstream file(filename);
@@ -84,68 +84,11 @@ public:
         return true;
     }
 
-    /// @brief This function is used to delete information of the candidate from the hash table and the file
-    /// @param filename The name of the file in which we store the information
-    /// @param CNIC The national id / CNIC of the candidate
-    /// @return Returns true if deletion is successful, else false
-    bool deleteInfo(string filename, long long int CNIC)
+    bool delete_by_CNIC(long long int CNIC)
     {
-        ifstream file(filename); // Opening the original file
-        if (!file.is_open())
-        {
-            cerr << "Error: Unable to open file " << filename << endl;
-            return false; // Returning false if the file cannot be opened
-        }
-
-        ofstream tempFile("modifiedCandidates.txt"); // Temporary file to store the modified information
-        if (!tempFile.is_open())
-        {
-            file.close();
-            return false; // Returning false if the temporary file cannot be created
-        }
-
-        string line;
-        bool found = false; // Flaging to check if the CNIC is found
-
-        while (getline(file, line)) // Reading each line from the file
-        {
-            istringstream info(line); // 'istringstream' to parse the line
-            string name, strCNIC;
-
-            getline(info, name, ','); // Extracting name
-            getline(info, strCNIC);   // Extracting CNIC
-
-            long long int cnic = stoll(strCNIC); // Converting CNIC from string to long long int
-
-            if (CNIC == cnic)
-            {
-                found = true; // Marking as found if the CNIC matches
-            }
-            else
-            {
-                tempFile << line << endl; // Writing the line to the temporary file if CNIC doesn't match
-            }
-        }
-
-        file.close();
-        tempFile.close();
-
-        if (found)
-        {
-            if (remove(filename.c_str()) != 0) // Deleting the original file
-            {
-                return false;
-            }
-
-            if (rename("modifiedCandidates.txt", filename.c_str()) != 0) // Renaming the temporary file
-            {
-                return false;
-            }
-
-            return true; // Returning true if deletion and renaming are successful
-        }
-        remove("modifiedCandidates.txt"); // Cleaning up temporary file if CNIC not found
-        return false;                     // Return false if CNIC not found
+        int index = hashFunction(CNIC);
+        if (table[index].deletion(CNIC))
+            return true;
     }
 };
 

@@ -38,12 +38,12 @@ public:
 
     /// @brief This is a general function for deletion. It performs deletion for all the cases
     /// @param CNIC This is the CNIC / National ID of the person (for whom we want to delete information)
-    /// @return Returns NULL if the list is empty. Else, head
-    Node_LinkedList *deletion(long long int CNIC)
+    /// @return Returns false if the list is empty or deletion is not successfull. Else, head
+    bool deletion(long long int CNIC)
     {
         if (head == NULL)
         {
-            return NULL; // Returns NULL if the list is empty
+            return false; // Returns NULL if the list is empty
         }
 
         if (head->CNIC == CNIC)
@@ -51,7 +51,7 @@ public:
             Node_LinkedList *temp = head;
             head = head->next; // Head becomes the second node if the 'CNIC to be deleted' is at the head
             delete temp; // Free the memory of the removed node
-            return head;
+            return true;
         }
 
         // If the element is not stored by the head node and the list is not empty
@@ -68,13 +68,13 @@ public:
         {
             // CNIC not found
             cout << "CNIC not found in the list." << endl;
-            return head;
+            return true;
         }
 
         // Freeing the connection and deleting the node
         prev->next = current->next;
         delete current;
-        return head;
+        return true;
     }
 
     /// @brief The function for traversal in list

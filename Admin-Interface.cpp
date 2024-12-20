@@ -63,17 +63,17 @@ public:
              << "\n2) Add Candidate to Elections"      // Done
              << "\n3) Delete Candidate from Elections" // Done
              << "\n4) Set Election's Deadline"         // Done
-             << "\n5) View Election Results"           // Yet to be implemented
-             << "\n6) View Candidate's Information"    // Call the traversal function from singly linked list
-             << "\n7) Add Voter's Information"         // Done
-             << "\n8) Delete Voter's Information"      // Done
-             << "\n9) View Voter's Information"        // Done
-             << "\n10) Exit"                             // Will be implemented in main function when user enters the input
+             << "\n5) View Candidate's Information"    // Done
+             << "\n6) Add Voter's Information "        // Done
+             << "\n7) Delete Voter's Information"      // Done
+             << "\n8) View Voter's Information"        // Yet to be implemented
+             << "\n9) View Election Results"           // Done
+             << "\n10) Exit"                           // Implemented in main function when user enters the input
              << "\nSelect an option: ";
     }
 
     /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
-    /// @return Retrieves the current time in hours, as read by the system clock.
+    /// @return Returns the deadline time as entered by the admin
     time_t deadLine()
     {
         float hours;
@@ -111,14 +111,11 @@ public:
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     /// @param name It is name of the candidate whoose information we want to delete
     /// @param CNIC It is CNIC/National ID of the candidate whoose information we want to delete
-    void deleteCandidates(Singlelinklist *head)
+    void deleteCandidates(Singlelinklist *head, long long int CNIC)
     {
-        long long int CNIC;
-
-        cout << "\nEnter the CNIC of the candidate (without dashes): ";
-        cin >> CNIC;
-
-        head->deletion(CNIC);
+        head->deletion(CNIC);                 // Delete information from the linked list
+        deleteInfo("Voters.txt", CNIC);       // Delete information from the file
+        Candidate_Table.delete_by_CNIC(CNIC); // Delete information from the Hash Table
     }
 
     void viewCandidates(Singlelinklist *head) //, HashMap M
@@ -170,6 +167,7 @@ public:
 
         head->deletion(CNIC);
         deleteInfo("Voter.txt", CNIC);
+        Voter_Table.delete_by_CNIC(CNIC);
     }
 
     void viewVoters(Singlelinklist *head)
@@ -194,6 +192,9 @@ public:
             goto invalidOption;
         }
     }
+
+    // Need to write this function as well
+    void viewResult() {}
 };
 
 // int main()

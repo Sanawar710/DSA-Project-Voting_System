@@ -12,11 +12,13 @@
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
 
+time_t deadline; // Global Variable for Setting Deadline
+
 int main()
 {
     // Creating Objects
     AdminInterface A;
-    Singlelinklist *Candidates;
+    Singlelinklist *Candidates, *Voters;
 
     cout << "Welcome to the Voting System !" << endl;
 
@@ -66,24 +68,36 @@ int main()
             }
 
             case 3:
+                long long int CNIC;
+
+                cout << "\nEnter the CNIC of the candidate (without dashes): ";
+                cin >> CNIC;
+                A.deleteCandidates(Candidates, CNIC);
                 break;
 
             case 4:
+                deadline = A.deadLine(); // Later used while casting votes when the election is started
                 break;
 
             case 5:
+                A.viewCandidates(Candidates);
                 break;
 
             case 6:
+                // A.addVoter(Voters); // Need to consult
                 break;
 
             case 7:
+                // A.deleteVoter(Voters)
                 break;
 
             case 8:
+                // A.viewVoters(Voters);
                 break;
 
             case 9:
+                cout << "Election's Result: \n";
+                A.viewResult();
                 break;
 
             case 10:
