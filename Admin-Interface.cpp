@@ -65,7 +65,10 @@ public:
              << "\n4) Set Election's Deadline"         // Done
              << "\n5) View Election Results"           // Yet to be implemented
              << "\n6) View Candidate's Information"    // Call the traversal function from singly linked list
-             << "\n7) Exit"                            // Will be implemented in main function when user enters the input
+             << "\n7) Add Voter's Information"         // Done
+             << "\n8) Delete Voter's Information"      // Done
+             << "\n9) View Voter's Information"        // Done
+             << "\n10) Exit"                             // Will be implemented in main function when user enters the input
              << "\nSelect an option: ";
     }
 
@@ -169,7 +172,6 @@ public:
         deleteInfo("Voter.txt", CNIC);
     }
 
-    
     void viewVoters(Singlelinklist *head)
     {
         int option;

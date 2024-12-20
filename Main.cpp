@@ -40,7 +40,7 @@ int main()
 
             int option;
 
-            cout << "Enter the option you want to choose (on a scale of 1-7): " << endl;
+            cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
             cin >> option;
 
             switch (option)
@@ -66,25 +66,27 @@ int main()
             }
 
             case 3:
-                cout << " " << endl;
                 break;
 
             case 4:
-
-                cout << " " << endl;
                 break;
 
             case 5:
-
-                cout << " " << endl;
                 break;
 
             case 6:
-
-                cout << " " << endl;
                 break;
 
             case 7:
+                break;
+
+            case 8:
+                break;
+
+            case 9:
+                break;
+
+            case 10:
                 cout << "Exiting the system. Thank you for managing the voting process." << endl;
                 break;
 
