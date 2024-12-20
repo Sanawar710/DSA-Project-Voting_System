@@ -46,6 +46,9 @@ int main()
 
             cout << "\nLogin Successful\n"
                  << endl;
+
+            sleep(3);
+            
             A.Menu();
 
             int option;
@@ -154,6 +157,8 @@ int main()
         {
             long long int CNIC;
 
+            sleep(3);
+
             cout << "Enter your CNIC: " << endl;
             cin >> CNIC;
             cin.ignore();
@@ -171,6 +176,8 @@ int main()
             cout << "\nEnter your name: \n";
             cin.ignore();
             getline(cin, name);
+
+            sleep(3);
 
             cout << "\nEnter your CNIC: \n";
             cin >> CNIC;

@@ -83,10 +83,10 @@ public:
              << "\n3) Delete Candidate from Elections" // Done
              << "\n4) Set Election's Deadline"         // Done
              << "\n5) View Candidate's Information"    // Done
-             << "\n6) View Voter's Information"        // Yet to be implemented
+             << "\n6) View Voter's Information"        // Done
              << "\n7) View Election Results"           // Done
-             << "\n8) Exit"                            // Implemented in main function when user enters the input
-             << "\nSelect an option: ";
+             << "\n8) Exit"
+             << endl;
     }
 
     /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
