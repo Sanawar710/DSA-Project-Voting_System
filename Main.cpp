@@ -12,7 +12,6 @@
 #include "Binary-Search-Tree.cpp"
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
-#include <limits>
 
 time_t deadline; // Global Variable for Deadline
 
@@ -153,26 +152,6 @@ int main()
         {
         case 1:
         {
-            sleep(3);
-
-            Credentials creds;
-            creds = loginTerminal();
-
-            long long int CNIC;
-
-            sleep(3);
-
-            cout << "Enter your CNIC: " << endl;
-            cin >> CNIC;
-            cin.ignore();
-
-            saveInfo("Voters.txt", creds.name, CNIC);
-
-            break;
-        }
-
-        case 2:
-        {
             long long int CNIC;
 
             cout << "Enter your CNIC: " << endl;
@@ -184,7 +163,7 @@ int main()
             break;
         }
 
-        case 3:
+        case 2:
         {
             string name;
             long long int CNIC;
@@ -193,6 +172,9 @@ int main()
             cin.ignore();
             getline(cin, name);
 
+            cout << "\nEnter your CNIC: \n";
+            cin >> CNIC;
+
             sleep(3);
 
             V.addVoter(Voters, name, CNIC);
@@ -200,7 +182,7 @@ int main()
             break;
         }
 
-        case 4:
+        case 3:
         {
             string name;
             long long int CNIC;
@@ -212,7 +194,7 @@ int main()
             break;
         }
 
-        case 5:
+        case 4:
 
             sleep(3);
 

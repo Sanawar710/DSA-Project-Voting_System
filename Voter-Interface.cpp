@@ -16,11 +16,10 @@ public:
     {
         // Menu for the voters to choose from the options
         cout << "\nVoting System Voter Menu:\n"
-             << "1)Login\n"
-             << "2)Cast Vote\n"
-             << "3)Register Yourself\n"
-             << "4)Unregister Yourself\n"
-             << "5)Exit\n"
+             << "1)Cast Vote\n"
+             << "2)Register Yourself\n"
+             << "3)Unregister Yourself\n"
+             << "4)Exit\n"
              << endl;
     }
 
