@@ -49,6 +49,7 @@ void saveInfo(string filename, string name, long long int CNIC) // A general fun
 bool deleteInfo(string filename, long long int CNIC)
 {
     ifstream file(filename); // Opening the original file
+
     if (!file.is_open())
     {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -75,9 +76,9 @@ bool deleteInfo(string filename, long long int CNIC)
         getline(info, name, ','); // Extract name
         getline(info, strCNIC);   // Extract CNIC
 
-        long long int cnic = stoll(strCNIC); // Convert CNIC from string to long long int
+        long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
 
-        if (CNIC == cnic)
+        if (CNIC == id)
         {
             found = true; // Mark as found if the CNIC matches
         }
@@ -109,6 +110,38 @@ bool deleteInfo(string filename, long long int CNIC)
         remove("modifiedCandidates.txt"); // Clean up temporary file if CNIC not found
         return false;                     // Return false if CNIC not found
     }
+}
+
+bool searchbyID(string filename, long long int CNIC)
+{
+    ifstream file(filename); // Opening the file in read mode
+
+    if (!file.is_open())
+    {
+        cerr << "Error: Unable to open file " << filename << endl;
+        return false; // Return false if the file cannot be opened
+    }
+    
+    string line;
+
+    while (getline(file, line)) // Read each line from the file
+    {
+        istringstream info(line); // 'istringstream' to parse the line
+        string name, strCNIC;
+
+        getline(info, name, ','); // Extract name
+        getline(info, strCNIC);   // Extract CNIC
+
+        long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
+
+        if (CNIC == id)
+        {
+            return true;
+        }
+    }
+    
+    file.close();
+    return false;
 }
 
 void viewInfo(string filename) // A general function to view information in files
