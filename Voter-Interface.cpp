@@ -1,13 +1,16 @@
 #include <iostream>
 #include "Save-Information.cpp"
 #include "Hashing.cpp"
+#include "Binary-Search-Tree.cpp"
 #include "Singly-Linked-List.cpp"
 #include "Cast-Vote.cpp"
 
 using namespace std;
 
 const int TableSize = 10; // Max size of information that we can store in the hash table
+// Global Objects
 HashMap Voter_Table(TableSize);
+BST *CNIC_Records;
 
 class VoterInterface
 {
