@@ -4,8 +4,9 @@
 #include "Singly-Linked-List.cpp"
 
 using namespace std;
-const int tableSize = 10; // Max size of information that we can store in the hash table
-HashMap Voter_Table(tableSize);
+
+const int TableSize = 10; // Max size of information that we can store in the hash table
+HashMap Voter_Table(TableSize);
 
 class VoterInterface
 {
@@ -26,7 +27,7 @@ public:
     /// @param head The starting node of the linked list
     /// @param name The name of the file
     /// @param CNIC The CNIC / National ID of the user
-    void addVoter(Singlelinklist *&head, string name, long long int CNIC)
+    void addVoter(Singlelinklist *&head, string name, long long int &CNIC)
     {
         Voter_Table.registeration("Voters.txt", name, CNIC);
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
@@ -39,13 +40,8 @@ public:
     /// @param head The starting node of the linked list
     /// @param name The name of the file
     /// @param CNIC The CNIC / National ID of the user
-    void deleteVoter(Singlelinklist *&head, string name, long long int CNIC)
+    void deleteVoter(Singlelinklist *&head, long long int &CNIC)
     {
-        long long int CNIC;
-
-        cout << "\nEnter the CNIC of the candidate (without dashes): ";
-        cin >> CNIC;
-
         head->deletion(CNIC);
         deleteInfo("Voter.txt", CNIC);
         Voter_Table.delete_by_CNIC(CNIC);

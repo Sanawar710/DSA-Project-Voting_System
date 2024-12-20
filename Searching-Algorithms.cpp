@@ -1,3 +1,5 @@
+#ifndef SEARCHINgALGORITHMS_H
+#define SEARCHINgALGORITHMS_H
 #include <iostream>
 
 using namespace std;
@@ -16,3 +18,5 @@ bool linearSearch(string array[], int size, string targetElement)
     }
     return false;
 }
+
+#endif

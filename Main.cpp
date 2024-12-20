@@ -26,6 +26,8 @@ int main()
 
     int choice;
 
+    sleep(3);
+
     cout << "\nDo you want to access the Admin Terminal or the Voter Terminal? (0/1): " << endl;
     cin >> choice;
 
@@ -33,16 +35,22 @@ int main()
     {
         cout << endl; // For indentation on terminal
 
+        sleep(3);
+
         Credentials creds;
         creds = loginTerminal();
 
         if (A.Authenicate(creds.name, creds.password))
         {
+            sleep(3);
+
             cout << "\nLogin Successful\n"
                  << endl;
             A.Menu();
 
             int option;
+
+            sleep(3);
 
             cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
             cin >> option;
@@ -59,11 +67,15 @@ int main()
 
                 cin.ignore(); // Clear input buffer
 
+                sleep(3);
+
                 cout << "Enter the name of the candidate: ";
                 getline(cin, name); // Used to take input name (used incase if some one uses a space in their name)
 
                 cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 cin >> CNIC;
+
+                sleep(10);
 
                 A.addCandidates(Candidates, name, CNIC);
                 break;
@@ -71,6 +83,8 @@ int main()
 
             case 3:
                 long long int CNIC;
+
+                sleep(3);
 
                 cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 cin >> CNIC;
@@ -86,34 +100,48 @@ int main()
                 break;
 
             case 6:
+                sleep(3);
+
                 cout << "Election's Result: \n";
                 A.viewResult();
                 break;
 
             case 7:
+                sleep(3);
+
                 cout << "Voter's Information: " << endl;
                 A.viewVoters(Voters);
                 break;
 
             case 8:
+                sleep(3);
+
                 cout << "Exiting the system. Thank you for managing the voting process." << endl;
                 break;
 
             default:
+                sleep(3);
+
                 cout << "You have entered an invalid input" << endl;
                 break;
             }
         }
         else
         {
+            sleep(3);
+
             cout << "\nLogin Failed" << endl;
         }
     }
     else if (choice == 1)
     {
+        sleep(3);
+
         V.Menu();
 
         int option;
+
+        sleep(3);
 
         cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
         cin >> option;
@@ -122,10 +150,14 @@ int main()
         {
         case 1:
         {
+            sleep(3);
+
             Credentials creds;
             creds = loginTerminal();
 
             long long int CNIC;
+
+            sleep(10);
 
             cout << "Enter your CNIC: " << endl;
             cin >> CNIC;
@@ -142,6 +174,8 @@ int main()
             string name;
             long long int CNIC;
 
+            sleep(3);
+
             V.addVoter(Voters, name, CNIC);
 
             break;
@@ -152,20 +186,28 @@ int main()
             string name;
             long long int CNIC;
 
-            V.deleteVoter(Voters, name, CNIC);
+            sleep(3);
+
+            V.deleteVoter(Voters, CNIC);
 
             break;
         }
 
         case 5:
+
+            sleep(3);
+
             cout << "Exiting the system. Thank you for managing the voting process." << endl;
             break;
 
         default:
+
+            sleep(3);
+
             cout << "You have entered an invalid input" << endl;
             break;
         }
-
-        return 0;
     }
+
+    return 0;
 }

@@ -47,7 +47,7 @@ public:
     {
         bool found = linearSearch(admins, 3, username);
 
-        if (found)
+        if (found && Password == password)
             return true;
 
         return false; // Executes in the case if the username and password do not match with the one in the array
@@ -64,7 +64,7 @@ public:
              << "\n5) View Candidate's Information"    // Done
              << "\n6) View Voter's Information"        // Yet to be implemented
              << "\n7) View Election Results"           // Done
-             << "\n8) Exit"                           // Implemented in main function when user enters the input
+             << "\n8) Exit"                            // Implemented in main function when user enters the input
              << "\nSelect an option: ";
     }
 

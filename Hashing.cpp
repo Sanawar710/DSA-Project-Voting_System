@@ -87,8 +87,11 @@ public:
     bool delete_by_CNIC(long long int CNIC)
     {
         int index = hashFunction(CNIC);
+
         if (table[index].deletion(CNIC))
             return true;
+
+        return false;
     }
 };
 
