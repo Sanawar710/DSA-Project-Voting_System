@@ -10,10 +10,18 @@ HashMap Voter_Table(tableSize);
 class VoterInterface
 {
 public:
-     void Menu(){
+    void Menu()
+    {
+        // Menu for the voters to choose from the options
+        cout << "Voting System Admin Menu:"
+             << "1)Login\n"
+             << "2)Cast Vote\n"
+             << "3)Register Yourself\n"
+             << "4)Unregister Yourself\n"
+             << "5)Exit\n"
+             << "\nSelect an option: " << endl;
+    }
 
-     }
-     
     /// @brief This function is used to add the voter's information in the linked list, hash table and the text file
     /// @param head The starting node of the linked list
     /// @param name The name of the file
@@ -42,4 +50,7 @@ public:
         deleteInfo("Voter.txt", CNIC);
         Voter_Table.delete_by_CNIC(CNIC);
     }
+
+    // Needs to be written RN
+    void castVote() {}
 };

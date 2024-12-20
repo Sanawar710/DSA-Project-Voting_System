@@ -1,6 +1,7 @@
 // Included the cpp files which include functions for our voting system
 #include "Hashing.cpp"
 #include "Admin-Interface.cpp"
+#include "Voter-Interface.cpp"
 #include "Graphs.cpp"
 #include "Stack.cpp"
 #include "Singly-Linked-List.cpp"
@@ -12,12 +13,13 @@
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
 
-time_t deadline; // Global Variable for Setting Deadline
+time_t deadline; // Global Variable for Deadline
 
 int main()
 {
     // Creating Objects
     AdminInterface A;
+    VoterInterface V;
     Singlelinklist *Candidates, *Voters;
 
     cout << "Welcome to the Voting System !" << endl;
@@ -98,6 +100,7 @@ int main()
                 break;
 
             default:
+                cout << "You have entered an invalid input" << endl;
                 break;
             }
         }
@@ -108,9 +111,61 @@ int main()
     }
     else if (choice == 1)
     {
-        Credentials creds;
-        loginTerminal();
-    }
+        V.Menu();
 
-    return 0;
+        int option;
+
+        cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
+        cin >> option;
+
+        switch (option)
+        {
+        case 1:
+        {
+            Credentials creds;
+            creds = loginTerminal();
+
+            long long int CNIC;
+
+            cout << "Enter your CNIC: " << endl;
+            cin >> CNIC;
+            saveInfo("Voter.txt", creds.name, CNIC);
+
+            break;
+        }
+        case 2:
+            V.castVote();
+            break;
+
+        case 3:
+        {
+            string name;
+            long long int CNIC;
+
+            V.addVoter(Voters, name, CNIC);
+
+            break;
+        }
+
+        case 4:
+        {
+            string name;
+            long long int CNIC;
+
+            V.deleteVoter(Voters, name, CNIC);
+
+            break;
+        }
+
+        case 5:
+            cout << "Exiting the system. Thank you for managing the voting process." << endl;
+            break;
+
+        default:
+            cout << "You have entered an invalid input" << endl;
+            break;
+        }
+
+        return 0;
+    }
 }
