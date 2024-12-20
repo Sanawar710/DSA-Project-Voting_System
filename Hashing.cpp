@@ -79,8 +79,8 @@ public:
         }
 
         table[index].insert(name, CNIC);
-        saveInfo("Candidates.txt", name, CNIC);
-        cout << "Candidate " << name << " registered successfully!" << endl;
+        saveInfo(filename, name, CNIC);
+        cout << "Registered successfully!" << endl;
         return true;
     }
 

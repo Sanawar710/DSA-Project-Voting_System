@@ -2,6 +2,7 @@
 #include "Save-Information.cpp"
 #include "Hashing.cpp"
 #include "Singly-Linked-List.cpp"
+#include "Cast-Vote.cpp"
 
 using namespace std;
 
@@ -14,13 +15,13 @@ public:
     void Menu()
     {
         // Menu for the voters to choose from the options
-        cout << "Voting System Admin Menu:"
+        cout << "\nVoting System Voter Menu:\n"
              << "1)Login\n"
              << "2)Cast Vote\n"
              << "3)Register Yourself\n"
              << "4)Unregister Yourself\n"
              << "5)Exit\n"
-             << "\nSelect an option: " << endl;
+             << endl;
     }
 
     /// @brief This function is used to add the voter's information in the linked list, hash table and the text file
@@ -43,10 +44,17 @@ public:
     void deleteVoter(Singlelinklist *&head, long long int &CNIC)
     {
         head->deletion(CNIC);
-        deleteInfo("Voter.txt", CNIC);
+        deleteInfo("Voters.txt", CNIC);
         Voter_Table.delete_by_CNIC(CNIC);
     }
 
-    // Needs to be written RN
-    void castVote() {}
+    /// @brief This function is used to cast vote to the candidates
+    /// @param CNIC The CNIC / National ID of the user
+    void castVote(long long int CNIC)
+    {
+        if (isValidVoter(CNIC))
+        {
+            processVote("Candidate.txt", "VotingLog.txt");
+        }
+    }
 };

@@ -16,7 +16,7 @@ bool saveInfo(string filename, string name, long long int CNIC) // A general fun
         file << name << "," << CNIC << endl; // Storing the values in a comma separated format
         file.close();
 
-        cout << "\nCandidate information saved to file successfully.\n";
+        cout << "\nInformation saved to file successfully.\n";
 
         return true;
     }

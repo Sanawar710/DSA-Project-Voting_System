@@ -23,6 +23,7 @@ int main()
     Singlelinklist *Candidates, *Voters;
 
     cout << "Welcome to the Voting System !" << endl;
+    // V.castVote(3460330147935);
 
     int choice;
 
@@ -143,7 +144,7 @@ int main()
 
         sleep(3);
 
-        cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
+        cout << "Enter the option you want to choose (on a scale of 1-5): " << endl;
         cin >> option;
 
         switch (option)
@@ -157,17 +158,26 @@ int main()
 
             long long int CNIC;
 
-            sleep(10);
+            sleep(3);
 
             cout << "Enter your CNIC: " << endl;
             cin >> CNIC;
-            saveInfo("Voter.txt", creds.name, CNIC);
+            saveInfo("Voters.txt", creds.name, CNIC);
 
             break;
         }
+
         case 2:
-            V.castVote();
+        {
+            long long int CNIC;
+
+            cout << "Enter your CNIC: " << endl;
+            cin >> CNIC;
+
+            V.castVote(CNIC);
+
             break;
+        }
 
         case 3:
         {
