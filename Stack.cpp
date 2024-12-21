@@ -10,7 +10,8 @@ struct Candidate
     string name;
     int votes;
 
-    bool operator<(const Candidate &other) const // Operator Overloading
+    // Operator Overloading
+    bool operator<(const Candidate &other) const
     {
         return votes < other.votes; // Compare by votes
     }

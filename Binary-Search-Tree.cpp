@@ -2,6 +2,7 @@
 #define BINARYSEARCHTREE_H
 
 #include <iostream>
+
 using namespace std;
 
 struct BST // Node for BST
@@ -122,7 +123,7 @@ struct BST // Node for BST
     /// @brief This function is used to delete record from the BST
     /// @param rootNode The starting node of the BST
     /// @param CNIC The CNIC we're trying to delete
-    /// @return
+    /// @return Returns the updated head if the deletion is successful. Else, false
     BST *deleteRecord(BST *rootNode, int CNIC)
     {
         if (rootNode == NULL)

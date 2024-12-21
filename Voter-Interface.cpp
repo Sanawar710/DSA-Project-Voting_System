@@ -28,6 +28,7 @@ private:
 public:
     VoterInterface(int tableSize) : candidateTable(tableSize) {}
 
+    /// @brief The menu for voter interface
     void Menu()
     {
         // Menu for the voters to choose from the options
@@ -40,6 +41,10 @@ public:
              << endl;
     }
 
+    /// @brief Theis function is used to register voter
+    /// @param head The head of the linked list in which we're storing the information
+    /// @param name The name of the voter
+    /// @param CNIC The CNIC/National ID of the voter
     void addVoter(Singlelinklist *&head, string name, long long int &CNIC)
     {
         // Register voter in hash table, linked list, and file
@@ -60,6 +65,10 @@ public:
         }
     }
 
+    /// @brief Theis function is used to unregister voter
+    /// @param head The head of the linked list in which we're storing the information
+    /// @param name The name of the voter
+    /// @param CNIC The CNIC/National ID of the voter
     void deleteVoter(Singlelinklist *&head, long long int &CNIC)
     {
         head->deletion(CNIC);
@@ -100,6 +109,8 @@ public:
         }
     }
 
+    /// @brief This function checks if the voter is registered and casts votes
+    /// @param CNIC The CNIC/National id of the voter
     void castVote(long long int CNIC)
     {
         if (isValidVoter("Voters.txt", CNIC))
@@ -111,7 +122,8 @@ public:
             cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         }
     }
-
+    
+    /// @brief The function to view the result of the Elections
     void viewResult()
     {
         Stack candidateStack;
@@ -148,7 +160,12 @@ public:
         if (!candidateStack.empty())
         {
             Candidate topCandidate = candidateStack.findTopCandidate();
-            cout << "\nWinner: " << topCandidate.name << " with " << topCandidate.votes << " votes." << endl;
+            cout << "\nWinner: "
+                 << topCandidate.name
+                 << " with "
+                 << topCandidate.votes
+                 << " votes."
+                 << endl;
         }
         else
         {

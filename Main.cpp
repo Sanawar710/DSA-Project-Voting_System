@@ -7,13 +7,12 @@
 #include "Singly-Linked-List.cpp"
 #include "Queues.cpp"
 #include "Sorting-Algorithms.cpp"
-#include "Sorting-Votes.cpp"
 #include "Save-Information.cpp"
 #include "Binary-Search-Tree.cpp"
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
 
-time_t deadline; // Global Variable for Deadline
+// time_t deadline; // Global Variable for Deadline
 
 int main()
 {
@@ -55,13 +54,34 @@ int main()
 
             sleep(3);
 
-            cout << "Enter the option you want to choose (on a scale of 1-8): " << endl;
+            cout << "Enter the option you want to choose (on a scale of 1-7): " << endl;
             cin >> option;
 
             switch (option)
             {
             case 1:
-                break;
+                // {
+                //     // A.startElections();
+
+                //     bool condition = true;
+                //     time_t currentTime;
+                //     // time_t deadline = A.deadLine();
+
+                //     // Enforcing the deadline
+                //     while (condition)
+                //     {
+                //         currentTime = time(0); // Continuously checks the current time
+
+                //         if (currentTime >= deadline)
+                //         {
+                //             cout << "Deadline reached! Elections are now closed." << endl;
+                //             condition = false;
+                //         }
+                //     }
+                // }
+
+                // break;
+                // }
 
             case 2:
             {
@@ -95,15 +115,15 @@ int main()
                 A.deleteCandidates(Candidates, CNIC);
                 break;
 
-            case 4:
-                deadline = A.deadLine(); // Later used while casting votes when the election is started
-                break;
+            // case 4:
+            //     // deadline = A.deadLine(); // Later used while casting votes when the election is started
+            //     break;
 
-            case 5:
+            case 4:
                 A.viewCandidates(Candidates);
                 break;
 
-            case 6:
+            case 5:
                 sleep(3);
 
                 cout << "Election's Result: \n";
@@ -111,7 +131,7 @@ int main()
 
                 break;
 
-            case 7:
+            case 6:
                 sleep(3);
 
                 cout << "Voter's Information: " << endl;
@@ -119,7 +139,7 @@ int main()
 
                 break;
 
-            case 8:
+            case 7:
                 sleep(3);
 
                 cout << "Exiting the system. Thank you for managing the voting process." << endl;

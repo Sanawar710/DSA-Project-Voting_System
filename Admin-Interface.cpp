@@ -7,7 +7,6 @@
 #include "Singly-Linked-List.cpp"
 #include "Hashing.cpp"
 #include "Searching-Algorithms.cpp"
-// #include "Stack.cpp"
 
 using namespace std;
 
@@ -26,32 +25,15 @@ Credentials loginTerminal()
 {
     Credentials cred;
 
+    cin.ignore();
     cout << "Enter your Username: " << endl;
     getline(cin, cred.name);
-    cin.ignore();
 
     cout << "Enter your Password: " << endl;
     getline(cin, cred.password);
-    cin.ignore();
 
     return cred; // Returns username and password as a structure
 }
-
-// void Easter()
-// {
-//     cout << "     EASTER EGG               " << endl;
-//     cout << "\n      *****       " << endl;
-//     cout << "    **     **     " << endl;
-//     cout << "   *         *    " << endl;
-//     cout << "  *           *   " << endl;
-//     cout << " *             *  " << endl;
-//     cout << " *             *  " << endl;
-//     cout << "  *           *   " << endl;
-//     cout << "   *         *    " << endl;
-//     cout << "    **     **     " << endl;
-//     cout << "      *****       \n"
-//          << endl;
-// }
 
 class AdminInterface
 {
@@ -75,54 +57,45 @@ public:
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
 
+    /// @brief The function to display the menu for admin terminal
     void Menu()
     {
         // Menu for the admin to choose from the options
         cout << "Voting System Admin Menu:"
-             << "\n1) Start Election"                  // Yet to be implemented
-             << "\n2) Add Candidate to Elections"      // Done
-             << "\n3) Delete Candidate from Elections" // Done
-             << "\n4) Set Election's Deadline"         // Done
-             << "\n5) View Candidate's Information"    // Done
-             << "\n6) View Voter's Information"        // Done
-             << "\n7) View Election Results"           // Done
-             << "\n8) Exit"
+             << "\n1) Start Election"
+             << "\n2) Add Candidate to Elections"
+             << "\n3) Delete Candidate from Elections"
+             //  << "\n4) Set Election's Deadline"
+             << "\n4) View Candidate's Information"
+             << "\n5) View Voter's Information"
+             << "\n6) View Election Results"
+             << "\n7) Exit"
              << endl;
     }
 
-    void startElections()
-    {
-        char choice;
+    // /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
+    // /// @return Returns the deadline time as entered by the admin
+    // time_t deadLine()
+    // {
+    //     float hours;
 
-        cout << "Do you want to start elections? (Y/N)" << endl;
-        cin >> choice;
+    //     cout << "Enter the Deadline for Ending Elections (in hours): ";
 
-        choice = tolower(choice);
-    }
+    // negativeTime: // The control will be redirected to this label if the entered input of time is negative
+    //     cin >> hours;
 
-    /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
-    /// @return Returns the deadline time as entered by the admin
-    time_t deadLine()
-    {
-        float hours;
+    //     // Validating the input
+    //     if (hours <= 0)
+    //     {
+    //         cout << "Time must be greater than 0. Please re-enter: ";
+    //         goto negativeTime; // Returns the control to the label 'negativeTime'
+    //     }
 
-        cout << "Enter the Deadline for Ending Elections (in hours): ";
+    //     time_t currentTime = time(0);                       // Getting current system time
+    //     time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
 
-    negativeTime: // The control will be redirected to this label if the entered input of time is negative
-        cin >> hours;
-
-        // Validating the input
-        if (hours <= 0)
-        {
-            cout << "Time must be greater than 0. Please re-enter: ";
-            goto negativeTime; // Returns the control to the label 'negativeTime'
-        }
-
-        time_t currentTime = time(0);                       // Getting current system time
-        time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
-
-        return deadlineTime;
-    }
+    //     return deadlineTime;
+    // }
 
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
@@ -146,7 +119,9 @@ public:
         Candidate_Table.delete_by_CNIC(CNIC); // Delete information from the Hash Table
     }
 
-    void viewCandidates(Singlelinklist *head) //, HashMap M
+    /// @brief The function to view the candidates' information
+    /// @param head THe head of the list in which we have stored the information of the candidates
+    void viewCandidates(Singlelinklist *head)
     {
         int option;
 
@@ -168,7 +143,9 @@ public:
             goto invalidOption;
         }
     }
-
+    
+    /// @brief The function to view the information of the voters
+    /// @param head The head of the list in which the information of the voters is stored
     void viewVoters(Singlelinklist *head)
     {
         int option;
@@ -192,38 +169,5 @@ public:
         }
     }
 };
-
-// int main()
-// {
-//     // Testing
-
-//     time_t currentTime;  // Variable to store current time
-//     time_t deadlineTime; // Variable to store the deadline time
-
-//     Admin A;
-
-//     // Implementation of deadline
-//     // Will call the function for casting votes in this block when the elections start
-//     deadlineTime = A.deadLine();
-
-//     bool condition = true;
-
-//     int i = 1;
-
-//     // Enforcing the deadline
-//     while (condition)
-//     {
-//         currentTime = time(0); // Continuously checks the current time
-
-//         cout << i << endl;
-//         i++;
-
-//         if (currentTime >= deadlineTime)
-//         {
-//             cout << "Deadline reached! Elections are now closed." << endl;
-//             condition = false;
-//         }
-//     }
-// }
 
 #endif

@@ -2,6 +2,7 @@
 #define CIRCULAR_QUEUE_H // If it is not defined, this statement will define it
 
 #include <iostream>
+
 using namespace std;
 
 // Struct to hold voter information
@@ -44,13 +45,16 @@ public:
         size = 0;
         capacity = cap;
     }
-
-    bool isEmpty() // Function to check if the queue is empty
+    /// @brief Function to check if the queue is empty
+    /// @return Returns true if the queue is empty, else false
+    bool isEmpty()
     {
         return size == 0;
     }
 
-    bool isFull() // Function to check if the queue is full
+    /// @brief Function to check if the queue is full
+    /// @return Returns true if the queue is true, else false
+    bool isFull() 
     {
         return size == capacity;
     }
