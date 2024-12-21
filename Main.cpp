@@ -40,7 +40,7 @@ int main()
         Credentials creds;
         creds = loginTerminal();
 
-        if (A.Authenicate(creds.name, creds.password))
+        if (A.Authenticate(creds.name, creds.password))
         {
             sleep(3);
 
@@ -55,7 +55,7 @@ int main()
 
             sleep(3);
 
-            cout << "Enter the option you want to choose (on a scale of 1-10): " << endl;
+            cout << "Enter the option you want to choose (on a scale of 1-8): " << endl;
             cin >> option;
 
             switch (option)
@@ -74,11 +74,12 @@ int main()
 
                 cout << "Enter the name of the candidate: ";
                 getline(cin, name); // Used to take input name (used incase if some one uses a space in their name)
+                cin.ignore();
 
                 cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 cin >> CNIC;
 
-                sleep(10);
+                sleep(3);
 
                 A.addCandidates(Candidates, name, CNIC);
                 break;
@@ -175,8 +176,8 @@ int main()
             long long int CNIC;
 
             cout << "\nEnter your name: \n";
-            cin.ignore();
             getline(cin, name);
+            cin.ignore();
 
             sleep(3);
 
@@ -209,7 +210,7 @@ int main()
 
             sleep(3);
 
-            cout << "Exiting the system. Thank you for managing the voting process." << endl;
+            cout << "Exiting the system. Thank you for voting." << endl;
             break;
 
         default:

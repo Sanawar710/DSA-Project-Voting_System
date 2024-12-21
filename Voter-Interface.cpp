@@ -14,9 +14,6 @@
 
 using namespace std;
 
-// const int TableSize; // Max size of information that we can store in the hash table
-// extern int TableSize;
-
 // Global Object
 HashMap Voter_Table(10); // This table stores the information of voters
 BST *Voter_Records;

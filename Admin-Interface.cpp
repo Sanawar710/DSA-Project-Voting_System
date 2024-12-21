@@ -26,29 +26,31 @@ Credentials loginTerminal()
     Credentials cred;
 
     cout << "Enter your Username: " << endl;
-    cin >> cred.name;
+    getline(cin, cred.name);
+    cin.ignore();
 
     cout << "Enter your Password: " << endl;
-    cin >> cred.password;
+    getline(cin, cred.password);
+    cin.ignore();
 
     return cred; // Returns username and password as a structure
 }
 
-void Easter()
-{
-    cout << "     EASTER EGG               " << endl;
-    cout << "\n      *****       " << endl;
-    cout << "    **     **     " << endl;
-    cout << "   *         *    " << endl;
-    cout << "  *           *   " << endl;
-    cout << " *             *  " << endl;
-    cout << " *             *  " << endl;
-    cout << "  *           *   " << endl;
-    cout << "   *         *    " << endl;
-    cout << "    **     **     " << endl;
-    cout << "      *****       \n"
-         << endl;
-}
+// void Easter()
+// {
+//     cout << "     EASTER EGG               " << endl;
+//     cout << "\n      *****       " << endl;
+//     cout << "    **     **     " << endl;
+//     cout << "   *         *    " << endl;
+//     cout << "  *           *   " << endl;
+//     cout << " *             *  " << endl;
+//     cout << " *             *  " << endl;
+//     cout << "  *           *   " << endl;
+//     cout << "   *         *    " << endl;
+//     cout << "    **     **     " << endl;
+//     cout << "      *****       \n"
+//          << endl;
+// }
 
 class AdminInterface
 {
@@ -62,17 +64,18 @@ public:
     /// @param username Username entered by the user or the admin
     /// @param Password Password entered by the user or the admin
     /// @return Return true if username and password is verified. Otherwise, false
-    bool Authenicate(string username, string Password)
+    bool Authenticate(string username, string Password)
     {
         bool found = linearSearch(admins, 3, username);
 
         if (found && Password == password)
             return true;
-        else if (username == "Sanawar" || username == "Fatima" || username == "Abdul Wadood")
-        {
-            Easter();
-            exit(0);
-        }
+            
+        // else if (username == "Sanawar" || username == "Fatima" || username == "Abdul Wadood")
+        // {
+        //     Easter();
+        //     exit(0);
+        // }
 
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
