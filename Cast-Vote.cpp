@@ -4,12 +4,12 @@
 #include <iostream>
 #include <unistd.h>
 #include "Save-Information.cpp"
-#include "Admin-Interface.cpp"
+#include "Voter-Interface.cpp"
 
 using namespace std;
 
-// extern int TableSize;
-// extern HashMap Voter_Table(int TableSize);
+extern int TableSize;       // Declare TableSize
+extern HashMap Voter_Table; // Declare Voter_Table
 
 // Helper function to validate if a voter ID exists in the given file
 bool isValidVoter(const string &filename, long long int voterID)
@@ -45,7 +45,7 @@ void processVote(string candidatesFile, string votingLogFile)
     cin >> CNIC;
 
     // Find candidate in the hash table
-    for (int i = 0; i < TableSize; i++)
+    for (int i = 0; i < tableSize; i++)
     {
         searchbyID(candidatesFile, CNIC);
 

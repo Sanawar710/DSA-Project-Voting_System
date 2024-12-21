@@ -10,14 +10,15 @@
 #include "Cast-Vote.cpp"
 #include "Graphs.cpp"
 #include "Stack.cpp"
+#include "Admin-Interface.cpp"
 
 using namespace std;
 
-const int TableSize = 10; // Max size of information that we can store in the hash table
+// const int TableSize; // Max size of information that we can store in the hash table
 // extern int TableSize;
 
-// Global Objects
-HashMap Voter_Table(TableSize); // This table stores the information of voters
+// Global Object
+HashMap Voter_Table(10); // This table stores the information of voters
 BST *Voter_Records;
 const int QueueCapacity = 100;           // Set capacity for the queue
 CircularQueue VoterQueue(QueueCapacity); // Circular queue for storing voters
