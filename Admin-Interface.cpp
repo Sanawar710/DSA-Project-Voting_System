@@ -7,6 +7,7 @@
 #include "Singly-Linked-List.cpp"
 #include "Hashing.cpp"
 #include "Searching-Algorithms.cpp"
+// #include "Stack.cpp"
 
 using namespace std;
 
@@ -70,12 +71,6 @@ public:
 
         if (found && Password == password)
             return true;
-            
-        // else if (username == "Sanawar" || username == "Fatima" || username == "Abdul Wadood")
-        // {
-        //     Easter();
-        //     exit(0);
-        // }
 
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
@@ -93,6 +88,16 @@ public:
              << "\n7) View Election Results"           // Done
              << "\n8) Exit"
              << endl;
+    }
+
+    void startElections()
+    {
+        char choice;
+
+        cout << "Do you want to start elections? (Y/N)" << endl;
+        cin >> choice;
+
+        choice = tolower(choice);
     }
 
     /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
@@ -186,9 +191,6 @@ public:
             goto invalidOption;
         }
     }
-
-    // Need to write this function as well
-    void viewResult() {}
 };
 
 // int main()

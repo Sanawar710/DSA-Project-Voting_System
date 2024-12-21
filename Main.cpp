@@ -107,7 +107,7 @@ int main()
                 sleep(3);
 
                 cout << "Election's Result: \n";
-                A.viewResult();
+                V.viewResult();
 
                 break;
 
