@@ -8,6 +8,9 @@
 
 using namespace std;
 
+// extern int TableSize;
+// extern HashMap Voter_Table(int TableSize);
+
 // Helper function to validate if a voter ID exists in the given file
 bool isValidVoter(const string &filename, long long int voterID)
 {

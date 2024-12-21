@@ -1,3 +1,6 @@
+#ifndef VOTERINTERFACE_H
+#define VOTERINTERFACE_H
+
 #include <iostream>
 #include "Save-Information.cpp"
 #include "Queues.cpp"
@@ -11,9 +14,10 @@
 using namespace std;
 
 const int TableSize = 10; // Max size of information that we can store in the hash table
+// extern int TableSize;
 
 // Global Objects
-HashMap Voter_Table(TableSize);
+HashMap Voter_Table(TableSize); // This table stores the information of voters
 BST *Voter_Records;
 const int QueueCapacity = 100;           // Set capacity for the queue
 CircularQueue VoterQueue(QueueCapacity); // Circular queue for storing voters
@@ -154,3 +158,5 @@ public:
         }
     }
 };
+
+#endif
