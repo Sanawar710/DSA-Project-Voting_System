@@ -2,7 +2,8 @@
 #define BINARYSEARCHTREE_H
 
 #include <iostream>
-using namespace std;
+
+using std::cout, std::cin, std::endl;
 
 struct BST // Node for BST
 {

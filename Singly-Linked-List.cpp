@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using namespace std;
+using std::cout, std::cin, std::endl;
 
 struct Node_LinkedList
 {

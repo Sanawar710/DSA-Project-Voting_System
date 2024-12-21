@@ -61,7 +61,28 @@ int main()
             switch (option)
             {
             case 1:
+                // {
+                //     // A.startElections();
+
+                //     bool condition = true;
+                //     time_t currentTime;
+                //     time_t deadlineTime = A.deadLine();
+
+                //     // Enforcing the deadline
+                //     while (condition)
+                //     {
+                //         currentTime = time(0); // Continuously checks the current time
+
+                //         if (currentTime >= deadlineTime)
+                //         {
+                //             cout << "Deadline reached! Elections are now closed." << endl;
+                //             condition = false;
+                //         }
+                //     }
+                // }
+
                 break;
+                // }
 
             case 2:
             {

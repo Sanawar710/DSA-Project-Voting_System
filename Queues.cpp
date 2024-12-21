@@ -2,7 +2,8 @@
 #define CIRCULAR_QUEUE_H // If it is not defined, this statement will define it
 
 #include <iostream>
-using namespace std;
+
+using std::cout, std::cin, std::endl;
 
 // Struct to hold voter information
 struct Voter

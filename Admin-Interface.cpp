@@ -7,9 +7,8 @@
 #include "Singly-Linked-List.cpp"
 #include "Hashing.cpp"
 #include "Searching-Algorithms.cpp"
-// #include "Stack.cpp"
 
-using namespace std;
+using std::cout, std::cin, std::endl;
 
 const int tableSize = 10; // Max size of information that we can store in the hash table
 HashMap Candidate_Table(tableSize);
@@ -36,22 +35,6 @@ Credentials loginTerminal()
 
     return cred; // Returns username and password as a structure
 }
-
-// void Easter()
-// {
-//     cout << "     EASTER EGG               " << endl;
-//     cout << "\n      *****       " << endl;
-//     cout << "    **     **     " << endl;
-//     cout << "   *         *    " << endl;
-//     cout << "  *           *   " << endl;
-//     cout << " *             *  " << endl;
-//     cout << " *             *  " << endl;
-//     cout << "  *           *   " << endl;
-//     cout << "   *         *    " << endl;
-//     cout << "    **     **     " << endl;
-//     cout << "      *****       \n"
-//          << endl;
-// }
 
 class AdminInterface
 {
@@ -90,16 +73,6 @@ public:
              << endl;
     }
 
-    void startElections()
-    {
-        char choice;
-
-        cout << "Do you want to start elections? (Y/N)" << endl;
-        cin >> choice;
-
-        choice = tolower(choice);
-    }
-
     /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
     /// @return Returns the deadline time as entered by the admin
     time_t deadLine()
@@ -124,6 +97,7 @@ public:
         return deadlineTime;
     }
 
+    
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     void addCandidates(Singlelinklist *&head, string name, long long int CNIC)
@@ -192,38 +166,5 @@ public:
         }
     }
 };
-
-// int main()
-// {
-//     // Testing
-
-//     time_t currentTime;  // Variable to store current time
-//     time_t deadlineTime; // Variable to store the deadline time
-
-//     Admin A;
-
-//     // Implementation of deadline
-//     // Will call the function for casting votes in this block when the elections start
-//     deadlineTime = A.deadLine();
-
-//     bool condition = true;
-
-//     int i = 1;
-
-//     // Enforcing the deadline
-//     while (condition)
-//     {
-//         currentTime = time(0); // Continuously checks the current time
-
-//         cout << i << endl;
-//         i++;
-
-//         if (currentTime >= deadlineTime)
-//         {
-//             cout << "Deadline reached! Elections are now closed." << endl;
-//             condition = false;
-//         }
-//     }
-// }
 
 #endif

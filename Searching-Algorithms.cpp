@@ -1,8 +1,7 @@
 #ifndef SEARCHINgALGORITHMS_H
 #define SEARCHINgALGORITHMS_H
-#include <iostream>
 
-using namespace std;
+#include <iostream>
 
 /// @brief The algorithm for Linear Search
 /// @param array The array in which we want to search element

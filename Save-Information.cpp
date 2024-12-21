@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream> // This header file allows us to include 'istringstream' function
 
-using namespace std;
+using std::cout, std::cin, std::endl;
 
 bool saveInfo(string filename, string name, long long int CNIC) // A general function to save information in files
 {
