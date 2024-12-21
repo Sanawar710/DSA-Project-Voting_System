@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 // Struct to hold voter information
 struct Voter

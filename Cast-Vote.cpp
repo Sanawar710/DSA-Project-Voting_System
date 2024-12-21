@@ -6,7 +6,7 @@
 #include "Save-Information.cpp"
 #include "Voter-Interface.cpp"
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 extern int TableSize;       // Declare TableSize
 extern HashMap Voter_Table; // Declare Voter_Table

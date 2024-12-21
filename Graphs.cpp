@@ -4,8 +4,7 @@
 #include <iostream>
 #include <queue>
 
-
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 class Graph
 {

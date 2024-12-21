@@ -6,7 +6,7 @@
 #include "Save-Information.cpp"
 #include "Singly-Linked-List.cpp"
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 class HashMap
 {

@@ -1,6 +1,6 @@
 #include <iostream>
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 void bubbleSort(string names[], int votes[], int n)
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Singly-Linked-List.cpp"
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 /// @brief This function is used to merge the two sorted subarrays with each other
 /// @param array The array that is being sorted

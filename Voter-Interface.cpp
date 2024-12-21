@@ -12,7 +12,7 @@
 #include "Stack.cpp"
 #include "Admin-Interface.cpp"
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 // Global Object
 HashMap Voter_Table(10); // This table stores the information of voters

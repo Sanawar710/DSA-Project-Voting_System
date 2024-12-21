@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using std::cout, std::cin, std::endl, std::string, std::runtime_error;
+using namespace std;
 
 struct Candidate
 {

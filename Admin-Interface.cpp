@@ -8,7 +8,7 @@
 #include "Hashing.cpp"
 #include "Searching-Algorithms.cpp"
 
-using std::cout, std::cin, std::endl;
+using namespace std;
 
 const int tableSize = 10; // Max size of information that we can store in the hash table
 HashMap Candidate_Table(tableSize);
