@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 struct Candidate
@@ -6,7 +7,7 @@ struct Candidate
     string name;
     int votes;
 
-    bool operator<(const Candidate &other) const
+    bool operator<(const Candidate &other) const // Operator Overloading
     {
         return votes < other.votes; // Compare by votes
     }
@@ -69,17 +70,6 @@ public:
         return topNode == nullptr;
     }
 
-    // Function to print the stack
-    // void printStack() const
-    // {
-    //     Node *temp = topNode;
-    //     while (temp != nullptr)
-    //     {
-    //         cout << temp->data.name << " - " << temp->data.votes << endl;
-    //         temp = temp->next;
-    //     }
-    // }
-
     // Sorting function
     void sortStack()
     {
@@ -130,38 +120,3 @@ public:
         return topCandidate;
     }
 };
-
-// int main()
-// {
-//     Stack candidates;
-//     int n;
-
-//     cout << "Enter the number of candidates: ";
-//     cin >> n;
-
-//     for (int i = 0; i < n; ++i)
-//     {
-//         Candidate c;
-//         cout << "Enter name for candidate " << i + 1 << ": ";
-//         cin >> c.name;
-//         cout << "Enter the number of votes for candidate " << i + 1 << ": ";
-//         cin >> c.votes;
-//         candidates.push(c);
-//     }
-
-//     cout << "\nOriginal Stack:\n";
-//     candidates.printStack();
-
-//     // Sort the stack
-//     candidates.sortStack();
-
-//     cout << "\nSorted Stack:\n";
-//     candidates.printStack();
-
-//     // Find and display the candidate with the highest vote score
-//     Candidate topCandidate = candidates.findTopCandidate();
-//     cout << "\nCandidate with the highest vote score is: "
-//          << topCandidate.name << " - " << topCandidate.votes << endl;
-
-//     return 0;
-// }

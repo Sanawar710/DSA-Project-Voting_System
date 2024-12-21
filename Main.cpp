@@ -19,7 +19,7 @@ int main()
 {
     // Creating Objects
     AdminInterface A;
-    VoterInterface V;
+    VoterInterface V(10);
     Singlelinklist *Candidates, *Voters;
 
     cout << "Welcome to the Voting System !" << endl;
@@ -203,8 +203,8 @@ int main()
         }
 
         case 4:
-        
-        break;
+
+            break;
         case 5:
 
             sleep(3);

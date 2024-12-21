@@ -14,12 +14,23 @@ public:
     vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
     int size;                     // Size of the hash table
 
+    int getSize()
+    {
+        return size;
+    }
+
     /// @brief Hash function to calculate the index
     /// @param CNIC The CNIC of the candidate
     /// @return Returns the hash index
     int hashFunction(long long int CNIC)
     {
         return CNIC % size; // Simple modulus-based hash function
+    }
+
+    Singlelinklist &getBucket(long long int CNIC)
+    {
+        int index = hashFunction(CNIC);
+        return table[index];
     }
 
     /// @brief Constructor to initialize the hash table with a fixed size

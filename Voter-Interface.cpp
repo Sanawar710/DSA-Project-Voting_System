@@ -6,6 +6,7 @@
 #include "Singly-Linked-List.cpp"
 #include "Cast-Vote.cpp"
 #include "Graphs.cpp"
+#include "Stack.cpp"
 
 using namespace std;
 
@@ -19,7 +20,12 @@ CircularQueue VoterQueue(QueueCapacity); // Circular queue for storing voters
 
 class VoterInterface
 {
+private:
+    HashMap candidateTable;
+
 public:
+    VoterInterface(int tableSize) : candidateTable(tableSize) {}
+    
     void Menu()
     {
         // Menu for the voters to choose from the options
@@ -106,27 +112,44 @@ public:
 
     void viewResult()
     {
-        cout << "\nVoting Results:\n";
-        cout << "----------------\n";
+        Stack candidateStack;
 
-        // Iterate over the hash table to count votes for each candidate
-        bool hasResults = false; // To check if any results exist
-        for (int i = 0; i < TableSize; i++)
+        // Load candidates from the hash table into the stack
+        for (int i = 0; i < candidateTable.getSize(); i++)
         {
-            Node_LinkedList *current = Voter_Table.table[i].head; // Access the linked list at index `i`
+            Node_LinkedList *current = candidateTable.getBucket(i);
 
-            while (current != NULL)
+            while (current != nullptr)
             {
-                // Display candidate's name and vote count
-                cout << "Candidate: " << current->name << " | CNIC: " << current->CNIC << " | Votes: " << current->votes << endl;
-                hasResults = true;
+                Candidate c;
+                c.name = current->name;
+                c.votes = current->votes;
+                candidateStack.push(c);
                 current = current->next;
             }
         }
 
-        if (!hasResults)
+        // Sort the stack by votes
+        candidateStack.sortStack();
+
+        // Display the results
+        cout << "\nElection Results:\n";
+        while (!candidateStack.empty())
         {
-            cout << "No votes have been cast yet." << endl;
+            Candidate c = candidateStack.top();
+            candidateStack.pop();
+            cout << "Candidate: " << c.name << ", Votes: " << c.votes << endl;
+        }
+
+        // Find and display the candidate with the highest votes
+        if (!candidateStack.empty())
+        {
+            Candidate topCandidate = candidateStack.findTopCandidate();
+            cout << "\nWinner: " << topCandidate.name << " with " << topCandidate.votes << " votes." << endl;
+        }
+        else
+        {
+            cout << "No candidates available to display results." << endl;
         }
     }
 };
