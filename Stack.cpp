@@ -1,3 +1,6 @@
+#ifndef STACK_H
+#define STACK_H
+
 #include <iostream>
 
 using namespace std;
@@ -120,3 +123,5 @@ public:
         return topCandidate;
     }
 };
+
+#endif

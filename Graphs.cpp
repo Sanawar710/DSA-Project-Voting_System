@@ -1,3 +1,6 @@
+#ifndef GRAPHS_H
+#define GRAPHS_H
+
 #include <iostream>
 #include "Queues.cpp"
 
@@ -283,3 +286,5 @@ public:
 
 //     return 0;
 // }
+
+#endif
