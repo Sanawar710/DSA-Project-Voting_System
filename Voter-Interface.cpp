@@ -49,16 +49,20 @@ public:
         head->deletion(CNIC);
         deleteInfo("Voters.txt", CNIC);
         Voter_Table.delete_by_CNIC(CNIC);
-        Voter_Records->deleteRecord(Voter_Records,CNIC);
+        Voter_Records->deleteRecord(Voter_Records, CNIC);
     }
 
     /// @brief This function is used to cast vote to the candidates
     /// @param CNIC The CNIC / National ID of the user
     void castVote(long long int CNIC)
     {
-        if (isValidVoter(CNIC))
+        if (isValidVoter("Voters.txt", CNIC))
         {
-            processVote("Candidate.txt", "VotingLog.txt");
+            processVote("Candidates.txt", "VotingLog.txt");
+        }
+        else
+        {
+            cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         }
     }
 };

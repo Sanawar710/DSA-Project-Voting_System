@@ -108,12 +108,21 @@ struct BST // Node for BST
         }
     }
 
-    BST *inOrder_Predecessor(BST *rootNode); // Used in function to delete nodes in BST
+    BST *inOrder_Predecessor(BST *rootNode) // Used to return left subtree's right most child node
+    {
+        rootNode = rootNode->left;
 
+        while (rootNode->right != NULL)
+        {
+            rootNode = rootNode->right;
+        }
+
+        return rootNode;
+    }
     /// @brief This function is used to delete record from the BST
     /// @param rootNode The starting node of the BST
     /// @param CNIC The CNIC we're trying to delete
-    /// @return 
+    /// @return
     BST *deleteRecord(BST *rootNode, int CNIC)
     {
         if (rootNode == NULL)
@@ -166,18 +175,6 @@ struct BST // Node for BST
                 rootNode->left = deleteRecord(rootNode->left, iPre->data); // Delete predecessor
             }
         }
-        return rootNode;
-    }
-
-    BST *inOrder_Predecessor(BST *rootNode) // Used to return left subtree's right most child node
-    {
-        rootNode = rootNode->left;
-
-        while (rootNode->right != NULL)
-        {
-            rootNode = rootNode->right;
-        }
-
         return rootNode;
     }
 };
