@@ -1,5 +1,5 @@
-#ifndef SEARCHINgALGORITHMS_H
-#define SEARCHINgALGORITHMS_H
+#ifndef SEARCHINGALGORITHMS_H
+#define SEARCHINGALGORITHMS_H
 
 #include <iostream>
 

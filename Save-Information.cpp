@@ -7,7 +7,12 @@
 
 using namespace std;
 
-bool saveInfo(string filename, string name, long long int CNIC) // A general function to save information in files
+/// @brief A general function to save information in files
+/// @param filename The file in which the information is stored
+/// @param name The name of the person
+/// @param CNIC The CNIC/Natioanl ID of the person
+/// @return Return true if the file is opened successfully and information is saved
+bool saveInfo(string filename, string name, long long int CNIC)
 {
     ofstream file(filename, ios::app); // Opening the file in append mode
 
@@ -54,6 +59,11 @@ bool saveInfo(string filename, string name, long long int CNIC) // A general fun
     return false;
 }
 
+/// @brief A general function to delete information in files
+/// @param filename The file in which the information is stored
+/// @param name The name of the person
+/// @param CNIC The CNIC/Natioanl ID of the person
+/// @return Return true if the file is opened successfully and information is saved
 bool deleteInfo(string filename, long long int CNIC)
 {
     ifstream file(filename); // Opening the original file
@@ -118,6 +128,10 @@ bool deleteInfo(string filename, long long int CNIC)
     return false;               // Return false if CNIC not found
 }
 
+/// @brief A general function to search information in files
+/// @param filename The file in which the information is stored
+/// @param CNIC The CNIC/Natioanl ID of the person
+/// @return Return true if the CNIC is found in the file
 bool searchbyID(string filename, long long int CNIC)
 {
     ifstream file(filename); // Opening the file in read mode
@@ -150,7 +164,9 @@ bool searchbyID(string filename, long long int CNIC)
     return false;
 }
 
-void viewInfo(string filename) // A general function to view information in files
+/// @brief A general function to view all the contents of the file
+/// @param filename The file which consists the information
+void viewInfo(string filename)
 {
     string line; // Helps us to read an entire line from the file
 
