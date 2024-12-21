@@ -25,7 +25,7 @@ private:
 
 public:
     VoterInterface(int tableSize) : candidateTable(tableSize) {}
-    
+
     void Menu()
     {
         // Menu for the voters to choose from the options
@@ -117,7 +117,8 @@ public:
         // Load candidates from the hash table into the stack
         for (int i = 0; i < candidateTable.getSize(); i++)
         {
-            Node_LinkedList *current = candidateTable.getBucket(i);
+            Singlelinklist &bucket = candidateTable.getBucket(i);
+            Node_LinkedList *current = bucket.head;
 
             while (current != nullptr)
             {

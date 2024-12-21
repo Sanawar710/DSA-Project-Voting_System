@@ -32,6 +32,7 @@ public:
 
         newNode->name = name;
         newNode->CNIC = CNIC;
+        newNode->votes = 1; // Initialize votes to 1
         newNode->next = head;
 
         head = newNode;
@@ -39,19 +40,19 @@ public:
 
     /// @brief This is a general function for deletion. It performs deletion for all the cases
     /// @param CNIC This is the CNIC / National ID of the person (for whom we want to delete information)
-    /// @return Returns false if the list is empty or deletion is not successfull. Else, head
+    /// @return Returns false if the list is empty or deletion is not successful.
     bool deletion(long long int CNIC)
     {
         if (head == NULL)
         {
-            return false; // Returns NULL if the list is empty
+            return false; // Returns false if the list is empty
         }
 
         if (head->CNIC == CNIC)
         {
             Node_LinkedList *temp = head;
-            head = head->next; // Head becomes the second node if the 'CNIC to be deleted' is at the head
-            delete temp;       // Free the memory of the removed node
+            head = head->next;
+            delete temp;
             return true;
         }
 
@@ -68,8 +69,7 @@ public:
         if (current == NULL)
         {
             // CNIC not found
-            cout << "CNIC not found in the list." << endl;
-            return true;
+            return false;
         }
 
         // Freeing the connection and deleting the node

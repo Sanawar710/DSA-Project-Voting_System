@@ -27,9 +27,8 @@ public:
         return CNIC % size; // Simple modulus-based hash function
     }
 
-    Singlelinklist &getBucket(long long int CNIC)
+    Singlelinklist& getBucket(int index)
     {
-        int index = hashFunction(CNIC);
         return table[index];
     }
 
