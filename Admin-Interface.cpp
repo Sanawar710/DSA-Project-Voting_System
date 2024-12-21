@@ -1,3 +1,6 @@
+#ifndef ADMININTERFACE_H
+#define ADMININTERFACE_H
+
 #include <iostream>
 #include <unistd.h> // For sleep function
 #include <ctime>
@@ -217,3 +220,5 @@ public:
 //         }
 //     }
 // }
+
+#endif
