@@ -25,13 +25,12 @@ Credentials loginTerminal()
 {
     Credentials cred;
 
+    cin.ignore();
     cout << "Enter your Username: " << endl;
     getline(cin, cred.name);
-    cin.ignore();
 
     cout << "Enter your Password: " << endl;
     getline(cin, cred.password);
-    cin.ignore();
 
     return cred; // Returns username and password as a structure
 }
@@ -65,39 +64,38 @@ public:
              << "\n1) Start Election"                  // Yet to be implemented
              << "\n2) Add Candidate to Elections"      // Done
              << "\n3) Delete Candidate from Elections" // Done
-             << "\n4) Set Election's Deadline"         // Done
-             << "\n5) View Candidate's Information"    // Done
-             << "\n6) View Voter's Information"        // Done
-             << "\n7) View Election Results"           // Done
-             << "\n8) Exit"
+            //  << "\n4) Set Election's Deadline"         // Done
+             << "\n4) View Candidate's Information"    // Done
+             << "\n5) View Voter's Information"        // Done
+             << "\n6) View Election Results"           // Done
+             << "\n7) Exit"
              << endl;
     }
 
-    /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
-    /// @return Returns the deadline time as entered by the admin
-    time_t deadLine()
-    {
-        float hours;
+    // /// @brief This function is used to implement and enforce deadline. Needs a little modification right now.
+    // /// @return Returns the deadline time as entered by the admin
+    // time_t deadLine()
+    // {
+    //     float hours;
 
-        cout << "Enter the Deadline for Ending Elections (in hours): ";
+    //     cout << "Enter the Deadline for Ending Elections (in hours): ";
 
-    negativeTime: // The control will be redirected to this label if the entered input of time is negative
-        cin >> hours;
+    // negativeTime: // The control will be redirected to this label if the entered input of time is negative
+    //     cin >> hours;
 
-        // Validating the input
-        if (hours <= 0)
-        {
-            cout << "Time must be greater than 0. Please re-enter: ";
-            goto negativeTime; // Returns the control to the label 'negativeTime'
-        }
+    //     // Validating the input
+    //     if (hours <= 0)
+    //     {
+    //         cout << "Time must be greater than 0. Please re-enter: ";
+    //         goto negativeTime; // Returns the control to the label 'negativeTime'
+    //     }
 
-        time_t currentTime = time(0);                       // Getting current system time
-        time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
+    //     time_t currentTime = time(0);                       // Getting current system time
+    //     time_t deadlineTime = currentTime + (hours * 3600); // Adding input hours in seconds
 
-        return deadlineTime;
-    }
+    //     return deadlineTime;
+    // }
 
-    
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
     void addCandidates(Singlelinklist *&head, string name, long long int CNIC)
