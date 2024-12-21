@@ -8,16 +8,9 @@
 
 using namespace std;
 
-// struct Candidate3
-// {
-//     string name;
-//     int votes;
-//     long long int CNIC;
-// };
-
 class HashMap
 {
-private:
+public:
     vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
     int size;                     // Size of the hash table
 
@@ -29,7 +22,6 @@ private:
         return CNIC % size; // Simple modulus-based hash function
     }
 
-public:
     /// @brief Constructor to initialize the hash table with a fixed size
     /// @param tableSize The size of the table
     HashMap(int tableSize) : size(tableSize)

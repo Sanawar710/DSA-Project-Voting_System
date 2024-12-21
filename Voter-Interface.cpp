@@ -5,14 +5,15 @@
 #include "Binary-Search-Tree.cpp"
 #include "Singly-Linked-List.cpp"
 #include "Cast-Vote.cpp"
+#include "Graphs.cpp"
 
 using namespace std;
 
 const int TableSize = 10; // Max size of information that we can store in the hash table
+
 // Global Objects
 HashMap Voter_Table(TableSize);
 BST *Voter_Records;
-// Define the circular queue for voter information
 const int QueueCapacity = 100;           // Set capacity for the queue
 CircularQueue VoterQueue(QueueCapacity); // Circular queue for storing voters
 
@@ -26,7 +27,8 @@ public:
              << "1) Cast Vote\n"
              << "2) Register Yourself\n"
              << "3) Unregister Yourself\n"
-             << "4) Exit\n"
+             << "4) View Result\n"
+             << "5) Exit\n"
              << endl;
     }
 
@@ -99,6 +101,32 @@ public:
         else
         {
             cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
+        }
+    }
+
+    void viewResult()
+    {
+        cout << "\nVoting Results:\n";
+        cout << "----------------\n";
+
+        // Iterate over the hash table to count votes for each candidate
+        bool hasResults = false; // To check if any results exist
+        for (int i = 0; i < TableSize; i++)
+        {
+            Node_LinkedList *current = Voter_Table.table[i].head; // Access the linked list at index `i`
+
+            while (current != NULL)
+            {
+                // Display candidate's name and vote count
+                cout << "Candidate: " << current->name << " | CNIC: " << current->CNIC << " | Votes: " << current->votes << endl;
+                hasResults = true;
+                current = current->next;
+            }
+        }
+
+        if (!hasResults)
+        {
+            cout << "No votes have been cast yet." << endl;
         }
     }
 };

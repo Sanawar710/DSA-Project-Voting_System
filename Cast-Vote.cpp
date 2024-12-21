@@ -30,87 +30,30 @@ bool isValidVoter(const string &filename, long long int voterID)
     return false;
 }
 
-// Function to process a vote
-void processVote(const string &candidateFile, const string &voteLogFile)
+void processVote(string candidatesFile, string votingLogFile)
 {
-    string voterIDStr;
-    long long int voterID;
+    string candidateName;
+    cout << "Enter the name of the candidate you want to vote for: ";
+    cin >> candidateName;
 
-    // Input and validate voter ID
-    do
+    // Find candidate in the hash table
+    for (int i = 0; i < TableSize; i++)
     {
-        cout << "Enter your CNIC (Voter ID): ";
-        cin >> voterIDStr;
-
-        try
+        Node_LinkedList *current = Voter_Table.table[i].head;
+        while (current != NULL)
         {
-            voterID = stoll(voterIDStr);
+            if (current->name == candidateName)
+            {
+                current->votes++; // Increment vote count
+                saveInfo(votingLogFile, candidateName, current->CNIC);
+                cout << "Your vote has been successfully cast for " << candidateName << "." << endl;
+                return;
+            }
+            current = current->next;
         }
-        catch (const exception &e)
-        {
-            cout << "\nInvalid CNIC format. Please enter a valid number.\n";
-            continue; // Continue to the next iteration of the loop
-        }
-
-        if (!isValidVoter("Voters.txt", voterID))
-        {
-            cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
-            continue; // Continue to the next iteration of the loop
-        }
-
-        if (isValidVoter(voteLogFile, voterID))
-        {
-            cout << "\nYou have already voted.\n";
-            continue; // Continue to the next iteration of the loop
-        }
-
-        break; // Exit the loop if all validations pass
-
-    } while (true);
-
-    // Display the list of candidates
-    cout << "\nCandidates:\n";
-    // Assuming viewInfo function is defined elsewhere
-    viewInfo(candidateFile);
-
-    string candidateIDStr;
-    long long int candidateID;
-
-    // Input and validate candidate ID
-    do
-    {
-        cout << "Enter the CNIC of the candidate you want to vote for: ";
-        cin >> candidateIDStr;
-
-        try
-        {
-            candidateID = stoll(candidateIDStr);
-        }
-        catch (const exception &e)
-        {
-            cout << "\nInvalid candidate CNIC format. Please enter a valid number.\n";
-            continue; // Continue to the next iteration of the loop
-        }
-
-        if (!isValidVoter(candidateFile, candidateID))
-        {
-            cout << "\nInvalid candidate CNIC.\n";
-            continue; // Continue to the next iteration of the loop
-        }
-
-        break; // Exit the loop if all validations pass
-
-    } while (true);
-
-    // Log the vote
-    if (saveInfo(voteLogFile, voterIDStr, candidateID))
-    {
-        cout << "\nYour vote has been cast successfully!\n";
     }
-    else
-    {
-        cout << "\nError: Unable to record your vote.\n";
-    }
+
+    cout << "Candidate not found! Please check the name and try again." << endl;
 }
 
 #endif

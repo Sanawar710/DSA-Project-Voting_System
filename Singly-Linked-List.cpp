@@ -9,6 +9,7 @@ struct Node_LinkedList
 {
     string name;
     long long int CNIC;
+    int votes = 0;
     Node_LinkedList *next;
 };
 
@@ -50,7 +51,7 @@ public:
         {
             Node_LinkedList *temp = head;
             head = head->next; // Head becomes the second node if the 'CNIC to be deleted' is at the head
-            delete temp; // Free the memory of the removed node
+            delete temp;       // Free the memory of the removed node
             return true;
         }
 
@@ -101,4 +102,4 @@ public:
     }
 };
 
-#endif 
+#endif

@@ -203,6 +203,9 @@ int main()
         }
 
         case 4:
+        
+        break;
+        case 5:
 
             sleep(3);
 
