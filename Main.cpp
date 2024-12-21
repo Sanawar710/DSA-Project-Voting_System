@@ -48,7 +48,7 @@ int main()
                  << endl;
 
             sleep(3);
-            
+
             A.Menu();
 
             int option;
@@ -135,7 +135,8 @@ int main()
         {
             sleep(3);
 
-            cout << "\nLogin Failed" << endl;
+            cout << "\nLogin Failed!" << endl;
+            cout << "Invalid Username or Password." << endl;
         }
     }
     else if (choice == 1)

@@ -4,31 +4,43 @@
 #include <iostream>
 using namespace std;
 
-class Node_CQ {
+// Struct to hold voter information
+struct Voter
+{
+    string name;
+    long long int CNIC;
+
+    // Constructor for easier initialization
+    Voter(string n = "", long long int c = 0) : name(n), CNIC(c) {}
+};
+
+class Node_CQ
+{
 public:
-    int data;
+    Voter data; // Store voter information
     Node_CQ *next;
 
     // Constructor to initialize a node
-    Node_CQ(int value)
+    Node_CQ(Voter value)
     {
         data = value;
         next = nullptr;
     }
 };
 
-class CircularQueue {
+class CircularQueue
+{
 private:
     Node_CQ *front;
     Node_CQ *rear;
-    int size; // Current number of elements in the queue
+    int size;     // Current number of elements in the queue
     int capacity; // Maximum capacity of the queue
 
 public:
     CircularQueue(int cap) // Constructor to initialize the circular queue
     {
-        front = NULL;
-        rear = NULL;
+        front = nullptr;
+        rear = nullptr;
         size = 0;
         capacity = cap;
     }
@@ -43,21 +55,21 @@ public:
         return size == capacity;
     }
 
-    int Front()
+    Voter Front()
     {
         if (isEmpty())
         {
             cout << "Queue is Empty" << endl;
-            return false;
+            return Voter(); // Return an empty voter struct
         }
-        return front->data; // Return the value at the front
+        return front->data; // Return the voter at the front
     }
 
-    void EnQueue(int value) // Function to add an element to the queue
+    void EnQueue(Voter value) // Function to add a voter to the queue
     {
         if (isFull())
         {
-            cout << "Queue is full. Cannot enqueue " << value << "." << endl;
+            cout << "Queue is full. Cannot enqueue " << value.name << "." << endl;
             return;
         }
 
@@ -77,18 +89,18 @@ public:
         }
 
         size++;
-        cout << value << " enqueued to the queue." << endl;
+        cout << value.name << " with CNIC " << value.CNIC << " enqueued to the queue." << endl;
     }
 
-    int DeQueue() // Function to remove an element from the queue
+    Voter DeQueue() // Function to remove a voter from the queue
     {
         if (isEmpty())
         {
             cout << "Queue is empty. Cannot dequeue." << endl;
-            return -1;
+            return Voter(); // Return an empty voter struct
         }
 
-        int value;
+        Voter value;
         if (front == rear)
         {
             value = front->data;
@@ -110,4 +122,4 @@ public:
     }
 };
 
-#endif 
+#endif
