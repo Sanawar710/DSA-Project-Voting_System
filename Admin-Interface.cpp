@@ -57,17 +57,18 @@ public:
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
 
+    /// @brief The function to display the menu for admin terminal
     void Menu()
     {
         // Menu for the admin to choose from the options
         cout << "Voting System Admin Menu:"
-             << "\n1) Start Election"                  // Yet to be implemented
-             << "\n2) Add Candidate to Elections"      // Done
-             << "\n3) Delete Candidate from Elections" // Done
-            //  << "\n4) Set Election's Deadline"         // Done
-             << "\n4) View Candidate's Information"    // Done
-             << "\n5) View Voter's Information"        // Done
-             << "\n6) View Election Results"           // Done
+             << "\n1) Start Election"
+             << "\n2) Add Candidate to Elections"
+             << "\n3) Delete Candidate from Elections"
+             //  << "\n4) Set Election's Deadline"
+             << "\n4) View Candidate's Information"
+             << "\n5) View Voter's Information"
+             << "\n6) View Election Results"
              << "\n7) Exit"
              << endl;
     }
@@ -118,7 +119,9 @@ public:
         Candidate_Table.delete_by_CNIC(CNIC); // Delete information from the Hash Table
     }
 
-    void viewCandidates(Singlelinklist *head) //, HashMap M
+    /// @brief The function to view the candidates' information
+    /// @param head THe head of the list in which we have stored the information of the candidates
+    void viewCandidates(Singlelinklist *head)
     {
         int option;
 
@@ -140,7 +143,9 @@ public:
             goto invalidOption;
         }
     }
-
+    
+    /// @brief The function to view the information of the voters
+    /// @param head The head of the list in which the information of the voters is stored
     void viewVoters(Singlelinklist *head)
     {
         int option;

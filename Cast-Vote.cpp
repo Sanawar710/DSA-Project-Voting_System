@@ -11,7 +11,10 @@ using namespace std;
 extern int TableSize;       // Declare TableSize
 extern HashMap Voter_Table; // Declare Voter_Table
 
-// Helper function to validate if a voter ID exists in the given file
+/// @brief Helper function to validate if a voter ID exists in the given file
+/// @param filename The file in which the voter ID is to be searched
+/// @param voterID The ID of the voter to be searched
+/// @return Returns true if the voter ID is found, else false
 bool isValidVoter(const string &filename, long long int voterID)
 {
     ifstream file(filename);
@@ -34,6 +37,9 @@ bool isValidVoter(const string &filename, long long int voterID)
     return false;
 }
 
+/// @brief The function to check if the voter has already voted
+/// @param candidatesFile The file which stores the information of the candidates
+/// @param votingLogFile The file which stores the information of the people who have voted
 void processVote(string candidatesFile, string votingLogFile)
 {
     long long int CNIC;

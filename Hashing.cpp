@@ -27,7 +27,7 @@ public:
         return CNIC % size; // Simple modulus-based hash function
     }
 
-    Singlelinklist& getBucket(int index)
+    Singlelinklist &getBucket(int index)
     {
         return table[index];
     }
@@ -86,6 +86,9 @@ public:
         return true;
     }
 
+    /// @brief The function to delete a candidate from the hash table
+    /// @param CNIC The CNIC/National ID of the candidate
+    /// @return Returns true if the candidate is deleted, else false
     bool delete_by_CNIC(long long int CNIC)
     {
         int index = hashFunction(CNIC);
