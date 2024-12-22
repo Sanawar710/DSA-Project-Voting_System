@@ -27,7 +27,8 @@ Credentials loginTerminal()
     std::cout << "Enter your Username: " << std::endl;
     std::getline(std::cin, cred.name);
 
-    std::cout << "Enter your Password: " << std::endl;
+    sleep(3);
+    std::cout << "\nEnter your Password: " << std::endl;
     std::getline(std::cin, cred.password);
 
     return cred; // Returns username and password as a structure
@@ -35,7 +36,7 @@ Credentials loginTerminal()
 void EasterEgg()
 {
     sleep(3);
-    
+
     std::cout << "\nEasteregg found!" << std::endl;
     std::cout << "\n    ******    " << std::endl;
     std::cout << "  **      **  " << std::endl;
@@ -75,8 +76,9 @@ public:
     /// @brief The function to display the menu for admin terminal
     void Menu()
     {
+        sleep(3);
         // Menu for the admin to choose from the options
-        std::cout << "Voting System Admin Menu:"
+        std::cout << "\nVoting System Admin Menu:"
                   << "\n1) Start Election"
                   << "\n2) Add Candidate to Elections"
                   << "\n3) Delete Candidate from Elections"
@@ -92,8 +94,8 @@ public:
     time_t deadLine()
     {
         float hours;
-
-        std::cout << "Enter the Deadline for Ending Elections (in hours): ";
+        sleep(3);
+        std::cout << "\nEnter the Deadline for Ending Elections (in hours): ";
 
     negativeTime: // The control will be redirected to this label if the entered input of time is negative
         std::cin >> hours;
@@ -101,7 +103,8 @@ public:
         // Validating the input
         if (hours <= 0)
         {
-            std::cout << "Time must be greater than 0. Please re-enter: ";
+            sleep(3);
+            std::cout << "\nTime must be greater than 0. Please re-enter: ";
             goto negativeTime; // Returns the control to the label 'negativeTime'
         }
 
@@ -118,7 +121,7 @@ public:
         Candidate_Table.registeration("Candidates.txt", name, CNIC); // Registers the candidate in hash table in a sorted manner
 
         head->insert(name, CNIC); // Inserting the pair of name and CNIC at the end of the list
-
+        sleep(3);
         std::cout << name << " with CNIC " << CNIC << " has been registered successfully." << std::endl;
     }
 
@@ -139,6 +142,7 @@ public:
     {
         int option;
 
+        sleep(3);
         std::cout << "Do you want to view information through Linked List or File? (0/1)" << std::endl;
     invalidOption:
         std::cin >> option;
@@ -153,6 +157,7 @@ public:
         }
         else
         {
+
             std::cout << "You have entered an invalid option." << "\nPlease re-enter the option." << std::endl;
             goto invalidOption;
         }
@@ -163,7 +168,7 @@ public:
     void viewVoters(Singlelinklist *head)
     {
         int option;
-
+        sleep(3);
         std::cout << "Do you want to view information through Linked List or File? (0/1)" << std::endl;
     invalidOption:
         std::cin >> option;
@@ -178,6 +183,7 @@ public:
         }
         else
         {
+            sleep(3);
             std::cout << "You have entered an invalid option." << "\nPlease re-enter the option." << std::endl;
             goto invalidOption;
         }

@@ -62,7 +62,7 @@ int main()
             {
 
                 deadline = A.deadLine();
-
+                sleep(3);
                 std::cout << "You are being redirected to the voter terminal." << std::endl;
                 goto voterTerminal;
 
@@ -78,7 +78,7 @@ int main()
 
                 sleep(3);
 
-                std::cout << "\nEnter the name of the candidate: ";
+                std::cout << "\nEnter the name of the candidate: "<<std::endl;
 
                 std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 std::cin >> CNIC;
@@ -95,7 +95,7 @@ int main()
 
                 sleep(3);
 
-                std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
+                std::cout << "\nEnter the CNIC of the candidate (without dashes): "<<std::endl;
                 std::cin >> CNIC;
                 A.deleteCandidates(Candidates, CNIC);
                 break;
@@ -125,12 +125,13 @@ int main()
                 sleep(3);
 
                 std::cout << "Exiting the system. Thank you for managing the voting process." << std::endl;
+                exit(0);
                 break;
 
             default:
                 sleep(3);
 
-                std::cout << "You have entered an invalid input" << std::endl;
+                std::cout << "\nYou have entered an invalid input\n" << std::endl;
                 break;
             }
         }
@@ -140,7 +141,7 @@ int main()
         sleep(3);
 
         std::cout << "\nLogin Failed!" << std::endl;
-        std::cout << "Invalid Username or Password." << std::endl;
+        std::cout << "Invalid Username or Password\n." << std::endl;
     }
     if (choice == 1)
     {
@@ -157,8 +158,9 @@ int main()
 
             if (currentTime >= deadline)
             {
-                std::cout << "Deadline reached! Elections are now closed." << std::endl;
+                std::cout << "\nDeadline reached! Elections are now closed." << std::endl;
                 condition = false;
+                exit(0);
             }
 
             V.Menu();
@@ -231,6 +233,7 @@ int main()
                 sleep(3);
 
                 std::cout << "Exiting the system. Thank you for voting." << std::endl;
+                exit(0);
                 break;
 
             default:

@@ -10,7 +10,7 @@ class HashMap
 {
 public:
     std::vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
-    int size;                     // Size of the hash table
+    int size;                          // Size of the hash table
 
     int getSize()
     {

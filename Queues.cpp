@@ -53,7 +53,7 @@ public:
 
     /// @brief Function to check if the queue is full
     /// @return Returns true if the queue is true, else false
-    bool isFull() 
+    bool isFull()
     {
         return size == capacity;
     }
@@ -112,7 +112,7 @@ public:
             front = nullptr;
             rear = nullptr;
         }
-        
+
         else
         {
             Node_CQ *temp = front;

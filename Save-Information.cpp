@@ -149,7 +149,7 @@ bool searchbyID(std::string filename, long long int CNIC)
         std::string name, strCNIC;
 
         std::getline(info, name, ','); // Extract name
-        std::getline(info, strCNIC);        // Extract CNIC
+        std::getline(info, strCNIC);   // Extract CNIC
 
         long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
 

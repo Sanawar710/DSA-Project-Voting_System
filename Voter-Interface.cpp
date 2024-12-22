@@ -32,13 +32,13 @@ public:
     void Menu()
     {
         // Menu for the voters to choose from the options
-       std:: cout << "\nVoting System Voter Menu:\n"
-             << "1) Cast Vote\n"
-             << "2) Register Yourself\n"
-             << "3) Unregister Yourself\n"
-             << "4) View Result\n"
-             << "5) Exit\n"
-             << std::endl;
+        std::cout << "\nVoting System Voter Menu:\n"
+                  << "1) Cast Vote\n"
+                  << "2) Register Yourself\n"
+                  << "3) Unregister Yourself\n"
+                  << "4) View Result\n"
+                  << "5) Exit\n"
+                  << std::endl;
     }
 
     /// @brief Theis function is used to register voter
@@ -61,7 +61,7 @@ public:
         }
         else
         {
-           std:: cout << "Queue is full. Cannot enqueue voter." << std::endl;
+            std::cout << "Queue is full. Cannot enqueue voter." << std::endl;
         }
     }
 
@@ -122,7 +122,7 @@ public:
             std::cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         }
     }
-    
+
     /// @brief The function to view the result of the Elections
     void viewResult()
     {
@@ -161,11 +161,11 @@ public:
         {
             Candidate topCandidate = candidateStack.findTopCandidate();
             std::cout << "\nWinner: "
-                 << topCandidate.name
-                 << " with "
-                 << topCandidate.votes
-                 << " votes."
-                 << std::endl;
+                      << topCandidate.name
+                      << " with "
+                      << topCandidate.votes
+                      << " votes."
+                      << std::endl;
         }
         else
         {
