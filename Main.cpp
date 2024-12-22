@@ -78,7 +78,7 @@ int main()
 
                 sleep(3);
 
-                std::cout << "\nEnter the name of the candidate: "<<std::endl;
+                std::cout << "\nEnter the name of the candidate: " << std::endl;
 
                 std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 std::cin >> CNIC;
@@ -95,7 +95,7 @@ int main()
 
                 sleep(3);
 
-                std::cout << "\nEnter the CNIC of the candidate (without dashes): "<<std::endl;
+                std::cout << "\nEnter the CNIC of the candidate (without dashes): " << std::endl;
                 std::cin >> CNIC;
                 A.deleteCandidates(Candidates, CNIC);
                 break;
@@ -131,7 +131,8 @@ int main()
             default:
                 sleep(3);
 
-                std::cout << "\nYou have entered an invalid input\n" << std::endl;
+                std::cout << "\nYou have entered an invalid input\n"
+                          << std::endl;
                 break;
             }
         }
@@ -194,9 +195,9 @@ int main()
                 std::string name;
                 long long int CNIC;
 
+                std::cin.ignore();
                 std::cout << "\nEnter your name: \n";
                 std::getline(std::cin, name);
-                std::cin.ignore();
 
                 sleep(3);
 

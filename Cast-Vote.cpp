@@ -70,11 +70,11 @@ void processVote(std::string candidatesFile, std::string votingLogFile)
     std::string candidateName;
 
     std::cout << "Enter the name of the candidate you want to vote for: " << std::endl;
-    std::cin >> candidateName;
+    std::getline(std::cin, candidateName);
 
     std::cout << "Enter the name of the candidate you want to vote for: ";
     std::cin >> CNIC;
-
+    std::cin.ignore();
     // Find candidate in the hash table
     for (int i = 0; i < tableSize; i++)
     {
