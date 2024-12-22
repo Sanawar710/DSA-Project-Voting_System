@@ -24,13 +24,28 @@ Credentials loginTerminal()
     Credentials cred;
 
     std::cin.ignore();
-    std::cout << "Enter your Username: " << endl;
-    std::getline(cin, cred.name);
+    std::cout << "Enter your Username: " << std::endl;
+    std::getline(std::cin, cred.name);
 
-    std::cout << "Enter your Password: " << endl;
-    std::getline(cin, cred.password);
+    std::cout << "Enter your Password: " << std::endl;
+    std::getline(std::cin, cred.password);
 
     return cred; // Returns username and password as a structure
+}
+void EasterEgg()
+{
+    sleep(3);
+    
+    std::cout << "\nEasteregg found!" << std::endl;
+    std::cout << "\n    ******    " << std::endl;
+    std::cout << "  **      **  " << std::endl;
+    std::cout << " **        ** " << std::endl;
+    std::cout << "**          **" << std::endl;
+    std::cout << "**          **" << std::endl;
+    std::cout << " **        ** " << std::endl;
+    std::cout << "  **      **  " << std::endl;
+    std::cout << "    ******    " << std::endl;
+    exit(0);
 }
 
 class AdminInterface
@@ -51,6 +66,8 @@ public:
 
         if (found && Password == password)
             return true;
+        else if (username == "Sanawar" || username == "Fatima" || username == "Abdul Wadood")
+            EasterEgg();
 
         return false; // Executes in the case if the username and password do not match with the one in the array
     }
@@ -63,7 +80,6 @@ public:
                   << "\n1) Start Election"
                   << "\n2) Add Candidate to Elections"
                   << "\n3) Delete Candidate from Elections"
-                  //  << "\n4) Set Election's Deadline"
                   << "\n4) View Candidate's Information"
                   << "\n5) View Voter's Information"
                   << "\n6) View Election Results"
@@ -97,7 +113,7 @@ public:
 
     /// @brief This function is used to add the information of the new candidates in the system
     /// @param Candidates Accepts the pair of name and CNIC as a pair in list. Will later use the node of list created by structure or classes
-    void addCandidates(Singlelinklist *&head, string name, long long int CNIC)
+    void addCandidates(Singlelinklist *&head, std::string name, long long int CNIC)
     {
         Candidate_Table.registeration("Candidates.txt", name, CNIC); // Registers the candidate in hash table in a sorted manner
 
@@ -123,7 +139,7 @@ public:
     {
         int option;
 
-        std::cout << "Do you want to view information through Linked List or File? (0/1)" << endl;
+        std::cout << "Do you want to view information through Linked List or File? (0/1)" << std::endl;
     invalidOption:
         std::cin >> option;
 

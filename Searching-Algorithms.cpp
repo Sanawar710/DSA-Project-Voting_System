@@ -8,7 +8,7 @@
 /// @param size The size of the array
 /// @param targetElement The element which we want to search
 /// @return Returns true if the element is found, else false
-bool linearSearch(string array[], int size, string targetElement)
+bool linearSearch(std::string array[], int size, std::string targetElement)
 {
     for (int i = 0; i < size; i++)
     {

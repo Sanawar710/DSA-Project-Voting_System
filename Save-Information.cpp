@@ -10,13 +10,13 @@
 /// @param name The name of the person
 /// @param CNIC The CNIC/Natioanl ID of the person
 /// @return Return true if the file is opened successfully and information is saved
-bool saveInfo(string filename, string name, long long int CNIC)
+bool saveInfo(std::string filename, std::string name, long long int CNIC)
 {
-    std::ofstream file(filename, ios::app); // Opening the file in append mode
+    std::ofstream file(filename, std::ios::app); // Opening the file in append mode
 
     if (file.is_open())
     {
-        file << name << "," << CNIC << endl; // Storing the values in a comma separated format
+        file << name << "," << CNIC << std::endl; // Storing the values in a comma separated format
         file.close();
 
         std::cout << "\nInformation saved to file successfully.\n";
@@ -41,7 +41,7 @@ bool saveInfo(string filename, string name, long long int CNIC)
 
             if (new_file.is_open())
             {
-                new_file << name << "," << CNIC << endl;
+                new_file << name << "," << CNIC << std::endl;
                 new_file.close();
 
                 std::cout << "\nNew file created and information saved successfully.\n";
@@ -63,7 +63,7 @@ bool saveInfo(string filename, string name, long long int CNIC)
 /// @param name The name of the person
 /// @param CNIC The CNIC/Natioanl ID of the person
 /// @return Return true if the file is opened successfully and information is saved
-bool deleteInfo(string filename, long long int CNIC)
+bool deleteInfo(std::string filename, long long int CNIC)
 {
     std::ifstream file(filename); // Opening the original file
 
@@ -73,11 +73,11 @@ bool deleteInfo(string filename, long long int CNIC)
         return false; // Return false if the file cannot be opened
     }
 
-    ofstream tempFile("modifiedFile.txt"); // Temporary file to store the modified information
+    std::ofstream tempFile("modifiedFile.txt"); // Temporary file to store the modified information
 
     if (!tempFile.is_open())
     {
-        std::cerr << "Error: Unable to create temporary file." << endl;
+        std::cerr << "Error: Unable to create temporary file." << std::endl;
         file.close();
         return false; // Return false if the temporary file cannot be created
     }
@@ -85,7 +85,7 @@ bool deleteInfo(string filename, long long int CNIC)
     std::string line;
     bool found = false; // Flag to check if the CNIC is found
 
-    while (getline(file, line)) // Read each line from the file
+    while (std::getline(file, line)) // Read each line from the file
     {
         std::istringstream info(line); // 'istringstream' to parse the line
         std::string name, strCNIC;
@@ -131,7 +131,7 @@ bool deleteInfo(string filename, long long int CNIC)
 /// @param filename The file in which the information is stored
 /// @param CNIC The CNIC/Natioanl ID of the person
 /// @return Return true if the CNIC is found in the file
-bool searchbyID(string filename, long long int CNIC)
+bool searchbyID(std::string filename, long long int CNIC)
 {
     std::ifstream file(filename); // Opening the file in read mode
 
@@ -149,7 +149,7 @@ bool searchbyID(string filename, long long int CNIC)
         std::string name, strCNIC;
 
         std::getline(info, name, ','); // Extract name
-        getline(info, strCNIC);        // Extract CNIC
+        std::getline(info, strCNIC);        // Extract CNIC
 
         long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
 
@@ -165,11 +165,11 @@ bool searchbyID(string filename, long long int CNIC)
 
 /// @brief A general function to view all the contents of the file
 /// @param filename The file which consists the information
-void viewInfo(string filename)
+void viewInfo(std::string filename)
 {
     std::string line; // Helps us to read an entire line from the file
 
-    std::ifstream file(filename, ios::in); // Opening the file to read information
+    std::ifstream file(filename, std::ios::in); // Opening the file to read information
 
     std::cout << " Name   |  CNIC\n";
     while (!file.eof())

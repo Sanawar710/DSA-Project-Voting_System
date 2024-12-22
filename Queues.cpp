@@ -6,11 +6,11 @@
 // Struct to hold voter information
 struct Voter
 {
-    string name;
+    std::string name;
     long long int CNIC;
 
     // Constructor for easier initialization
-    Voter(string n = "", long long int c = 0) : name(n), CNIC(c) {}
+    Voter(std::string n = "", long long int c = 0) : name(n), CNIC(c) {}
 };
 
 class Node_CQ

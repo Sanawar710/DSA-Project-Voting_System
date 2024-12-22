@@ -59,11 +59,11 @@ public:
     // Get the top element of the stack
     Candidate top() const
     {
-        if (topNode != nullptr)
+        if (topNode == nullptr)
         {
-            return topNode->data;
+            throw std::runtime_error("Stack is empty");
         }
-        throw runtime_error("Stack is empty");
+        return topNode->data;
     }
 
     // Check if the stack is empty
@@ -104,7 +104,7 @@ public:
     {
         if (topNode == nullptr)
         {
-            throw runtime_error("Stack is empty");
+            throw std::runtime_error("Stack is empty");
         }
 
         Node *temp = topNode;

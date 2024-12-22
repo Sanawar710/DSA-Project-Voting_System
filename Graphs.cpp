@@ -38,7 +38,7 @@ public:
         delete[] VertexValues;
     }
 
-    void add_vertexValue(int Vertex, string value)
+    void add_vertexValue(int Vertex, std::string value)
     {
         if (Vertex < 0 || Vertex >= Vertices)
         {
@@ -102,7 +102,7 @@ public:
 
         visited[start] = true;
 
-        queue<int> q;
+        std::queue<int> q;
         q.push(start);
 
         while (!q.empty())
@@ -110,7 +110,7 @@ public:
             int current = q.front();
             q.pop();
 
-            cout << VertexValues[current] << " ";
+            std::cout << VertexValues[current] << " ";
 
             for (int i = 0; i < Vertices; i++)
             {
@@ -148,7 +148,7 @@ public:
         }
 
         bool *visited = new bool[Vertices]();
-        std::cout << "DFS:" << endl;
+        std::cout << "DFS:" << std::endl;
         DFS_helper(start, visited);
         std::cout << std::endl;
         delete[] visited;

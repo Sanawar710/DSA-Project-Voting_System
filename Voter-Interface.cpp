@@ -45,7 +45,7 @@ public:
     /// @param head The head of the linked list in which we're storing the information
     /// @param name The name of the voter
     /// @param CNIC The CNIC/National ID of the voter
-    void addVoter(Singlelinklist *&head, string name, long long int &CNIC)
+    void addVoter(Singlelinklist *&head, std::string name, long long int &CNIC)
     {
         // Register voter in hash table, linked list, and file
         Voter_Table.registeration("Voters.txt", name, CNIC);

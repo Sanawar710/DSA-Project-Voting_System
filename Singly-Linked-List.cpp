@@ -24,7 +24,7 @@ public:
     /// @brief Inserts the values at the start of the list
     /// @param name The name of the person
     /// @param CNIC The CNIC/National ID of the person
-    void insert(string name, long long int CNIC)
+    void insert(std::string name, long long int CNIC)
     {
         Node_LinkedList *newNode = new Node_LinkedList;
 

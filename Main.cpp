@@ -61,23 +61,12 @@ int main()
             {
             case 1:
             {
-                // A.startElections();
 
-                bool condition = true;
-                time_t currentTime;
-                // time_t deadline = A.deadLine();
+                deadline = A.deadLine();
 
-                // Enforcing the deadline
-                while (condition)
-                {
-                    currentTime = time(0); // Continuously checks the current time
+                std::cout << "You are being redirected to the voter terminal." << std::endl;
+                goto voterTerminal;
 
-                    if (currentTime >= deadline)
-                    {
-                        std::cout << "Deadline reached! Elections are now closed." << std::endl;
-                        condition = false;
-                    }
-                }
                 break;
             }
 
@@ -158,86 +147,101 @@ int main()
     {
         sleep(3);
 
-        V.Menu();
+    voterTerminal:
+        bool condition = true;
+        time_t currentTime;
 
-        int option;
-
-        sleep(3);
-
-        std::cout << "Enter the option you want to choose (on a scale of 1-5): " << std::endl;
-        std::cin >> option;
-
-        switch (option)
+        // Enforcing the deadline
+        while (condition)
         {
-        case 1:
-        {
-            long long int CNIC;
+            currentTime = time(0); // Continuously checks the current time
+
+            if (currentTime >= deadline)
+            {
+                std::cout << "Deadline reached! Elections are now closed." << std::endl;
+                condition = false;
+            }
+
+            V.Menu();
+
+            int option;
 
             sleep(3);
 
-            std::cout << "Enter your CNIC: " << std::endl;
-            std::cin >> CNIC;
-            std::cin.ignore();
+            std::cout << "Enter the option you want to choose (on a scale of 1-5): " << std::endl;
+            std::cin >> option;
 
-            V.castVote(CNIC);
+            switch (option)
+            {
+            case 1:
+            {
+                long long int CNIC;
 
-            break;
-        }
+                sleep(3);
 
-        case 2:
-        {
-            std::string name;
-            long long int CNIC;
+                std::cout << "Enter your CNIC: " << std::endl;
+                std::cin >> CNIC;
+                std::cin.ignore();
 
-            std::cout << "\nEnter your name: \n";
-            std::getline(std::cin, name);
-            std::cin.ignore();
+                V.castVote(CNIC);
 
-            sleep(3);
+                break;
+            }
 
-            std::cout << "\nEnter your CNIC: \n";
-            std::cin >> CNIC;
+            case 2:
+            {
+                std::string name;
+                long long int CNIC;
 
-            sleep(3);
+                std::cout << "\nEnter your name: \n";
+                std::getline(std::cin, name);
+                std::cin.ignore();
 
-            V.addVoter(Voters, name, CNIC);
+                sleep(3);
 
-            break;
-        }
+                std::cout << "\nEnter your CNIC: \n";
+                std::cin >> CNIC;
 
-        case 3:
-        {
-            std::string name;
-            long long int CNIC;
+                sleep(3);
 
-            sleep(3);
+                V.addVoter(Voters, name, CNIC);
 
-            std::cout << "\nEnter your CNIC: \n";
-            std::cin >> CNIC;
+                break;
+            }
 
-            V.deleteVoter(Voters, CNIC);
+            case 3:
+            {
+                std::string name;
+                long long int CNIC;
 
-            break;
-        }
+                sleep(3);
 
-        case 4:
+                std::cout << "\nEnter your CNIC: \n";
+                std::cin >> CNIC;
 
-            break;
-        case 5:
+                V.deleteVoter(Voters, CNIC);
 
-            sleep(3);
+                break;
+            }
 
-            std::cout << "Exiting the system. Thank you for voting." << std::endl;
-            break;
+            case 4:
 
-        default:
+                break;
+            case 5:
 
-            sleep(3);
+                sleep(3);
 
-            std::cout << "You have entered an invalid input" << std::endl;
-            break;
+                std::cout << "Exiting the system. Thank you for voting." << std::endl;
+                break;
+
+            default:
+
+                sleep(3);
+
+                std::cout << "You have entered an invalid input" << std::endl;
+                break;
+            }
         }
     }
-
     return 0;
 }

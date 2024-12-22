@@ -13,9 +13,9 @@ extern HashMap Voter_Table; // Declare Voter_Table
 /// @param filename The file in which the voter ID is to be searched
 /// @param voterID The ID of the voter to be searched
 /// @return Returns true if the voter ID is found, else false
-bool isValidVoter(const string &filename, long long int voterID)
+bool isValidVoter(const std::string &filename, long long int voterID)
 {
-    ifstream file(filename);
+    std::ifstream file(filename);
     if (!file.is_open())
     {
         std::cerr << "Error: Unable to open " << filename << std::endl;
@@ -24,7 +24,7 @@ bool isValidVoter(const string &filename, long long int voterID)
 
     std::string line;
 
-    while (getline(file, line))
+    while (std::getline(file, line))
     {
         if (stoll(line) == voterID)
         {
@@ -39,7 +39,7 @@ bool isValidVoter(const string &filename, long long int voterID)
 /// @brief The function to check if the voter has already voted
 /// @param candidatesFile The file which stores the information of the candidates
 /// @param votingLogFile The file which stores the information of the people who have voted
-void processVote(string candidatesFile, string votingLogFile)
+void processVote(std::string candidatesFile, std::string votingLogFile)
 {
     long long int CNIC;
     std::string candidateName;

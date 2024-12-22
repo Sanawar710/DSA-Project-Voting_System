@@ -9,7 +9,7 @@
 class HashMap
 {
 public:
-    vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
+    std::vector<Singlelinklist> table; // Hash table implemented using a vector of singly linked lists
     int size;                     // Size of the hash table
 
     int getSize()
@@ -41,7 +41,7 @@ public:
     /// @param name The name of the candidate
     /// @param CNIC The CNIC of the candidate
     /// @return Returns false if the candidate already exists, otherwise true
-    bool registeration(string filename, string name, long long int CNIC)
+    bool registeration(std::string filename, std::string name, long long int CNIC)
     {
         // Check if the candidate exists in the file
         std::ifstream file(filename);
