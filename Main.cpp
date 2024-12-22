@@ -6,7 +6,6 @@
 #include "Stack.cpp"
 #include "Singly-Linked-List.cpp"
 #include "Queues.cpp"
-#include "Sorting-Algorithms.cpp"
 #include "Save-Information.cpp"
 #include "Binary-Search-Tree.cpp"
 #include "Cast-Vote.cpp"
