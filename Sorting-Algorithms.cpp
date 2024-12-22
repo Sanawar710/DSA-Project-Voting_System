@@ -56,7 +56,7 @@ void bubbleSort(Node_LinkedList *head)
 {
     if (head == NULL)
     {
-        cout << "Empty List" << endl;
+        std::cout << "Empty List" << std::endl;
         return;
     }
 

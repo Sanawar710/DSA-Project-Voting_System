@@ -3,11 +3,9 @@
 
 #include <iostream>
 
-using namespace std;
-
 struct Node_LinkedList
 {
-    string name;
+    std::string name;
     long long int CNIC;
     int votes = 0;
     Node_LinkedList *next;
@@ -85,7 +83,7 @@ public:
 
         if (temp == NULL)
         {
-            cout << "The list is empty." << endl;
+            std::cout << "The list is empty." << std::endl;
             return;
         }
 
@@ -93,8 +91,8 @@ public:
 
         while (temp != NULL)
         {
-            cout << count << ") Name: " << temp->name << "\nCNIC: " << temp->CNIC << endl;
-            cout << endl;
+            std::cout << count << ") Name: " << temp->name << "\nCNIC: " << temp->CNIC << std::endl;
+            std::cout << std::endl;
 
             temp = temp->next;
             count++;

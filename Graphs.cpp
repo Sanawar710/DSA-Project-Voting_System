@@ -4,14 +4,12 @@
 #include <iostream>
 #include <queue>
 
-using namespace std;
-
 class Graph
 {
 private:
     int **AdjacencyMatrix;
     int Vertices;
-    string *VertexValues;
+    std::string *VertexValues;
 
 public:
     Graph(int value) : Vertices(value)
@@ -27,7 +25,7 @@ public:
             }
         }
 
-        VertexValues = new string[Vertices];
+        VertexValues = new std::string[Vertices];
     }
 
     ~Graph()
@@ -44,7 +42,7 @@ public:
     {
         if (Vertex < 0 || Vertex >= Vertices)
         {
-            cout << "Invalid vertex entered..." << endl;
+            std::cout << "Invalid vertex entered..." << std::endl;
             return;
         }
         VertexValues[Vertex] = value;
@@ -54,7 +52,7 @@ public:
     {
         if (v >= Vertices || u >= Vertices || v < 0 || u < 0)
         {
-            cout << "Invalid vertices typed..." << endl;
+            std::cout << "Invalid vertices typed..." << std::endl;
             return;
         }
         AdjacencyMatrix[v][u] = weight;
@@ -67,9 +65,9 @@ public:
         {
             for (int j = 0; j < Vertices; j++)
             {
-                cout << AdjacencyMatrix[i][j] << " ";
+                std::cout << AdjacencyMatrix[i][j] << " ";
             }
-            cout << endl;
+            std::cout << std::endl;
         }
     }
 
@@ -77,17 +75,17 @@ public:
     {
         if (v >= Vertices || u >= Vertices || v < 0 || u < 0)
         {
-            cout << "Invalid vertices typed..." << endl;
+            std::cout << "Invalid vertices typed..." << std::endl;
             return;
         }
         if (AdjacencyMatrix[v][u] != 0)
         {
-            cout << "There exists an edge between " << v << " and " << u << endl;
-            cout << "And the weight value is..." << AdjacencyMatrix[v][u] << endl;
+            std::cout << "There exists an edge between " << v << " and " << u << std::endl;
+            std::cout << "And the weight value is..." << AdjacencyMatrix[v][u] << std::endl;
         }
         else
         {
-            cout << "There does not exist an edge between " << v << " and " << u << endl;
+            std::cout << "There does not exist an edge between " << v << " and " << u << std::endl;
         }
     }
 
@@ -95,12 +93,13 @@ public:
     {
         if (start < 0 || start >= Vertices)
         {
-            cout << "Invalid start vertex" << endl;
+            std::cout << "Invalid start vertex" << std::endl;
             return;
         }
         bool *visited = new bool[Vertices]();
 
-        cout << "BFS:" << endl;
+        std::cout << "BFS:" << std::endl;
+
         visited[start] = true;
 
         queue<int> q;
@@ -122,14 +121,15 @@ public:
                 }
             }
         }
-        cout << endl;
+        std::cout << std::endl;
         delete[] visited;
     }
 
     void DFS_helper(int v, bool *visited)
     {
         visited[v] = true;
-        cout << VertexValues[v] << " ";
+        std::cout << VertexValues[v] << " ";
+
         for (int i = 0; i < Vertices; i++)
         {
             if (AdjacencyMatrix[v][i] != 0 && !visited[i])
@@ -143,13 +143,14 @@ public:
     {
         if (start < 0 || start >= Vertices)
         {
-            cout << "Invalid start vertex" << endl;
+            std::cout << "Invalid start vertex" << std::endl;
             return;
         }
+
         bool *visited = new bool[Vertices]();
-        cout << "DFS:" << endl;
+        std::cout << "DFS:" << endl;
         DFS_helper(start, visited);
-        cout << endl;
+        std::cout << std::endl;
         delete[] visited;
     }
 };

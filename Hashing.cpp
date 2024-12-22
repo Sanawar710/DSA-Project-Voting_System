@@ -6,8 +6,6 @@
 #include "Save-Information.cpp"
 #include "Singly-Linked-List.cpp"
 
-using namespace std;
-
 class HashMap
 {
 public:
@@ -46,20 +44,20 @@ public:
     bool registeration(string filename, string name, long long int CNIC)
     {
         // Check if the candidate exists in the file
-        ifstream file(filename);
-        string line;
+        std::ifstream file(filename);
+        std::string line;
 
         while (getline(file, line))
         {
-            istringstream info(line);
-            string fileName, fileCNIC;
+            std::istringstream info(line);
+            std::string fileName, fileCNIC;
 
-            getline(info, fileName, ',');
-            getline(info, fileCNIC);
+            std::getline(info, fileName, ',');
+            std::getline(info, fileCNIC);
 
             if (stoll(fileCNIC) == CNIC) // Convert file CNIC from string to long long and compare
             {
-                cout << "Candidate with CNIC " << CNIC << " already exists in the file!" << endl;
+                std::cout << "Candidate with CNIC " << CNIC << " already exists in the file!" << std::endl;
                 file.close();
                 return false;
             }
@@ -74,7 +72,7 @@ public:
         {
             if (current->CNIC == CNIC)
             {
-                cout << "Candidate with CNIC " << CNIC << " already exists in the hash table!" << endl;
+                std::cout << "Candidate with CNIC " << CNIC << " already exists in the hash table!" << std::endl;
                 return false;
             }
             current = current->next;
@@ -82,7 +80,7 @@ public:
 
         table[index].insert(name, CNIC);
         saveInfo(filename, name, CNIC);
-        cout << "Registered successfully!" << endl;
+        std::cout << "Registered successfully!" << std::endl;
         return true;
     }
 

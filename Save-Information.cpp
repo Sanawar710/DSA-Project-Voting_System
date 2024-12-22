@@ -5,8 +5,6 @@
 #include <fstream>
 #include <sstream> // This header file allows us to include 'istringstream' function
 
-using namespace std;
-
 /// @brief A general function to save information in files
 /// @param filename The file in which the information is stored
 /// @param name The name of the person
@@ -14,44 +12,45 @@ using namespace std;
 /// @return Return true if the file is opened successfully and information is saved
 bool saveInfo(string filename, string name, long long int CNIC)
 {
-    ofstream file(filename, ios::app); // Opening the file in append mode
+    std::ofstream file(filename, ios::app); // Opening the file in append mode
 
     if (file.is_open())
     {
         file << name << "," << CNIC << endl; // Storing the values in a comma separated format
         file.close();
 
-        cout << "\nInformation saved to file successfully.\n";
+        std::cout << "\nInformation saved to file successfully.\n";
 
         return true;
     }
     else
     {
-        cerr << "\nUnable to open file.\n";
+        std::cerr << "\nUnable to open file.\n";
 
         char option;
+
         do
         {
-            cout << "\nDo you want to create a new file with the same name? (y/n): ";
-            cin >> option;
+            std::cout << "\nDo you want to create a new file with the same name? (y/n): ";
+            std::cin >> option;
         } while (option != 'y' && option != 'n');
 
         if (option == 'y')
         {
-            ofstream new_file(filename);
+            std::ofstream new_file(filename);
 
             if (new_file.is_open())
             {
                 new_file << name << "," << CNIC << endl;
                 new_file.close();
 
-                cout << "\nNew file created and information saved successfully.\n";
+                std::cout << "\nNew file created and information saved successfully.\n";
 
                 return true;
             }
             else
             {
-                cerr << "\n Unable to create new file.\n";
+                std::cerr << "\n Unable to create new file.\n";
                 return false;
             }
         }
@@ -66,11 +65,11 @@ bool saveInfo(string filename, string name, long long int CNIC)
 /// @return Return true if the file is opened successfully and information is saved
 bool deleteInfo(string filename, long long int CNIC)
 {
-    ifstream file(filename); // Opening the original file
+    std::ifstream file(filename); // Opening the original file
 
     if (!file.is_open())
     {
-        cerr << "Error: Unable to open file " << filename << endl;
+        std::cerr << "Error: Unable to open file " << filename << std::endl;
         return false; // Return false if the file cannot be opened
     }
 
@@ -78,21 +77,21 @@ bool deleteInfo(string filename, long long int CNIC)
 
     if (!tempFile.is_open())
     {
-        cerr << "Error: Unable to create temporary file." << endl;
+        std::cerr << "Error: Unable to create temporary file." << endl;
         file.close();
         return false; // Return false if the temporary file cannot be created
     }
 
-    string line;
+    std::string line;
     bool found = false; // Flag to check if the CNIC is found
 
     while (getline(file, line)) // Read each line from the file
     {
-        istringstream info(line); // 'istringstream' to parse the line
-        string name, strCNIC;
+        std::istringstream info(line); // 'istringstream' to parse the line
+        std::string name, strCNIC;
 
-        getline(info, name, ','); // Extract name
-        getline(info, strCNIC);   // Extract CNIC
+        std::getline(info, name, ','); // Extract name
+        std::getline(info, strCNIC);   // Extract CNIC
 
         long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
 
@@ -102,7 +101,7 @@ bool deleteInfo(string filename, long long int CNIC)
         }
         else
         {
-            tempFile << line << endl; // Write the line to the temporary file if CNIC doesn't match
+            tempFile << line << std::endl; // Write the line to the temporary file if CNIC doesn't match
         }
     }
 
@@ -134,23 +133,23 @@ bool deleteInfo(string filename, long long int CNIC)
 /// @return Return true if the CNIC is found in the file
 bool searchbyID(string filename, long long int CNIC)
 {
-    ifstream file(filename); // Opening the file in read mode
+    std::ifstream file(filename); // Opening the file in read mode
 
     if (!file.is_open())
     {
-        cerr << "Error: Unable to open file " << filename << endl;
+        std::cerr << "Error: Unable to open file " << filename << std::endl;
         return false; // Return false if the file cannot be opened
     }
 
-    string line;
+    std::string line;
 
     while (getline(file, line)) // Read each line from the file
     {
-        istringstream info(line); // 'istringstream' to parse the line
-        string name, strCNIC;
+        std::istringstream info(line); // 'istringstream' to parse the line
+        std::string name, strCNIC;
 
-        getline(info, name, ','); // Extract name
-        getline(info, strCNIC);   // Extract CNIC
+        std::getline(info, name, ','); // Extract name
+        getline(info, strCNIC);        // Extract CNIC
 
         long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
 
@@ -168,15 +167,15 @@ bool searchbyID(string filename, long long int CNIC)
 /// @param filename The file which consists the information
 void viewInfo(string filename)
 {
-    string line; // Helps us to read an entire line from the file
+    std::string line; // Helps us to read an entire line from the file
 
-    ifstream file(filename, ios::in); // Opening the file to read information
+    std::ifstream file(filename, ios::in); // Opening the file to read information
 
-    cout << " Name   |  CNIC\n";
+    std::cout << " Name   |  CNIC\n";
     while (!file.eof())
     {
-        getline(file, line);
-        cout << line << endl;
+        std::getline(file, line);
+        std::cout << line << std::endl;
     }
 }
 

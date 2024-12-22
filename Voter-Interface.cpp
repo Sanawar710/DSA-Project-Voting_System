@@ -32,13 +32,13 @@ public:
     void Menu()
     {
         // Menu for the voters to choose from the options
-        cout << "\nVoting System Voter Menu:\n"
+       std:: cout << "\nVoting System Voter Menu:\n"
              << "1) Cast Vote\n"
              << "2) Register Yourself\n"
              << "3) Unregister Yourself\n"
              << "4) View Result\n"
              << "5) Exit\n"
-             << endl;
+             << std::endl;
     }
 
     /// @brief Theis function is used to register voter
@@ -57,11 +57,11 @@ public:
         if (!VoterQueue.isFull())
         {
             VoterQueue.EnQueue(Voter(name, CNIC)); // Enqueue voter as a struct
-            cout << name << " with CNIC " << CNIC << " has been registered successfully." << endl;
+            std::cout << name << " with CNIC " << CNIC << " has been registered successfully." << std::endl;
         }
         else
         {
-            cout << "Queue is full. Cannot enqueue voter." << endl;
+           std:: cout << "Queue is full. Cannot enqueue voter." << std::endl;
         }
     }
 
@@ -101,11 +101,11 @@ public:
 
         if (found)
         {
-            cout << "Voter with CNIC " << CNIC << " has been unregistered successfully." << endl;
+            std::cout << "Voter with CNIC " << CNIC << " has been unregistered successfully." << std::endl;
         }
         else
         {
-            cout << "Voter with CNIC " << CNIC << " not found in the queue." << endl;
+            std::cout << "Voter with CNIC " << CNIC << " not found in the queue." << std::endl;
         }
     }
 
@@ -119,7 +119,7 @@ public:
         }
         else
         {
-            cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
+            std::cout << "\nYou are not registered to vote or your CNIC is invalid.\n";
         }
     }
     
@@ -148,28 +148,28 @@ public:
         candidateStack.sortStack();
 
         // Display the results
-        cout << "\nElection Results:\n";
+        std::cout << "\nElection Results:\n";
         while (!candidateStack.empty())
         {
             Candidate c = candidateStack.top();
             candidateStack.pop();
-            cout << "Candidate: " << c.name << ", Votes: " << c.votes << endl;
+            std::cout << "Candidate: " << c.name << ", Votes: " << c.votes << std::endl;
         }
 
         // Find and display the candidate with the highest votes
         if (!candidateStack.empty())
         {
             Candidate topCandidate = candidateStack.findTopCandidate();
-            cout << "\nWinner: "
+            std::cout << "\nWinner: "
                  << topCandidate.name
                  << " with "
                  << topCandidate.votes
                  << " votes."
-                 << endl;
+                 << std::endl;
         }
         else
         {
-            cout << "No candidates available to display results." << endl;
+            std::cout << "No candidates available to display results." << std::endl;
         }
     }
 };

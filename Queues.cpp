@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 // Struct to hold voter information
 struct Voter
 {
@@ -45,6 +43,7 @@ public:
         size = 0;
         capacity = cap;
     }
+
     /// @brief Function to check if the queue is empty
     /// @return Returns true if the queue is empty, else false
     bool isEmpty()
@@ -63,9 +62,10 @@ public:
     {
         if (isEmpty())
         {
-            cout << "Queue is Empty" << endl;
+            std::cout << "Queue is Empty" << std::endl;
             return Voter(); // Return an empty voter struct
         }
+
         return front->data; // Return the voter at the front
     }
 
@@ -73,7 +73,7 @@ public:
     {
         if (isFull())
         {
-            cout << "Queue is full. Cannot enqueue " << value.name << "." << endl;
+            std::cout << "Queue is full. Cannot enqueue " << value.name << "." << std::endl;
             return;
         }
 
@@ -93,14 +93,14 @@ public:
         }
 
         size++;
-        cout << value.name << " with CNIC " << value.CNIC << " enqueued to the queue." << endl;
+        std::cout << value.name << " with CNIC " << value.CNIC << " enqueued to the queue." << std::endl;
     }
 
     Voter DeQueue() // Function to remove a voter from the queue
     {
         if (isEmpty())
         {
-            cout << "Queue is empty. Cannot dequeue." << endl;
+            std::cout << "Queue is empty. Cannot dequeue." << std::endl;
             return Voter(); // Return an empty voter struct
         }
 
@@ -112,6 +112,7 @@ public:
             front = nullptr;
             rear = nullptr;
         }
+        
         else
         {
             Node_CQ *temp = front;

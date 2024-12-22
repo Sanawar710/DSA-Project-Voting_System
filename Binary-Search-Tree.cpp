@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 struct BST // Node for BST
 {
     int data;
@@ -30,7 +28,7 @@ struct BST // Node for BST
         if (rootNode != NULL)
         {
             Traversal(rootNode->left);
-            cout << rootNode->data << " ";
+            std::cout << rootNode->data << " ";
             Traversal(rootNode->right);
         }
     }
@@ -76,7 +74,7 @@ struct BST // Node for BST
 
             if (rootNode->data == CNIC)
             {
-                cout << "Duplicate values cannot be inserted." << endl;
+                std::cout << "Duplicate values cannot be inserted." << std::endl;
                 break; // Breaks the loop a duplicate value is found.
             }
 
@@ -128,7 +126,7 @@ struct BST // Node for BST
     {
         if (rootNode == NULL)
         {
-            cout << "The tree is already empty. Cannot perform deletion." << endl;
+            std::cout << "The tree is already empty. Cannot perform deletion." << std::endl;
             return NULL;
         }
 
@@ -180,36 +178,4 @@ struct BST // Node for BST
     }
 };
 
-// int main()
-// {
-// Testing
-
-// Node *root = new Node;
-// Node *second = new Node;
-// Node *third = new Node;
-
-// root = createNode(100);
-// second = createNode(102);
-// third = createNode(10);
-
-// root->right = second;
-// root->left = third;
-
-// // cout << "Pre-Order Traversal:" << endl;
-// // preOrder_Traversal(root);
-
-// // cout << "\nPost-Order Traversal" << endl;
-// // postOrder_Traversal(root);
-
-// cout << "In-Order Traversal" << endl;
-// inOrder_Traversal(root);
-
-// cout << "\nDeletion Function Called " << endl;
-// root = deletion_in_BST(root, 10);
-
-// cout << "\nIn-Order Traversal" << endl;
-// inOrder_Traversal(root);
-
-//      return 0;
-// }
 #endif

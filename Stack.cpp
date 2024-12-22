@@ -3,11 +3,9 @@
 
 #include <iostream>
 
-using namespace std;
-
 struct Candidate
 {
-    string name;
+    std::string name;
     int votes;
 
     // Operator Overloading

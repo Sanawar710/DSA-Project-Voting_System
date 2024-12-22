@@ -12,7 +12,7 @@
 #include "Cast-Vote.cpp"
 #include "Searching-Algorithms.cpp"
 
-// time_t deadline; // Global Variable for Deadline
+time_t deadline; // Global Variable for Deadline
 
 int main()
 {
@@ -21,18 +21,18 @@ int main()
     VoterInterface V(10);
     Singlelinklist *Candidates, *Voters;
 
-    cout << "Welcome to the Voting System !" << endl;
+    std::cout << "Welcome to the Voting System !" << std::endl;
 
     int choice;
 
     sleep(3);
 
-    cout << "\nDo you want to access the Admin Terminal or the Voter Terminal? (0/1): " << endl;
-    cin >> choice;
+    std::cout << "\nDo you want to access the Admin Terminal or the Voter Terminal? (0/1): " << std::endl;
+    std::cin >> choice;
 
     if (choice == 0)
     {
-        cout << endl; // For indentation on terminal
+        std::cout << std::endl; // For indentation on terminal
 
         sleep(3);
 
@@ -43,8 +43,8 @@ int main()
         {
             sleep(3);
 
-            cout << "\nLogin Successful\n"
-                 << endl;
+            std::cout << "\nLogin Successful\n"
+                      << std::endl;
 
             sleep(3);
 
@@ -54,50 +54,46 @@ int main()
 
             sleep(3);
 
-            cout << "Enter the option you want to choose (on a scale of 1-7): " << endl;
-            cin >> option;
+            std::cout << "Enter the option you want to choose (on a scale of 1-7): " << std::endl;
+            std::cin >> option;
 
             switch (option)
             {
             case 1:
-                // {
-                //     // A.startElections();
+            {
+                // A.startElections();
 
-                //     bool condition = true;
-                //     time_t currentTime;
-                //     // time_t deadline = A.deadLine();
+                bool condition = true;
+                time_t currentTime;
+                // time_t deadline = A.deadLine();
 
-                //     // Enforcing the deadline
-                //     while (condition)
-                //     {
-                //         currentTime = time(0); // Continuously checks the current time
+                // Enforcing the deadline
+                while (condition)
+                {
+                    currentTime = time(0); // Continuously checks the current time
 
-                //         if (currentTime >= deadline)
-                //         {
-                //             cout << "Deadline reached! Elections are now closed." << endl;
-                //             condition = false;
-                //         }
-                //     }
-                // }
-
-                // break;
-                // }
+                    if (currentTime >= deadline)
+                    {
+                        std::cout << "Deadline reached! Elections are now closed." << std::endl;
+                        condition = false;
+                    }
+                }
+                break;
+            }
 
             case 2:
             {
-                string name;
+                std::string name;
                 long long int CNIC;
 
-                cin.ignore(); // Clear input buffer
+                std::cin.ignore(); // Clear input buffer
 
                 sleep(3);
 
-                cout << "Enter the name of the candidate: ";
-                getline(cin, name); // Used to take input name (used incase if some one uses a space in their name)
-                cin.ignore();
+                std::cout << "\nEnter the name of the candidate: ";
 
-                cout << "\nEnter the CNIC of the candidate (without dashes): ";
-                cin >> CNIC;
+                std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
+                std::cin >> CNIC;
 
                 sleep(3);
 
@@ -106,18 +102,16 @@ int main()
             }
 
             case 3:
+            {
                 long long int CNIC;
 
                 sleep(3);
 
-                cout << "\nEnter the CNIC of the candidate (without dashes): ";
-                cin >> CNIC;
+                std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
+                std::cin >> CNIC;
                 A.deleteCandidates(Candidates, CNIC);
                 break;
-
-            // case 4:
-            //     // deadline = A.deadLine(); // Later used while casting votes when the election is started
-            //     break;
+            }
 
             case 4:
                 A.viewCandidates(Candidates);
@@ -126,7 +120,7 @@ int main()
             case 5:
                 sleep(3);
 
-                cout << "Election's Result: \n";
+                std::cout << "Election's Result: \n";
                 V.viewResult();
 
                 break;
@@ -134,7 +128,7 @@ int main()
             case 6:
                 sleep(3);
 
-                cout << "Voter's Information: " << endl;
+                std::cout << "Voter's Information: " << std::endl;
                 A.viewVoters(Voters);
 
                 break;
@@ -142,25 +136,25 @@ int main()
             case 7:
                 sleep(3);
 
-                cout << "Exiting the system. Thank you for managing the voting process." << endl;
+                std::cout << "Exiting the system. Thank you for managing the voting process." << std::endl;
                 break;
 
             default:
                 sleep(3);
 
-                cout << "You have entered an invalid input" << endl;
+                std::cout << "You have entered an invalid input" << std::endl;
                 break;
             }
         }
-        else
-        {
-            sleep(3);
-
-            cout << "\nLogin Failed!" << endl;
-            cout << "Invalid Username or Password." << endl;
-        }
     }
-    else if (choice == 1)
+    else
+    {
+        sleep(3);
+
+        std::cout << "\nLogin Failed!" << std::endl;
+        std::cout << "Invalid Username or Password." << std::endl;
+    }
+    if (choice == 1)
     {
         sleep(3);
 
@@ -170,8 +164,8 @@ int main()
 
         sleep(3);
 
-        cout << "Enter the option you want to choose (on a scale of 1-5): " << endl;
-        cin >> option;
+        std::cout << "Enter the option you want to choose (on a scale of 1-5): " << std::endl;
+        std::cin >> option;
 
         switch (option)
         {
@@ -181,9 +175,9 @@ int main()
 
             sleep(3);
 
-            cout << "Enter your CNIC: " << endl;
-            cin >> CNIC;
-            cin.ignore();
+            std::cout << "Enter your CNIC: " << std::endl;
+            std::cin >> CNIC;
+            std::cin.ignore();
 
             V.castVote(CNIC);
 
@@ -192,17 +186,17 @@ int main()
 
         case 2:
         {
-            string name;
+            std::string name;
             long long int CNIC;
 
-            cout << "\nEnter your name: \n";
-            getline(cin, name);
-            cin.ignore();
+            std::cout << "\nEnter your name: \n";
+            std::getline(std::cin, name);
+            std::cin.ignore();
 
             sleep(3);
 
-            cout << "\nEnter your CNIC: \n";
-            cin >> CNIC;
+            std::cout << "\nEnter your CNIC: \n";
+            std::cin >> CNIC;
 
             sleep(3);
 
@@ -213,10 +207,13 @@ int main()
 
         case 3:
         {
-            string name;
+            std::string name;
             long long int CNIC;
 
             sleep(3);
+
+            std::cout << "\nEnter your CNIC: \n";
+            std::cin >> CNIC;
 
             V.deleteVoter(Voters, CNIC);
 
@@ -230,14 +227,14 @@ int main()
 
             sleep(3);
 
-            cout << "Exiting the system. Thank you for voting." << endl;
+            std::cout << "Exiting the system. Thank you for voting." << std::endl;
             break;
 
         default:
 
             sleep(3);
 
-            cout << "You have entered an invalid input" << endl;
+            std::cout << "You have entered an invalid input" << std::endl;
             break;
         }
     }

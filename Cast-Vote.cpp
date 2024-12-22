@@ -6,8 +6,6 @@
 #include "Save-Information.cpp"
 #include "Voter-Interface.cpp"
 
-using namespace std;
-
 extern int TableSize;       // Declare TableSize
 extern HashMap Voter_Table; // Declare Voter_Table
 
@@ -20,11 +18,12 @@ bool isValidVoter(const string &filename, long long int voterID)
     ifstream file(filename);
     if (!file.is_open())
     {
-        cerr << "Error: Unable to open " << filename << endl;
+        std::cerr << "Error: Unable to open " << filename << std::endl;
         return false;
     }
 
-    string line;
+    std::string line;
+
     while (getline(file, line))
     {
         if (stoll(line) == voterID)
@@ -43,12 +42,13 @@ bool isValidVoter(const string &filename, long long int voterID)
 void processVote(string candidatesFile, string votingLogFile)
 {
     long long int CNIC;
-    string candidateName;
+    std::string candidateName;
 
-    cout << "Enter the name of the candidate you want to vote for: " << endl;
-    cin >> candidateName;
-    cout << "Enter the name of the candidate you want to vote for: ";
-    cin >> CNIC;
+    std::cout << "Enter the name of the candidate you want to vote for: " << std::endl;
+    std::cin >> candidateName;
+
+    std::cout << "Enter the name of the candidate you want to vote for: ";
+    std::cin >> CNIC;
 
     // Find candidate in the hash table
     for (int i = 0; i < tableSize; i++)
@@ -62,14 +62,14 @@ void processVote(string candidatesFile, string votingLogFile)
             {
                 current->votes++; // Increment vote count
                 saveInfo(votingLogFile, candidateName, current->CNIC);
-                cout << "Your vote has been successfully cast for " << CNIC << "." << endl;
+                std::cout << "Your vote has been successfully cast for " << CNIC << "." << std::endl;
                 return;
             }
             current = current->next;
         }
     }
 
-    cout << "Candidate not found! Please check the name and try again." << endl;
+    std::cout << "Candidate not found! Please check the name and try again." << std::endl;
 }
 
 #endif
