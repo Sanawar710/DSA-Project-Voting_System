@@ -16,6 +16,7 @@ extern HashMap Voter_Table; // Declare Voter_Table
 bool isValidVoter(const std::string &filename, long long int voterID)
 {
     std::ifstream file(filename);
+
     if (!file.is_open())
     {
         std::cerr << "Error: Unable to open " << filename << std::endl;
@@ -26,12 +27,36 @@ bool isValidVoter(const std::string &filename, long long int voterID)
 
     while (std::getline(file, line))
     {
-        if (stoll(line) == voterID)
+        std::stringstream ss(line);
+        std::string name, cnicStr;
+
+        // Extract name and CNIC from the CSV line
+        if (std::getline(ss, name, ',') && std::getline(ss, cnicStr))
         {
-            file.close();
-            return true;
+            try
+            {
+                long long int cnic = std::stoll(cnicStr);
+                if (cnic == voterID)
+                {
+                    file.close();
+                    return true;
+                }
+            }
+            catch (const std::invalid_argument &)
+            {
+                std::cerr << "Error: Invalid CNIC format in file." << std::endl;
+                file.close();
+                return false;
+            }
+            catch (const std::out_of_range &)
+            {
+                std::cerr << "Error: CNIC value out of range in file." << std::endl;
+                file.close();
+                return false;
+            }
         }
     }
+
     file.close();
     return false;
 }
