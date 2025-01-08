@@ -1,12 +1,14 @@
-- Course: CS221 - Data Structures and Algorithms
-- Project Overvie : A voting system implemented using core concepts from "Data Structures and Algorithms".
+Course: CS221 - Data Structures and Algorithms  
 
-- Key Data Structures Use :
-  1. Structure : For organizing candidate and voter information.
-  2. Linked Lists, HashMaps, and File Handling : For storing and retrieving candidate and voter data.
-  3. Binary Search Tree BST : To prevent duplicate voting.
-  4. Weighted Graph : For visualizing and analyzing election results.
-  5. Queue : To manage voter priorities while standing in line.
-  6. Stack : For sorting candidates based on their information.
-  
-The project integrates these data structures to create a functional and efficient voting system.
+Project Overview:  
+A voting system designed and implemented using core concepts of Data Structures and Algorithms.  
+
+Key Data Structures Used:  
+1. Structures: To organize and manage candidate and voter information.  
+2. Linked Lists, HashMaps, and File Handling: For efficient storage and retrieval of candidate and voter data.  
+3. Binary Search Tree (BST): To ensure duplicate voting is prevented.  
+4. Weighted Graph: To visualize and analyze election results.  
+5. Queue: To handle voter priorities while managing the voting queue.  
+6. Stack: For sorting candidates based on specific criteria.  
+
+This project integrates these data structures to develop a functional, efficient, and reliable voting system.
