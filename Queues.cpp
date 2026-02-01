@@ -1,130 +1,87 @@
-#ifndef CIRCULAR_QUEUE_H // Checks if circular queue is defined or not
-#define CIRCULAR_QUEUE_H // If it is not defined, this statement will define it
+// Circular Queue implementation
+#include "Queues.h"
 
 #include <iostream>
 
-// Struct to hold voter information
-struct Voter
+Voter::Voter(std::string n, long long int c) : name(n), CNIC(c) {}
+
+Node_CQ::Node_CQ(Voter value) : data(value), next(nullptr) {}
+
+CircularQueue::CircularQueue(int cap) : front(nullptr), rear(nullptr), size(0), capacity(cap) {}
+
+bool CircularQueue::isEmpty()
 {
-    std::string name;
-    long long int CNIC;
+    return size == 0;
+}
 
-    // Constructor for easier initialization
-    Voter(std::string n = "", long long int c = 0) : name(n), CNIC(c) {}
-};
-
-class Node_CQ
+bool CircularQueue::isFull()
 {
-public:
-    Voter data; // Store voter information
-    Node_CQ *next;
+    return size == capacity;
+}
 
-    // Constructor to initialize a node
-    Node_CQ(Voter value)
+Voter CircularQueue::Front()
+{
+    if (isEmpty())
     {
-        data = value;
-        next = nullptr;
+        std::cout << "Queue is Empty" << std::endl;
+        return Voter();
     }
-};
 
-class CircularQueue
+    return front->data;
+}
+
+void CircularQueue::EnQueue(Voter value)
 {
-private:
-    Node_CQ *front;
-    Node_CQ *rear;
-    int size;     // Current number of elements in the queue
-    int capacity; // Maximum capacity of the queue
-
-public:
-    CircularQueue(int cap) // Constructor to initialize the circular queue
+    if (isFull())
     {
+        std::cout << "Queue is full. Cannot enqueue " << value.name << "." << std::endl;
+        return;
+    }
+
+    Node_CQ *newNode = new Node_CQ(value);
+
+    if (isEmpty())
+    {
+        front = newNode;
+        rear = newNode;
+        rear->next = front;
+    }
+    else
+    {
+        rear->next = newNode;
+        rear = newNode;
+        rear->next = front;
+    }
+
+    size++;
+    std::cout << value.name << " with CNIC " << value.CNIC << " enqueued to the queue." << std::endl;
+}
+
+Voter CircularQueue::DeQueue()
+{
+    if (isEmpty())
+    {
+        std::cout << "Queue is empty. Cannot dequeue." << std::endl;
+        return Voter();
+    }
+
+    Voter value;
+    if (front == rear)
+    {
+        value = front->data;
+        delete front;
         front = nullptr;
         rear = nullptr;
-        size = 0;
-        capacity = cap;
     }
-
-    /// @brief Function to check if the queue is empty
-    /// @return Returns true if the queue is empty, else false
-    bool isEmpty()
+    else
     {
-        return size == 0;
+        Node_CQ *temp = front;
+        value = temp->data;
+        front = front->next;
+        rear->next = front;
+        delete temp;
     }
 
-    /// @brief Function to check if the queue is full
-    /// @return Returns true if the queue is true, else false
-    bool isFull()
-    {
-        return size == capacity;
-    }
-
-    Voter Front()
-    {
-        if (isEmpty())
-        {
-            std::cout << "Queue is Empty" << std::endl;
-            return Voter(); // Return an empty voter struct
-        }
-
-        return front->data; // Return the voter at the front
-    }
-
-    void EnQueue(Voter value) // Function to add a voter to the queue
-    {
-        if (isFull())
-        {
-            std::cout << "Queue is full. Cannot enqueue " << value.name << "." << std::endl;
-            return;
-        }
-
-        Node_CQ *newNode = new Node_CQ(value);
-
-        if (isEmpty())
-        {
-            front = newNode;
-            rear = newNode;
-            rear->next = front; // Circular link
-        }
-        else
-        {
-            rear->next = newNode;
-            rear = newNode;
-            rear->next = front; // Maintain circular link
-        }
-
-        size++;
-        std::cout << value.name << " with CNIC " << value.CNIC << " enqueued to the queue." << std::endl;
-    }
-
-    Voter DeQueue() // Function to remove a voter from the queue
-    {
-        if (isEmpty())
-        {
-            std::cout << "Queue is empty. Cannot dequeue." << std::endl;
-            return Voter(); // Return an empty voter struct
-        }
-
-        Voter value;
-        if (front == rear)
-        {
-            value = front->data;
-            delete front;
-            front = nullptr;
-            rear = nullptr;
-        }
-
-        else
-        {
-            Node_CQ *temp = front;
-            value = temp->data;
-            front = front->next;
-            rear->next = front; // Maintain circular link
-            delete temp;
-        }
-
-        size--;
-        return value;
-    }
-};
-
-#endif
+    size--;
+    return value;
+}

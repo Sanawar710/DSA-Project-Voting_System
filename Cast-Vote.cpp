@@ -1,18 +1,15 @@
-#ifndef CASTVOTE_H
-#define CASTVOTE_H
+// Cast Vote implementation
+#include "Cast-Vote.h"
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <unistd.h>
-#include "Save-Information.cpp"
-#include "Voter-Interface.cpp"
+#include "Save-Information.h"
 
-extern int TableSize;       // Declare TableSize
-extern HashMap Voter_Table; // Declare Voter_Table
+extern int TableSize;
+extern HashMap Voter_Table;
 
-/// @brief Helper function to validate if a voter ID exists in the given file
-/// @param filename The file in which the voter ID is to be searched
-/// @param voterID The ID of the voter to be searched
-/// @return Returns true if the voter ID is found, else false
 bool isValidVoter(const std::string &filename, long long int voterID)
 {
     std::ifstream file(filename);
@@ -30,7 +27,6 @@ bool isValidVoter(const std::string &filename, long long int voterID)
         std::stringstream ss(line);
         std::string name, cnicStr;
 
-        // Extract name and CNIC from the CSV line
         if (std::getline(ss, name, ',') && std::getline(ss, cnicStr))
         {
             try
@@ -61,9 +57,6 @@ bool isValidVoter(const std::string &filename, long long int voterID)
     return false;
 }
 
-/// @brief The function to check if the voter has already voted
-/// @param candidatesFile The file which stores the information of the candidates
-/// @param votingLogFile The file which stores the information of the people who have voted
 void processVote(std::string candidatesFile, std::string votingLogFile)
 {
     long long int CNIC;
@@ -75,8 +68,8 @@ void processVote(std::string candidatesFile, std::string votingLogFile)
     std::cout << "Enter the name of the candidate you want to vote for: ";
     std::cin >> CNIC;
     std::cin.ignore();
-    // Find candidate in the hash table
-    for (int i = 0; i < tableSize; i++)
+
+    for (int i = 0; i < TableSize; i++)
     {
         searchbyID(candidatesFile, CNIC);
 
@@ -85,7 +78,7 @@ void processVote(std::string candidatesFile, std::string votingLogFile)
         {
             if (current->CNIC == CNIC)
             {
-                current->votes++; // Increment vote count
+                current->votes++;
                 saveInfo(votingLogFile, candidateName, current->CNIC);
                 std::cout << "Your vote has been successfully cast for " << CNIC << "." << std::endl;
                 return;
@@ -96,5 +89,3 @@ void processVote(std::string candidatesFile, std::string votingLogFile)
 
     std::cout << "Candidate not found! Please check the name and try again." << std::endl;
 }
-
-#endif

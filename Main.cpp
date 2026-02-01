@@ -1,17 +1,19 @@
-// Included the cpp files which include functions for our voting system
-#include "Hashing.cpp"
-#include "Admin-Interface.cpp"
-#include "Voter-Interface.cpp"
-#include "Graphs.cpp"
-#include "Stack.cpp"
-#include "Singly-Linked-List.cpp"
-#include "Queues.cpp"
-#include "Save-Information.cpp"
-#include "Binary-Search-Tree.cpp"
-#include "Cast-Vote.cpp"
-#include "Searching-Algorithms.cpp"
+#include "Hashing.h"
+#include "Admin-Interface.h"
+#include "Voter-Interface.h"
+#include "Graphs.h"
+#include "Stack.h"
+#include "Singly-Linked-List.h"
+#include "Queues.h"
+#include "Save-Information.h"
+#include "Binary-Search-Tree.h"
+#include "Cast-Vote.h"
+#include "Searching-Algorithms.h"
+#include <ctime>
 
-time_t deadline; // Global Variable for Deadline
+// Global Variable for Deadline
+// Initialize to one year from now so voters can use the program without admin first setting a deadline
+time_t deadline = time(0) + 31536000;
 
 int main()
 {
@@ -24,7 +26,7 @@ int main()
 
     int choice;
 
-    sleep(3);
+    sleep(1);
 
     std::cout << "\nDo you want to access the Admin Terminal or the Voter Terminal? (0/1): " << std::endl;
     std::cin >> choice;
@@ -33,25 +35,25 @@ int main()
     {
         std::cout << std::endl; // For indentation on terminal
 
-        sleep(3);
+        sleep(1);
 
         Credentials creds;
         creds = loginTerminal();
 
         if (A.Authenticate(creds.name, creds.password))
         {
-            sleep(3);
+            sleep(1);
 
             std::cout << "\nLogin Successful\n"
                       << std::endl;
 
-            sleep(3);
+            sleep(1);
 
             A.Menu();
 
             int option;
 
-            sleep(3);
+            sleep(1);
 
             std::cout << "Enter the option you want to choose (on a scale of 1-7): " << std::endl;
             std::cin >> option;
@@ -62,7 +64,7 @@ int main()
             {
 
                 deadline = A.deadLine();
-                sleep(3);
+                sleep(1);
                 std::cout << "You are being redirected to the voter terminal." << std::endl;
                 goto voterTerminal;
 
@@ -76,14 +78,14 @@ int main()
 
                 std::cin.ignore(); // Clear input buffer
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "\nEnter the name of the candidate: " << std::endl;
 
                 std::cout << "\nEnter the CNIC of the candidate (without dashes): ";
                 std::cin >> CNIC;
 
-                sleep(3);
+                sleep(1);
 
                 A.addCandidates(Candidates, name, CNIC);
                 break;
@@ -93,7 +95,7 @@ int main()
             {
                 long long int CNIC;
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "\nEnter the CNIC of the candidate (without dashes): " << std::endl;
                 std::cin >> CNIC;
@@ -106,7 +108,7 @@ int main()
                 break;
 
             case 5:
-                sleep(3);
+                sleep(1);
 
                 std::cout << "Election's Result: \n";
                 V.viewResult();
@@ -114,7 +116,7 @@ int main()
                 break;
 
             case 6:
-                sleep(3);
+                sleep(1);
 
                 std::cout << "Voter's Information: " << std::endl;
                 A.viewVoters(Voters);
@@ -122,14 +124,14 @@ int main()
                 break;
 
             case 7:
-                sleep(3);
+                sleep(1);
 
                 std::cout << "Exiting the system. Thank you for managing the voting process." << std::endl;
                 exit(0);
                 break;
 
             default:
-                sleep(3);
+                sleep(1);
 
                 std::cout << "\nYou have entered an invalid input\n"
                           << std::endl;
@@ -139,14 +141,14 @@ int main()
     }
     else
     {
-        sleep(3);
+        sleep(1);
 
         std::cout << "\nLogin Failed!" << std::endl;
         std::cout << "Invalid Username or Password\n." << std::endl;
     }
     if (choice == 1)
     {
-        sleep(3);
+        sleep(1);
 
     voterTerminal:
         bool condition = true;
@@ -168,7 +170,7 @@ int main()
 
             int option;
 
-            sleep(3);
+            sleep(1);
 
             std::cout << "Enter the option you want to choose (on a scale of 1-5): " << std::endl;
             std::cin >> option;
@@ -179,7 +181,7 @@ int main()
             {
                 long long int CNIC;
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "Enter your CNIC: " << std::endl;
                 std::cin >> CNIC;
@@ -199,12 +201,12 @@ int main()
                 std::cout << "\nEnter your name: \n";
                 std::getline(std::cin, name);
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "\nEnter your CNIC: \n";
                 std::cin >> CNIC;
 
-                sleep(3);
+                sleep(1);
 
                 V.addVoter(Voters, name, CNIC);
 
@@ -216,7 +218,7 @@ int main()
                 std::string name;
                 long long int CNIC;
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "\nEnter your CNIC: \n";
                 std::cin >> CNIC;
@@ -231,7 +233,7 @@ int main()
                 break;
             case 5:
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "Exiting the system. Thank you for voting." << std::endl;
                 exit(0);
@@ -239,7 +241,7 @@ int main()
 
             default:
 
-                sleep(3);
+                sleep(1);
 
                 std::cout << "You have entered an invalid input" << std::endl;
                 break;

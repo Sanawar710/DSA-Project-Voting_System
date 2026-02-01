@@ -1,0 +1,59 @@
+# Compiled object files
+*.o
+*.obj
+*.slo
+*.lo
+*.la
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+
+# Executable files
+*.exe
+*.out
+*.app
+*.dll
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Build directories
+build/
+Debug/
+Release/
+bin/
+obj/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.sln
+
+# Dependencies
+*.depend
+
+# Output and log files
+*.log
+output/
+modifiedFile.txt
+VotingLog.txt
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

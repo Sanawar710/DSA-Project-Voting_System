@@ -1,22 +1,17 @@
-#ifndef FILEHANDLING_H
-#define FILEHANDLING_H
+// File handling implementations
+#include "Save-Information.h"
 
 #include <iostream>
 #include <fstream>
-#include <sstream> // This header file allows us to include 'istringstream' function
+#include <sstream>
 
-/// @brief A general function to save information in files
-/// @param filename The file in which the information is stored
-/// @param name The name of the person
-/// @param CNIC The CNIC/Natioanl ID of the person
-/// @return Return true if the file is opened successfully and information is saved
 bool saveInfo(std::string filename, std::string name, long long int CNIC)
 {
-    std::ofstream file(filename, std::ios::app); // Opening the file in append mode
+    std::ofstream file(filename, std::ios::app);
 
     if (file.is_open())
     {
-        file << name << "," << CNIC << std::endl; // Storing the values in a comma separated format
+        file << name << "," << CNIC << std::endl;
         file.close();
 
         std::cout << "\nInformation saved to file successfully.\n";
@@ -58,50 +53,45 @@ bool saveInfo(std::string filename, std::string name, long long int CNIC)
     return false;
 }
 
-/// @brief A general function to delete information in files
-/// @param filename The file in which the information is stored
-/// @param name The name of the person
-/// @param CNIC The CNIC/Natioanl ID of the person
-/// @return Return true if the file is opened successfully and information is saved
 bool deleteInfo(std::string filename, long long int CNIC)
 {
-    std::ifstream file(filename); // Opening the original file
+    std::ifstream file(filename);
 
     if (!file.is_open())
     {
         std::cerr << "Error: Unable to open file " << filename << std::endl;
-        return false; // Return false if the file cannot be opened
+        return false;
     }
 
-    std::ofstream tempFile("modifiedFile.txt"); // Temporary file to store the modified information
+    std::ofstream tempFile("modifiedFile.txt");
 
     if (!tempFile.is_open())
     {
         std::cerr << "Error: Unable to create temporary file." << std::endl;
         file.close();
-        return false; // Return false if the temporary file cannot be created
+        return false;
     }
 
     std::string line;
-    bool found = false; // Flag to check if the CNIC is found
+    bool found = false;
 
-    while (std::getline(file, line)) // Read each line from the file
+    while (std::getline(file, line))
     {
-        std::istringstream info(line); // 'istringstream' to parse the line
+        std::istringstream info(line);
         std::string name, strCNIC;
 
-        std::getline(info, name, ','); // Extract name
-        std::getline(info, strCNIC);   // Extract CNIC
+        std::getline(info, name, ',');
+        std::getline(info, strCNIC);
 
-        long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
+        long long int id = stoll(strCNIC);
 
         if (CNIC == id)
         {
-            found = true; // Mark as found if the CNIC matches
+            found = true;
         }
         else
         {
-            tempFile << line << std::endl; // Write the line to the temporary file if CNIC doesn't match
+            tempFile << line << std::endl;
         }
     }
 
@@ -110,48 +100,44 @@ bool deleteInfo(std::string filename, long long int CNIC)
 
     if (found)
     {
-        if (remove(filename.c_str()) != 0) // Delete the original file
+        if (remove(filename.c_str()) != 0)
         {
             return false;
         }
 
-        if (rename("modifiedFile.txt", filename.c_str()) != 0) // Rename the temporary file
+        if (rename("modifiedFile.txt", filename.c_str()) != 0)
         {
             return false;
         }
 
-        return true; // Return true if deletion and renaming are successful
+        return true;
     }
 
-    remove("modifiedFile.txt"); // Clean up temporary file if CNIC not found
-    return false;               // Return false if CNIC not found
+    remove("modifiedFile.txt");
+    return false;
 }
 
-/// @brief A general function to search information in files
-/// @param filename The file in which the information is stored
-/// @param CNIC The CNIC/Natioanl ID of the person
-/// @return Return true if the CNIC is found in the file
 bool searchbyID(std::string filename, long long int CNIC)
 {
-    std::ifstream file(filename); // Opening the file in read mode
+    std::ifstream file(filename);
 
     if (!file.is_open())
     {
         std::cerr << "Error: Unable to open file " << filename << std::endl;
-        return false; // Return false if the file cannot be opened
+        return false;
     }
 
     std::string line;
 
-    while (getline(file, line)) // Read each line from the file
+    while (getline(file, line))
     {
-        std::istringstream info(line); // 'istringstream' to parse the line
+        std::istringstream info(line);
         std::string name, strCNIC;
 
-        std::getline(info, name, ','); // Extract name
-        std::getline(info, strCNIC);   // Extract CNIC
+        std::getline(info, name, ',');
+        std::getline(info, strCNIC);
 
-        long long int id = stoll(strCNIC); // Convert CNIC from string to long long int
+        long long int id = stoll(strCNIC);
 
         if (CNIC == id)
         {
@@ -163,13 +149,11 @@ bool searchbyID(std::string filename, long long int CNIC)
     return false;
 }
 
-/// @brief A general function to view all the contents of the file
-/// @param filename The file which consists the information
 void viewInfo(std::string filename)
 {
-    std::string line; // Helps us to read an entire line from the file
+    std::string line;
 
-    std::ifstream file(filename, std::ios::in); // Opening the file to read information
+    std::ifstream file(filename, std::ios::in);
 
     std::cout << " Name   |  CNIC\n";
     while (!file.eof())
@@ -178,5 +162,3 @@ void viewInfo(std::string filename)
         std::cout << line << std::endl;
     }
 }
-
-#endif
