@@ -1,126 +1,98 @@
-#ifndef STACK_H
-#define STACK_H
+// Stack implementation
+#include "Stack.h"
 
-#include <iostream>
+#include <stdexcept>
 
-struct Candidate
+// Candidate operator implementations
+bool Candidate::operator<(const Candidate &other) const
 {
-    std::string name;
-    int votes;
+    return votes < other.votes;
+}
 
-    // Operator Overloading
-    bool operator<(const Candidate &other) const
-    {
-        return votes < other.votes; // Compare by votes
-    }
-
-    bool operator>(const Candidate &other) const
-    {
-        return votes > other.votes;
-    }
-};
-
-// Node structure for the linked list
-struct Node
+bool Candidate::operator>(const Candidate &other) const
 {
-    Candidate data;
-    Node *next;
-    Node(Candidate c) : data(c), next(nullptr) {}
-};
+    return votes > other.votes;
+}
 
-// Stack class using linked list
-class Stack
+// Node constructor
+Node::Node(Candidate c) : data(c), next(nullptr) {}
+
+Stack::Stack() : topNode(nullptr) {}
+
+void Stack::push(const Candidate &c)
 {
-private:
-    Node *topNode;
+    Node *newNode = new Node(c);
+    newNode->next = topNode;
+    topNode = newNode;
+}
 
-public:
-    Stack() : topNode(nullptr) {}
-
-    // Push an element to the stack
-    void push(const Candidate &c)
+void Stack::pop()
+{
+    if (topNode != nullptr)
     {
-        Node *newNode = new Node(c);
-        newNode->next = topNode;
-        topNode = newNode;
+        Node *temp = topNode;
+        topNode = topNode->next;
+        delete temp;
     }
+}
 
-    // Pop an element from the stack
-    void pop()
+Candidate Stack::top() const
+{
+    if (topNode == nullptr)
     {
-        if (topNode != nullptr)
-        {
-            Node *temp = topNode;
-            topNode = topNode->next;
-            delete temp;
-        }
+        throw std::runtime_error("Stack is empty");
     }
+    return topNode->data;
+}
 
-    // Get the top element of the stack
-    Candidate top() const
+bool Stack::empty() const
+{
+    return topNode == nullptr;
+}
+
+void Stack::sortStack()
+{
+    Stack tempStack;
+
+    while (!empty())
     {
-        if (topNode == nullptr)
-        {
-            throw std::runtime_error("Stack is empty");
-        }
-        return topNode->data;
-    }
+        Candidate current = top();
+        pop();
 
-    // Check if the stack is empty
-    bool empty() const
-    {
-        return topNode == nullptr;
-    }
-
-    // Sorting function
-    void sortStack()
-    {
-        Stack tempStack;
-
-        while (!empty())
-        {
-            Candidate current = top();
-            pop();
-
-            while (!tempStack.empty() && tempStack.top() > current)
-            {
-                push(tempStack.top());
-                tempStack.pop();
-            }
-
-            tempStack.push(current);
-        }
-
-        // Transfer sorted elements back to the original stack
-        while (!tempStack.empty())
+        while (!tempStack.empty() && tempStack.top() > current)
         {
             push(tempStack.top());
             tempStack.pop();
         }
+
+        tempStack.push(current);
     }
 
-    // Find and return the candidate with the highest votes
-    Candidate findTopCandidate() const
+    while (!tempStack.empty())
     {
-        if (topNode == nullptr)
-        {
-            throw std::runtime_error("Stack is empty");
-        }
-
-        Node *temp = topNode;
-        Candidate topCandidate = temp->data;
-
-        while (temp != nullptr)
-        {
-            if (temp->data.votes > topCandidate.votes)
-            {
-                topCandidate = temp->data;
-            }
-            temp = temp->next;
-        }
-
-        return topCandidate;
+        push(tempStack.top());
+        tempStack.pop();
     }
-};
+}
 
-#endif
+Candidate Stack::findTopCandidate() const
+{
+    if (topNode == nullptr)
+    {
+        throw std::runtime_error("Stack is empty");
+    }
+
+    Node *temp = topNode;
+    Candidate topCandidate = temp->data;
+
+    while (temp != nullptr)
+    {
+        if (temp->data.votes > topCandidate.votes)
+        {
+            topCandidate = temp->data;
+        }
+        temp = temp->next;
+    }
+
+    return topCandidate;
+}

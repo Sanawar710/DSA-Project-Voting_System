@@ -1,181 +1,154 @@
-#ifndef BINARYSEARCHTREE_H
-#define BINARYSEARCHTREE_H
+// BST implementation
+#include "Binary-Search-Tree.h"
 
 #include <iostream>
 
-struct BST // Node for BST
+BST *BST::createNode(int data)
 {
-    int data;
-    BST *right;
-    BST *left;
+    BST *newNode = new BST;
+    newNode->data = data;
 
-    BST *createNode(int data)
+    newNode->left = NULL;
+    newNode->right = NULL;
+
+    return newNode;
+}
+
+void BST::Traversal(BST *rootNode)
+{
+    if (rootNode != NULL)
     {
-        BST *newNode = new BST;
-        newNode->data = data;
-
-        // Sets the children nodes to NULL
-        newNode->left = NULL;
-        newNode->right = NULL;
-
-        return newNode;
+        Traversal(rootNode->left);
+        std::cout << rootNode->data << " ";
+        Traversal(rootNode->right);
     }
+}
 
-    /// @brief This function is used to implement InOrder Traversal (Left Subtree -> Root -> Subtree)
-    /// @param rootNode The starting node of the BST
-    void Traversal(BST *rootNode)
+BST *BST::searchRecord(BST *rootNode, int CNIC)
+{
+    if (rootNode == NULL)
     {
-        if (rootNode != NULL)
-        {
-            Traversal(rootNode->left);
-            std::cout << rootNode->data << " ";
-            Traversal(rootNode->right);
-        }
-    }
-
-    /// @brief This function is used to search elements with recursive approach
-    /// @param rootNode The starting node of the BST
-    /// @param CNIC The CNIC which we're searching
-    /// @return Returns NULL if the root node is empty or if the element is not found. Else, returns the node at which the element exists
-    BST *searchRecord(BST *rootNode, int CNIC)
-    {
-        if (rootNode == NULL)
-        {
-            return NULL;
-        }
-
-        if (CNIC == rootNode->data)
-        {
-            return rootNode;
-        }
-
-        else if (CNIC < rootNode->data)
-        {
-            return searchRecord(rootNode->left, CNIC); // Searches element in the left subtree if the element is smaller than the current node's element
-        }
-
-        else
-        {
-            return searchRecord(rootNode->right, CNIC); // Searches element in the right subtree if the element is greater than the current node's element
-        }
         return NULL;
     }
 
-    /// @brief This function inserts record in the BST
-    /// @param rootNode The starting node of the BST
-    /// @param CNIC The record which we're trying to insert
-    void insertRecord(BST *rootNode, int CNIC)
+    if (CNIC == rootNode->data)
     {
-        BST *prev = NULL; // Created for keeping the track of the Parent/Root Node
+        return rootNode;
+    }
 
-        while (rootNode != NULL)
+    else if (CNIC < rootNode->data)
+    {
+        return searchRecord(rootNode->left, CNIC);
+    }
+
+    else
+    {
+        return searchRecord(rootNode->right, CNIC);
+    }
+    return NULL;
+}
+
+void BST::insertRecord(BST *rootNode, int CNIC)
+{
+    BST *prev = NULL;
+
+    while (rootNode != NULL)
+    {
+        prev = rootNode;
+
+        if (rootNode->data == CNIC)
         {
-            prev = rootNode;
-
-            if (rootNode->data == CNIC)
-            {
-                std::cout << "Duplicate values cannot be inserted." << std::endl;
-                break; // Breaks the loop a duplicate value is found.
-            }
-
-            if (rootNode->data > CNIC)
-            {
-                rootNode = rootNode->left;
-            }
-
-            else
-            {
-                rootNode = rootNode->right;
-            }
+            std::cout << "Duplicate values cannot be inserted." << std::endl;
+            break;
         }
 
-        BST *newNode = createNode(CNIC); // Creates a new nodw with the value that we want to insert
-
-        if (prev == NULL)
+        if (rootNode->data > CNIC)
         {
-            rootNode = newNode; // The element becomes the parent node if the BST was previously empty
-        }
-
-        else if (prev->data > CNIC)
-        {
-            prev->left = newNode;
+            rootNode = rootNode->left;
         }
 
         else
         {
-            prev->right = newNode;
-        }
-    }
-
-    BST *inOrder_Predecessor(BST *rootNode) // Used to return left subtree's right most child node
-    {
-        rootNode = rootNode->left;
-
-        while (rootNode->right != NULL)
-        {
             rootNode = rootNode->right;
         }
-
-        return rootNode;
     }
-    /// @brief This function is used to delete record from the BST
-    /// @param rootNode The starting node of the BST
-    /// @param CNIC The CNIC we're trying to delete
-    /// @return Returns the updated head if the deletion is successful. Else, false
-    BST *deleteRecord(BST *rootNode, int CNIC)
+
+    BST *newNode = createNode(CNIC);
+
+    if (prev == NULL)
     {
-        if (rootNode == NULL)
+        rootNode = newNode;
+    }
+
+    else if (prev->data > CNIC)
+    {
+        prev->left = newNode;
+    }
+
+    else
+    {
+        prev->right = newNode;
+    }
+}
+
+BST *BST::inOrder_Predecessor(BST *rootNode)
+{
+    rootNode = rootNode->left;
+
+    while (rootNode->right != NULL)
+    {
+        rootNode = rootNode->right;
+    }
+
+    return rootNode;
+}
+
+BST *BST::deleteRecord(BST *rootNode, int CNIC)
+{
+    if (rootNode == NULL)
+    {
+        std::cout << "The tree is already empty. Cannot perform deletion." << std::endl;
+        return NULL;
+    }
+
+    if (CNIC < rootNode->data)
+    {
+        rootNode->left = deleteRecord(rootNode->left, CNIC);
+    }
+
+    else if (CNIC > rootNode->data)
+    {
+        rootNode->right = deleteRecord(rootNode->right, CNIC);
+    }
+
+    else
+    {
+        if (rootNode->left == NULL && rootNode->right == NULL)
         {
-            std::cout << "The tree is already empty. Cannot perform deletion." << std::endl;
+            delete rootNode;
             return NULL;
         }
 
-        // Searching for the node to be deleted
-        if (CNIC < rootNode->data)
+        else if (rootNode->left == NULL)
         {
-            rootNode->left = deleteRecord(rootNode->left, CNIC);
+            BST *temp = rootNode->right;
+            delete rootNode;
+            return temp;
         }
 
-        else if (CNIC > rootNode->data)
+        else if (rootNode->right == NULL)
         {
-            rootNode->right = deleteRecord(rootNode->right, CNIC);
+            BST *temp = rootNode->left;
+            delete rootNode;
+            return temp;
         }
 
-        else // This block implements the functionality to delete nodes
+        else
         {
-            // Case 1: Node has no children i.e. it is a Leaf Node
-            if (rootNode->left == NULL && rootNode->right == NULL)
-            {
-                delete rootNode;
-                return NULL;
-            }
-
-            // Case 2: Node has only one child
-            else if (rootNode->left == NULL) // Only right child exists
-            {
-                BST *temp = rootNode->right;
-                delete rootNode;
-                return temp;
-            }
-
-            // Case 3: Only left child exists
-            else if (rootNode->right == NULL)
-            {
-                BST *temp = rootNode->left;
-                delete rootNode;
-                return temp;
-            }
-
-            // Case 3: Node has two children
-            else
-            {
-                BST *iPre = inOrder_Predecessor(rootNode);                 // Finding in-order predecessor
-                rootNode->data = iPre->data;                               // Replacing data with predecessor's data
-                rootNode->left = deleteRecord(rootNode->left, iPre->data); // Delete predecessor
-            }
+            BST *iPre = inOrder_Predecessor(rootNode);
+            rootNode->data = iPre->data;
+            rootNode->left = deleteRecord(rootNode->left, iPre->data);
         }
-        return rootNode;
     }
-};
-
-#endif
+    return rootNode;
+}
